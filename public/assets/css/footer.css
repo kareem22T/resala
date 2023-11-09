@@ -1,0 +1,105 @@
+* {
+  font-family: 'Cairo', sans-serif;
+  box-sizing: border-box;
+}
+
+footer {
+  background-color: #ffffff;
+  background-image: url("./../img/footer-bg.jpg");
+  border-top: 3px solid #27318b;
+  padding: 35px 0 70px;
+  position: relative;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  background-position: bottom;
+  background-repeat: no-repeat;
+}
+footer .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+@media (max-width: 767.98px) {
+  footer .container {
+    flex-direction: column;
+    gap: 25px;
+  }
+}
+footer .container > div [alt="logo"] {
+  height: 100px;
+}
+footer .container > div:first-child {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+footer .container > div:first-child p {
+  margin: 0;
+  font-size: 20px;
+  line-height: 35px;
+}
+footer .container > div ul {
+  margin: 0;
+  padding: 0;
+  font-size: 19px;
+  line-height: 37px;
+  list-style: disclosure-closed;
+  color: #27318b;
+}
+footer .container > div ul a {
+  text-decoration: none;
+  color: #27318b;
+}
+footer .container > div ul a li {
+  transition: all .3s ease-out;
+}
+footer .container > div ul a:hover li {
+  transform: translateX(-15px);
+}
+footer .container > div .btns {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+@media (max-width: 767.98px) {
+  footer .container > div .btns {
+    flex-direction: row;
+  }
+}
+footer .container > div button {
+  border: none;
+  color: white;
+  background-color: #27318b;
+  padding: clamp(0.625rem, calc(0.4861rem + 0.5556vw), 0.9375rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(0.8125rem, calc(0.6384rem + 0.7527vw), 1.25rem);
+  gap: 10px;
+  border-radius: 13px;
+  transition: .2s all ease-out;
+  width: 120px;
+}
+footer .container > div button.menu {
+  display: none;
+}
+footer .container > div button:hover {
+  transform: scale(1.1);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+footer .container > div button:not(:last-child) {
+  background-color: #e31b24;
+}
+footer .container > div button i {
+  font-size: 25px;
+}
+footer .copy-right {
+  text-align: center;
+  padding: 13px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: #27318b;
+  color: #fff;
+}
+
+/*# sourceMappingURL=footer.css.map */
