@@ -5,16 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Branch extends Model
+class Volunteering_destination extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'id',
-        'location',
-        'address'
+        'title',
+        'description',
+        'image_id'
     ];
-
-    protected $table = 'branchs';
 
     public $timestamps = false;
 
@@ -22,4 +22,10 @@ class Branch extends Model
     {
         return $this->hasMany(Volunteer::class);
     }
+
+    public function thumbnail()
+    {
+        return $this->belongsTo(Image::class, 'image_id');
+    }
+
 }

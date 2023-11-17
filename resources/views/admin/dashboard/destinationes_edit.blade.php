@@ -1,27 +1,32 @@
 @extends('admin.layouts.admin-layout')
-@section('title', 'اضافة فرع')
-@section('branches_preview_active', 'active')
+@section('title', 'تعديل جهة التطوع')
+@section('destination_preview_active', 'active')
 
 @section('content')
 <h3 class="mb-5">
-    اضاقة فرع
+    تعديل جهة التطوع
 </h3>
-<main  id="branches_add">
-    <div class="card w-100">
-        <div class="card-body p-4">
-            <form @submit.prevent>
-                <div class="form-group mb-3">
-                    <label for="location">الموقع *</label>
-                    <input type="text" name="location" id="location" v-model="location" class="form-control mt-2" placeholder="(القاهرة - مصر الجديدة)">
-                </div>
-                <div class="form-group mb-3">
-                    <label for="address">العنوان</label>
-                    <input type="text" name="address" id="address" v-model="address"  class="form-control mt-2" placeholder="العنوان التفصيلي">
-                </div>
-                <button class="btn btn-primary" @click="add()">اضافة</button>
-            </form>
+<main  id="destination_add">
+    @if($destination)
+        <div class="card w-100">
+            <div class="card-body p-4">
+                <form @submit.prevent>
+                    <div class="form-group mb-3">
+                        <label for="title">العنوان *</label>
+                        <input type="text" name="title" id="title" v-model="title" class="form-control mt-2" placeholder="(القاهرة - مصر الجديدة)">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="description">الوصف</label>
+                        <textarea name="description" id="description" v-model="description"  class="form-control mt-2" placeholder="العنوان التفصيلي">
+                        </textarea>
+                    </div>
+                    <button class="btn btn-primary" @click="update()">تعديل</button>
+                </form>
+            </div>
         </div>
-    </div>
+    @else
+        <h1 class="text-center">هذه الجهة لم تعد متواجدة</h1>
+    @endif
 </main>
 @endsection
 
@@ -34,17 +39,19 @@ const { createApp, ref } = Vue;
 createApp({
     data() {
         return {
-            location: null,
-            address: null
+            title: "{{ $destination->title }}",
+            description: "{{ $destination->description }}",
+            id: "{{ $destination->id }}",
         }
     },
     methods: {
-        async add() {
+        async update() {
             $('.loader').fadeIn().css('display', 'flex')
             try {
-                const response = await axios.post(`{{ route("branches.put") }}`, {
-                    location: this.location,
-                    address: this.address
+                const response = await axios.post(`{{ route("destination.update") }}`, {
+                    title: this.title,
+                    description: this.description,
+                    id: this.id,
                 },
                 );
                 if (response.data.status === true) {
@@ -57,7 +64,6 @@ createApp({
                     $('.loader').fadeOut()
                     setTimeout(() => {
                         $('#errors').fadeOut('slow')
-                        window.location.href = '{{ route("branches.prev") }}'
                     }, 3500);
 
                 } else {
@@ -96,6 +102,6 @@ createApp({
     created() {
         $('.loader').fadeOut()
     },
-}).mount('#branches_add')
+}).mount('#destination_add')
 </script>
 @endsection

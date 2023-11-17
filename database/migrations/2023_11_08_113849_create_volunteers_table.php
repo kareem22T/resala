@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('city');
             $table->text('address');
             $table->date('dob');
+            $table->boolean('seen_by_an_admin')->default(false);
             $table->timestamps();
         });
     }

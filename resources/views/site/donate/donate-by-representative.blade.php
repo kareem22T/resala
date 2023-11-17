@@ -134,7 +134,7 @@
         async send() {
         $('.loader').fadeIn().css('display', 'flex')
             try {
-                const response = await axios.post(`{{ route("donate.representative.back") }}`, {
+                const response = await axios.post(`{{ route("donate.representative.send") }}`, {
                     type: this.type,
                     name: this.name,
                     phone: this.phone,

@@ -20,7 +20,8 @@ class RegisterController extends Controller
             'name' => 'admin', 
             'email' => 'kotbekareem74@gmail.com', 
             'password' => Hash::make('admin'), 
-            'donations_access' => true
+            'donations_access' => true,
+            'volunteering_access' => true,
         ]);
         return view('admin.login');
     }

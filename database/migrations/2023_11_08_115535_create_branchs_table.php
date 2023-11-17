@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('branchs', function (Blueprint $table) {
             $table->id();
             $table->string('location');
-            $table->text('address');
+            $table->text('address')->nullable();
         });
     }
 

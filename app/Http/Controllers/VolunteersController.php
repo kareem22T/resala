@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Donation_by_representative;
+use App\Models\Volunteer;
 use App\Models\Admin;
 use App\Http\Traits\SendEmail;
 use App\Http\Traits\DataFormController;
@@ -20,14 +20,22 @@ class VolunteersController extends Controller
 
     public function send (Request $request) {
         $validator = Validator::make($request->all(), [
-            'type' => ['required'],
             'name' => ['required'],
+            'email' => ['required'],
             'phone' => ['required'],
+            'branch_id' => ['required'],
+            'destination_id' => ['required'],
+            'dob' => ['required'],
+            'city' => ['required'],
             'address' => ['required'],
         ], [
-            'type.required' => 'قم باختيار نوع التبرع',
             'name.required' => 'الاسم مطلوب',
+            'email.required' => 'البريد الالكتروني مطلوب',
             'phone.required' => 'رقم الهاتف مطلوب',
+            'branch_id.required' => 'برجاء اختيار الفرع المناسب لك',
+            'destination_id.required' => 'برجاء اختيار النشاط المناسب لك',
+            'city.required' => 'المحافظة مطلوبة',
+            'dob.required' => 'تاريخ الميلاد مطلوب',
             'address.required' => 'العنوان مطلوب',
         ]);
 
@@ -35,24 +43,32 @@ class VolunteersController extends Controller
             return $this->jsondata(false, 'فشل الارسال', [$validator->errors()->first()], []);
         }
 
-        $donation = Donation_by_representative::create([
-            'type' => $request->type,
+        $volunteer = Volunteer::create([
             'name' => $request->name,
+            'email' => $request->email,
             'phone' => $request->phone,
+            'branch_id' => $request->branch_id,
+            'donation_destination_id' => $request->destination_id,
+            'city' => $request->city,
+            'dob' => $request->dob,
             'address' => $request->address,
         ]);
 
-        if ($donation) {
-            $admins = Admin::where('donations_access', true)->get();
+        if ($volunteer) {
+            $admins = Admin::where('volunteering_access', true)->get();
             if ($admins->count() > 0)
             foreach ($admins as $admin) {
                 $this->sendEmail(
                     $admin->email,
-                    "Donation Request",
-                    "<b>نوع التبرع :</b>" . "تبرع من خلال مندوب" . " (" . ($donation->type == 1 ? "تبرع عيني" : "تبرع مالي") . ")<br>" .
-                    "<b>اسم المتبرع :</b>" . $donation->name . "<br>" .
-                    "<b>رقم هاتف المتبرع :</b>" . $donation->phone . "<br>" .
-                    "<b>عنوان المتبرع :</b>" . $donation->address . "<br>"
+                    "Volunteering Request",
+                    "<b>اسم المتطوع :</b>" . $volunteer->name . "<br>" .
+                    "<b>البريد الالكتروني للمتطوع :</b>" . $volunteer->email . "<br>" .
+                    "<b>رقم هاتف المتطوع :</b>" . $volunteer->phone . "<br>" .
+                    "<b>محافظة المتطوع :</b>" . $volunteer->city . "<br>" .
+                    "<b>تاريخ ميلاد المتطوع :</b>" . $volunteer->dob . "<br>" .
+                    "<b>عنوان المتطوع :</b>" . $volunteer->address . "<br>" .
+                    "<b>فرع التطوع :</b>" . $volunteer->branch->location . "<br>" .
+                    "<b>جهة التطوع :</b>" . $volunteer->destination->title . "<br>"
                 );
             }
             return $this->jsonData(true, 'تم ارسال طلبك بنجاح, سوف نتواصل معك في اقرب وقت!', [], []);
@@ -61,21 +77,20 @@ class VolunteersController extends Controller
 
     //dashboard
     public function dashboardIndex() {
-        return view('admin.dashboard.donate-by-representative');
+        return view('admin.dashboard.volunteers');
     }
 
     public function get() {
-        $donations = Donation_by_representative::orderby('id', 'desc')->paginate(10);
-        return $this->jsonData(true, '', [], $donations);
+        $volunteers = Volunteer::with('branch')->with('destination')->orderby('id', 'desc')->paginate(10);
+        return $this->jsonData(true, '', [], $volunteers);
     }
-
     public function getUnseen() {
-        $donations = Donation_by_representative::where('seen_by_an_admin', false)->orderby('id', 'desc')->paginate(10);
+        $donations = Volunteer::with('branch')->with('destination')->where('seen_by_an_admin', false)->orderby('id', 'desc')->paginate(10);
         return $this->jsonData(true, '', [], $donations);
     }
 
     public function see() {
-        $donations = Donation_by_representative::where('seen_by_an_admin', false)->orderby('id', 'desc')->paginate(10);
+        $donations = Volunteer::with('branch')->with('destination')->where('seen_by_an_admin', false)->orderby('id', 'desc')->paginate(10);
         foreach ($donations as $donation) {
             $donation->seen_by_an_admin = true;
             $donation->save();
@@ -83,13 +98,13 @@ class VolunteersController extends Controller
     }
 
     public function search(Request $request) {
-        $names = Donation_by_representative::where('name', 'like', '%' . $request->search_words . '%')->orderby('id', 'desc')
+        $names = Volunteer::with('branch')->with('destination')->where('name', 'like', '%' . $request->search_words . '%')->orderby('id', 'desc')
                                 ->paginate(10);
 
-        $addresses = Donation_by_representative::where('address', 'like', '%' . $request->search_words . '%')->orderby('id', 'desc')
+        $addresses = Volunteer::with('branch')->with('destination')->where('address', 'like', '%' . $request->search_words . '%')->orderby('id', 'desc')
                                 ->paginate(10);
 
-        $phones = Donation_by_representative::where('phone', 'like', '%' . $request->search_words . '%')->orderby('id', 'desc')
+        $phones = Volunteer::with('branch')->with('destination')->where('phone', 'like', '%' . $request->search_words . '%')->orderby('id', 'desc')
                                 ->paginate(10);
 
         
@@ -99,17 +114,17 @@ class VolunteersController extends Controller
 
     public function delete(Request $request) {
         $validator = Validator::make($request->all(), [
-            'donation_id' => 'required',
+            'volunteer_id' => 'required',
         ]);
 
         if ($validator->fails()) {
             return $this->jsondata(false, true, 'Edit failed', [$validator->errors()->first()], []);
         }
 
-        $donation = Donation_by_representative::find($request->donation_id);
-        $donation->delete();
+        $volunteer = Volunteer::find($request->volunteer_id);
+        $volunteer->delete();
 
-        if ($donation)
+        if ($volunteer)
             return $this->jsonData(true, ' تم حذف الطلب بنجاح', [], []);
     }
 }

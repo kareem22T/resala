@@ -1,27 +1,31 @@
 @extends('admin.layouts.admin-layout')
-@section('title', 'اضافة فرع')
+@section('title', 'تعديل فرع')
 @section('branches_preview_active', 'active')
 
 @section('content')
 <h3 class="mb-5">
-    اضاقة فرع
+    تعديل الفرع
 </h3>
 <main  id="branches_add">
-    <div class="card w-100">
-        <div class="card-body p-4">
-            <form @submit.prevent>
-                <div class="form-group mb-3">
-                    <label for="location">الموقع *</label>
-                    <input type="text" name="location" id="location" v-model="location" class="form-control mt-2" placeholder="(القاهرة - مصر الجديدة)">
-                </div>
-                <div class="form-group mb-3">
-                    <label for="address">العنوان</label>
-                    <input type="text" name="address" id="address" v-model="address"  class="form-control mt-2" placeholder="العنوان التفصيلي">
-                </div>
-                <button class="btn btn-primary" @click="add()">اضافة</button>
-            </form>
+    @if($branch)
+        <div class="card w-100">
+            <div class="card-body p-4">
+                <form @submit.prevent>
+                    <div class="form-group mb-3">
+                        <label for="location">الموقع *</label>
+                        <input type="text" name="location" id="location" v-model="location" class="form-control mt-2" placeholder="(القاهرة - مصر الجديدة)">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="address">العنوان</label>
+                        <input type="text" name="address" id="address" v-model="address"  class="form-control mt-2" placeholder="العنوان التفصيلي">
+                    </div>
+                    <button class="btn btn-primary" @click="update()">تعديل</button>
+                </form>
+            </div>
         </div>
-    </div>
+    @else
+        <h1 class="text-center">هذا الفرع لم يعد متواجد</h1>
+    @endif
 </main>
 @endsection
 
@@ -34,17 +38,19 @@ const { createApp, ref } = Vue;
 createApp({
     data() {
         return {
-            location: null,
-            address: null
+            location: "{{ $branch->location }}",
+            address: "{{ $branch->address }}",
+            id: "{{ $branch->id }}",
         }
     },
     methods: {
-        async add() {
+        async update() {
             $('.loader').fadeIn().css('display', 'flex')
             try {
-                const response = await axios.post(`{{ route("branches.put") }}`, {
+                const response = await axios.post(`{{ route("branches.update") }}`, {
                     location: this.location,
-                    address: this.address
+                    address: this.address,
+                    id: this.id,
                 },
                 );
                 if (response.data.status === true) {
@@ -57,7 +63,6 @@ createApp({
                     $('.loader').fadeOut()
                     setTimeout(() => {
                         $('#errors').fadeOut('slow')
-                        window.location.href = '{{ route("branches.prev") }}'
                     }, 3500);
 
                 } else {

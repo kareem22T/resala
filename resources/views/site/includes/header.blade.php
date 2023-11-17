@@ -19,25 +19,34 @@
         <nav>
             <i class="fa-solid fa-x close"></i>
             <ul class="pages">
-                <a href="">
+                <a href="{{ route('resala.about') }}" class="@yield('about_active')">
                     <li>عن رسالة</li>
-                </a><a href="">
+                </a>
+                <a href="">
                     <li>الأخبار</li>
-                </a><a href="">
+                </a>
+                <a href="">
                     <li>الفعاليات</li>
-                </a><a href="">
+                </a>
+                <a href="">
                     <li>الانشطة</li>
-                </a><a href="">
+                </a>
+                <a href="">
                     <li>الفروع</li>
-                </a><a href="">
+                </a>
+                <a href="">
                     <li>يوم التحدي</li>
-                </a><a href="">
+                </a>
+                <a href="">
                     <li>الفيديوهات</li>
-                </a><a href="">
+                </a>
+                <a href="">
                     <li>صور</li>
-                </a><a href="">
+                </a>
+                <a href="">
                     <li>بهية</li>
-                </a><a href="">
+                </a>
+                <a href="">
                     <li>اتصل بنا</li>
                 </a>
 

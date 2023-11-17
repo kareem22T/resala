@@ -41,6 +41,7 @@
             justify-content: start;
             align-items: center;
             gap: 1rem;
+            flex-wrap: wrap;
         }
         section .switch label {
             padding: 10px 20px;
@@ -103,7 +104,7 @@
 @endsection
 
 @section('content')
-    <section id="donate_by_representative">
+    <section id="volunteers">
         <h1>طلب التطوع في جمعية رسالة </h1>
         <p>قم بتعبئة بيناتك فى الحقول التالية وسوف يتم الاتصال بك في اقرب وقت</p>
         <a href="/donate"><i class='bx bx-donate-heart'></i> اضغط هنا للتبرع</a>
@@ -122,23 +123,18 @@
             </div>            
             <div class="form-group">
                 <label for="branch">الفرع *</label>
-                <select name="branch" id="branch" v-model="branch_id" class="form-control">
+                <select name="branch" id="branch" v-model="branch_id" class="form-control" v-if="branches && branches.length > 0">
                     <option value="" selected>اختيار الفرع المناسب</option>
+                    <option :value="branch.id" v-for="(branch, index) in branches" :key="index">@{{ branch.location }}</option>
                 </select>
             </div>
-            <div class="form-group">
+            <div class="form-group" v-if="destinations && destinations.length > 0">
                 <label>يرجي اختيار النشاط</label>
                 <div class="switch">
-                    <div class="form-group">
-                        <input type="radio" name="type" id="type_1" class="form-control" value="1" checked v-model="type">
-                        <label for="type_1">
-                            <span>تبرع عيني</span>
-                        </label>
-                    </div>
-                    <div class="form-group">
-                        <input type="radio" name="type" id="type_2" class="form-control" value="2" v-model="type">
-                        <label for="type_2">
-                            <span>تبرع مالي</span>
+                    <div class="form-group" v-for="(destination, index) in destinations" :key="index">
+                        <input type="radio" name="type" :id="`destination_${destination.id}`" class="form-control" :value="destination.id" v-model="destination_id">
+                        <label :for="`destination_${destination.id}`">
+                            <span>@{{ destination.title }}</span>
                         </label>
                     </div>
                 </div>          
@@ -172,19 +168,29 @@
         return {
             name: '',
             phone: '',
+            email: '',
+            city: '',
+            dob: '',
             address: '',
-            type: 1,
+            destinations: null,
+            destination_id: 1,
+            branches: null,
+            branch_id: null,
         }
     },
     methods: {
         async send() {
-        $('.loader').fadeIn().css('display', 'flex')
+            $('.loader').fadeIn().css('display', 'flex')
             try {
-                const response = await axios.post(`{{ route("donate.representative.back") }}`, {
-                    type: this.type,
+                const response = await axios.post(`{{ route("volunteering.send") }}`, {
                     name: this.name,
                     phone: this.phone,
+                    email: this.email,
+                    city: this.city,
+                    dob: this.dob,
                     address: this.address,
+                    branch_id: this.branch_id,
+                    destination_id: this.destination_id,
                 },
                 );
                 if (response.data.status === true) {
@@ -231,7 +237,91 @@
                 console.error(error);
             }
         },
+        async getdestinations() {
+            $('.loader').fadeIn().css('display', 'flex')
+            try {
+                const response = await axios.get(`{{ route("destinations.getAll") }}`);
+                if (response.data.status === true) {
+                    $('#errors').fadeOut('slow')
+                    this.destinations = response.data.data
+                    $('.loader').fadeOut()
+                } else {
+                    $('.loader').fadeOut()
+                    document.getElementById('errors').innerHTML = ''
+                    $.each(response.data.errors, function (key, value) {
+                        let error = document.createElement('div')
+                        error.classList = 'error'
+                        error.innerHTML = value
+                        document.getElementById('errors').append(error)
+                    });
+                    $('#errors').fadeIn('slow')
+                    setTimeout(() => {
+                        $('input').css('outline', 'none')
+                        $('#errors').fadeOut('slow')
+                    }, 5000);
+                }
+
+            } catch (error) {
+                document.getElementById('errors').innerHTML = ''
+                let err = document.createElement('div')
+                err.classList = 'error'
+                err.innerHTML = 'server error try again later'
+                document.getElementById('errors').append(err)
+                $('#errors').fadeIn('slow')
+                $('.loader').fadeOut()
+
+                setTimeout(() => {
+                $('#errors').fadeOut('slow')
+                }, 3500);
+
+                console.error(error);
+            }
+        },
+        async getBranches() {
+            $('.loader').fadeIn().css('display', 'flex')
+            try {
+                const response = await axios.get(`{{ route("branches.getAll") }}`);
+                if (response.data.status === true) {
+                    $('#errors').fadeOut('slow')
+                    this.branches = response.data.data
+                    $('.loader').fadeOut()
+                } else {
+                    $('.loader').fadeOut()
+                    document.getElementById('errors').innerHTML = ''
+                    $.each(response.data.errors, function (key, value) {
+                        let error = document.createElement('div')
+                        error.classList = 'error'
+                        error.innerHTML = value
+                        document.getElementById('errors').append(error)
+                    });
+                    $('#errors').fadeIn('slow')
+                    setTimeout(() => {
+                        $('input').css('outline', 'none')
+                        $('#errors').fadeOut('slow')
+                    }, 5000);
+                }
+
+            } catch (error) {
+                document.getElementById('errors').innerHTML = ''
+                let err = document.createElement('div')
+                err.classList = 'error'
+                err.innerHTML = 'server error try again later'
+                document.getElementById('errors').append(err)
+                $('#errors').fadeIn('slow')
+                $('.loader').fadeOut()
+
+                setTimeout(() => {
+                $('#errors').fadeOut('slow')
+                }, 3500);
+
+                console.error(error);
+            }
+        },
     },
-    }).mount('#donate_by_representative')
+    created() {
+        this.getdestinations()
+        this.getBranches()
+    },
+    }).mount('#volunteers')
     </script>
 @endsection

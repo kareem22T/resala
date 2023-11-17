@@ -20,14 +20,93 @@ class BranchController extends Controller
     public function addIndex() {
         return view('admin.dashboard.branches_add');
     }
+    
+    public function editIndex($id) {
+        $branch = Branch::find($id);
+        return view('admin.dashboard.branches_edit')->with(compact('branch'));
+    }
+
+    public function search(Request $request) {
+        $locations = Branch::where('location', 'like', '%' . $request->search_words . '%')
+                                ->paginate(15);
+
+        $addresses = Branch::where('address', 'like', '%' . $request->search_words . '%')
+                                ->paginate(15);
+        
+        return $this->jsonData(true, '', [], !$locations->isEmpty() ? $locations : $addresses);
+
+    }
 
     public function get() {
-        $branches = Branch::orderby('id', 'desc')->paginate(10);
+        $branches = Branch::paginate(15);
         return $this->jsonData(true, '', [], $branches);
     }
 
-    public function delete() {
-        
+    public function getAll() {
+        $branches = Branch::all();
+        return $this->jsonData(true, '', [], $branches);
+    }
+
+    public function add(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'location' => ['required'],
+        ], [
+            'location.required' => 'الموقع مطلوب',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->jsondata(false, 'فشل الاضافة', [$validator->errors()->first()], []);
+        }
+
+        $branch = Branch::create([
+            'location' => $request->location,
+            'address' => $request->address,
+        ]);
+
+        if ($branch)
+            return $this->jsonData(true, 'تم اضافة الفرع بنجاح', [], []);
+
+    }
+
+    public function edit(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'id' => ['required'],
+            'location' => ['required'],
+        ], [
+            'location.required' => 'الموقع مطلوب',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->jsondata(false, 'فشل التعديل', [$validator->errors()->first()], []);
+        }
+
+        $branch = Branch::find($request->id);
+
+        $branch->location = $request->location;
+        $branch->address = $request->address;
+
+        $branch->save();
+
+        if ($branch)
+            return $this->jsonData(true, 'تم تعديل الفرع بنجاح', [], []);
+
+    }
+
+    public function delete(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'branch_id' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->jsondata(false, true, 'Edit failed', [$validator->errors()->first()], []);
+        }
+
+        $branch = Branch::find($request->branch_id);
+        $branch->delete();
+
+        if ($branch)
+            return $this->jsonData(true, ' تم حذف الفرع بنجاح', [], []);
+
     }
 
 }

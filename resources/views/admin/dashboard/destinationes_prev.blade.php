@@ -1,19 +1,19 @@
 @extends('admin.layouts.admin-layout')
 @section('title', 'الفروع')
-@section('branches_preview_active', 'active')
+@section('destination_preview_active', 'active')
 
 @section('content')
 <h3 class="mb-5">
-    فروع الجمعية
+    جهات التطوع
 </h3>
-<main id="branches_prev">
+<main id="destinations_prev">
     <div class="card w-100">
         <div class="card-header d-flex justify-content-between gap-3">
             <input type="text" name="search" id="search" class="form-control w-25" placeholder="بحث" v-model="search" @input="getSearch(this.search)">
-            <a href="{{ route('branches.add') }}" class="btn btn-primary"><i class="ti ti-plus"></i> اضافة فرع</a>
+            <a href="{{ route('destinations.add') }}" class="btn btn-primary"><i class="ti ti-plus"></i> اضافة فرع</a>
         </div>
         <div class="card-body p-4">
-        <div class="table-responsive" v-if="branchs_data && branchs_data.length > 0">
+        <div class="table-responsive" v-if="destinations_data && destinations_data.length > 0">
             <table class="table text-nowrap mb-0 align-middle">
             <thead class="text-dark fs-4">
                 <tr>
@@ -21,10 +21,10 @@
                         <h6 class="fw-semibold mb-0 d-inline-flex align-items-center">Id</h6>
                     </th> --}}
                     <th class="border-bottom-0">
-                        <h6 class="fw-semibold mb-0 d-inline-flex align-items-center">الموقع</h6>
+                        <h6 class="fw-semibold mb-0 d-inline-flex align-items-center">العنوان</h6>
                     </th>
                     <th class="border-bottom-0">
-                        <h6 class="fw-semibold mb-0 d-inline-flex align-items-center">العنوان</h6>
+                        <h6 class="fw-semibold mb-0 d-inline-flex align-items-center">الوصف</h6>
                     </th>
                     <th class="border-bottom-0">
                         <h6 class="fw-semibold mb-0 d-inline-flex align-items-center">Controls</h6>
@@ -32,14 +32,14 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(branch, index) in branchs_data" :key="index">
-                    {{-- <td class="border-bottom-0"><h6 class="fw-semibold mb-0">@{{branch.id}}</h6></td> --}}
-                    <td class="border-bottom-0"><h6 class="fw-semibold mb-0">@{{branch.location}}</h6></td>
-                    <td class="border-bottom-0"><h6 class="fw-semibold mb-0">@{{branch.address}}</h6></td>
+                <tr v-for="(destination, index) in destinations_data" :key="index">
+                    {{-- <td class="border-bottom-0"><h6 class="fw-semibold mb-0">@{{destination.id}}</h6></td> --}}
+                    <td class="border-bottom-0"><h6 class="fw-semibold mb-0">@{{destination.title}}</h6></td>
+                    <td class="border-bottom-0" style="max-width: 300px; white-space: breack-spaces;"><h6 class="fw-semibold mb-0">@{{destination.description}}</h6></td>
                     <td class="border-bottom-0">
                         <div class="d-flex gap-2">
-                            <a :href="`/admin/branches/edit/${branch.id}`" class="btn btn-secondary p-2"><h4 class="ti ti-edit text-light m-0 fw-semibold"></h4></a>
-                            <button class="btn btn-danger p-2" @click="this.delete_pop_up = true; getValues(branch.id, branch.location)"><h4 class="ti ti-trash text-light m-0 fw-semibold"></h4></button>
+                            <a :href="`/admin/volunteering-destinations/edit/${destination.id}`" class="btn btn-secondary p-2"><h4 class="ti ti-edit text-light m-0 fw-semibold"></h4></a>
+                            <button class="btn btn-danger p-2" @click="this.delete_pop_up = true; getValues(destination.id, destination.title)"><h4 class="ti ti-trash text-light m-0 fw-semibold"></h4></button>
                         </div>
                     </td>
                 </tr>
@@ -49,24 +49,24 @@
         <div class="pagination w-100 d-flex gap-2 justify-content-center mt-3" v-if="last_page > 1">
             <div v-for="page_num in last_page" :key="page_num" >
                 <label :for="`page_num_${page_num}`" class="btn btn-primary" :class="page_num == page ? 'active' : ''">@{{ page_num }}</label>
-                <input type="radio" class="d-none" name="page_num" :id="`page_num_${page_num}`" v-model="page" :value="page_num" @change="search == '' ? getbranchs() : getSearch(this.search)">
+                <input type="radio" class="d-none" name="page_num" :id="`page_num_${page_num}`" v-model="page" :value="page_num" @change="search == '' ? getdestinations() : getSearch(this.search)">
             </div>
         </div>
         <h4 class="text-center">
-            @{{ branchs_data && branchs_data.length == 0 ? 'لا توجد فروع مضافة' : '' }}
+            @{{ destinations_data && destinations_data.length == 0 ? 'لا توجد جهات مضافة' : '' }}
         </h4>
         <h4 class="text-center">
-            @{{ branchs_data === false ? 'Server error try again later' : '' }}
+            @{{ destinations_data === false ? 'Server error try again later' : '' }}
         </h4>
         </div>
         <div class="hide-content" v-if="delete_pop_up"></div>
         <div class="pop-up delete_pop_up card w-50" style="margin: auto; display: none;"  :class="{ 'show': delete_pop_up }" v-if="delete_pop_up">
             <div class="card-body">
                 <form @submit.prevent>
-                    <h5 class="mb-3 text-center">هل انت متاكد من حذف الفرع @{{ branch_name }}؟</h5>
+                    <h5 class="mb-3 text-center">هل انت متاكد من حذف جهة التطوع  @{{ destination_name }}؟</h5>
                     <div class="btns d-flex w-100 justify-content-between gap-3">
                         <button class="btn btn-light w-100" @click="delete_pop_up = false; getValus(null, null, null)">الغاء</button>
-                        <button class="btn btn-danger w-100" @click="deletebranch(branch_id)">حذف</button>
+                        <button class="btn btn-danger w-100" @click="deletedestination(destination_id)">حذف</button>
                     </div>
                 </form>
             </div>
@@ -84,10 +84,10 @@ const { createApp, ref } = Vue;
 createApp({
     data() {
         return {
-            branch_id: null,
-            branch_name: null,
+            destination_id: null,
+            destination_name: null,
             delete_pop_up: false,
-            branchs_data: null,
+            destinations_data: null,
             search: null,
             page: 1,
             total: null,
@@ -95,11 +95,11 @@ createApp({
         }
     },
     methods: {
-        async deletebranch(branch_id) {
+        async deletedestination(destination_id) {
             $('.loader').fadeIn().css('display', 'flex')
             try {
-                const response = await axios.post(`{{ route("branchs.delete") }}`, {
-                    branch_id: branch_id,
+                const response = await axios.post(`{{ route("destinations.delete") }}`, {
+                    destination_id: destination_id,
                 },
                 );
                 if (response.data.status === true) {
@@ -112,7 +112,7 @@ createApp({
                     $('.loader').fadeOut()
                     setTimeout(() => {
                         $('#errors').fadeOut('slow')
-                        location.reload();
+                        title.reload();
                     }, 2000);
                 } else {
                     $('.loader').fadeOut()
@@ -146,15 +146,15 @@ createApp({
                 console.error(error);
             }
         },
-        async getbranchs() {
+        async getdestinations() {
             $('.loader').fadeIn().css('display', 'flex')
             try {
-                const response = await axios.post(`{{ route("branchs.get") }}?page=${this.page}`, {
+                const response = await axios.post(`{{ route("destinations.get") }}?page=${this.page}`, {
                 },
                 );
                 if (response.data.status === true) {
                     $('.loader').fadeOut()
-                    this.branchs_data = response.data.data.data
+                    this.destinations_data = response.data.data.data
                     this.total = response.data.data.total
                     this.last_page = response.data.data.last_page
                 } else {
@@ -191,12 +191,12 @@ createApp({
         },
         async getSearch(search_words) {
             try {
-                const response = await axios.post(`{{ route("branchs.search") }}?page=${this.page}`, {
+                const response = await axios.post(`{{ route("destinations.search") }}?page=${this.page}`, {
                     search_words: search_words,
                 },
                 );
                 if (response.data.status === true) {
-                    this.branchs_data = response.data.data.data
+                    this.destinations_data = response.data.data.data
                     this.total = response.data.data.total
                     this.last_page = response.data.data.last_page
                 } else {
@@ -230,15 +230,15 @@ createApp({
                 console.error(error);
             }
         },
-        getValues(branch_id, branch_name) {
-            this.branch_id = branch_id
-            this.branch_name = branch_name
+        getValues(destination_id, destination_name) {
+            this.destination_id = destination_id
+            this.destination_name = destination_name
         }
     },
     created() {
-        this.getbranchs()
+        this.getdestinations()
         $('.loader').fadeOut()
     },
-}).mount('#branches_prev')
+}).mount('#destinations_prev')
 </script>
 @endsection

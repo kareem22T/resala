@@ -162,54 +162,42 @@
             </li>
             <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-              <span class="hide-menu">الفروع</span>
+              <span class="hide-menu">التطوع</span>
             </li>
             <li class="sidebar-item">
               <a class="sidebar-link @yield('branches_preview_active')" href="{{ route('branches.prev') }}" aria-expanded="false">
                 <span>
                   <i class="ti ti-map-pins"></i>
                 </span>
-                <span class="hide-menu">عرض</span>
+                <span class="hide-menu">الفروع</span>
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link @yield('branches_add_active')" href="{{ route('branches.add') }}" aria-expanded="false">
+              <a class="sidebar-link @yield('destination_preview_active')" href="{{ route('destinations.prev') }}" aria-expanded="false">
                 <span>
-                  <i class="ti ti-current-location"></i>
+                  <i class="ti ti-walk"></i>
                 </span>
-                <span class="hide-menu">اضافة</span>
+                <span class="hide-menu">جهات التطوع</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link @yield('volunteers_active')" href="{{ route('volunteers.prev') }}" aria-expanded="false">
+                <span>
+                  <i class="ti ti-heart-handshake"></i>
+                </span>
+                <span class="hide-menu">طلبات التطوع</span>
               </a>
             </li>
             <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-              <span class="hide-menu">Words</span>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link @yield('words_preview_active')" href="/Moheb/admin/words" aria-expanded="false">
-                <span>
-                  <i class="ti ti-clipboard-text"></i>
-                </span>
-                <span class="hide-menu">Preview</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link @yield('words_add_active')" href="/Moheb/admin/words/add" aria-expanded="false">
-                <span>
-                  <i class="ti ti-text-plus"></i>
-                </span>
-                <span class="hide-menu">Add</span>
-              </a>
-            </li>
-            <li class="nav-small-cap">
-              <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-              <span class="hide-menu">Articles</span>
+              <span class="hide-menu">المقالات</span>
             </li>
             <li class="sidebar-item">
               <a class="sidebar-link @yield('articles_preview_active')" href="/Moheb/admin/articles" aria-expanded="false">
                 <span>
                   <i class="ti ti-file-text"></i>
                 </span>
-                <span class="hide-menu">Preview</span>
+                <span class="hide-menu">عرض</span>
               </a>
             </li>
             <li class="sidebar-item">
@@ -217,7 +205,7 @@
                 <span>
                   <i class="ti ti-file-plus"></i>
                 </span>
-                <span class="hide-menu">Add</span>
+                <span class="hide-menu">اضافة</span>
               </a>
             </li>
             <li class="nav-small-cap">

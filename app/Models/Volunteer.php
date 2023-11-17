@@ -21,5 +21,13 @@ class Volunteer extends Model
         'dob',
     ];
 
-    
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class);
+    }
+
+    public function destination()
+    {
+        return $this->belongsTo(Volunteering_destination::class, 'donation_destination_id');
+    }
 }

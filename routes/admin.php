@@ -4,7 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\RegisterController;
 use App\Http\Controllers\Admin\AdminHomeController;
 use App\Http\Controllers\DonationsByRepresentativeController;
+use App\Http\Controllers\VolunteeringDestinationsController;
 use App\Http\Controllers\BranchController;
+use App\Http\Controllers\VolunteersController;
+use App\Http\Controllers\ImagesController;
 
 Route::middleware(['admin_guest'])->group(function () {
     Route::get('/login', [RegisterController::class, 'getLoginIndex']);
@@ -33,8 +36,39 @@ Route::middleware('auth:admin')->group(function () {
     Route::prefix('/branches')->group(function () {
         Route::get('/', [BranchController::class, 'index'])->name('branches.prev');
         Route::post('/', [BranchController::class, 'get'])->name('branchs.get');
+        Route::post('/search', [BranchController::class, 'search'])->name('branchs.search');
         Route::post('/delete', [BranchController::class, 'delete'])->name('branchs.delete');
         Route::get('/add', [BranchController::class, 'addIndex'])->name('branches.add');
+        Route::post('/add', [BranchController::class, 'add'])->name('branches.put');
+        Route::get('/edit/{id}', [BranchController::class, 'editIndex'])->name('branches.edit');
+        Route::post('/edit', [BranchController::class, 'edit'])->name('branches.update');
+    });
+
+    Route::prefix('/volunteering-destinations')->group(function () {
+        Route::get('/', [VolunteeringDestinationsController::class, 'index'])->name('destinations.prev');
+        Route::post('/', [VolunteeringDestinationsController::class, 'get'])->name('destinations.get');
+        Route::post('/search', [VolunteeringDestinationsController::class, 'search'])->name('destinations.search');
+        Route::post('/delete', [VolunteeringDestinationsController::class, 'delete'])->name('destinations.delete');
+        Route::get('/add', [VolunteeringDestinationsController::class, 'addIndex'])->name('destinations.add');
+        Route::post('/add', [VolunteeringDestinationsController::class, 'add'])->name('destinations.put');
+        Route::get('/edit/{id}', [VolunteeringDestinationsController::class, 'editIndex'])->name('destinations.edit');
+        Route::post('/edit', [VolunteeringDestinationsController::class, 'edit'])->name('destination.update');
+    });
+
+    Route::prefix('/volunteers')->group(function () {
+        Route::get('/', [VolunteersController::class, 'dashboardIndex'])->name('volunteers.prev');
+        Route::post('/', [VolunteersController::class, 'get'])->name('volunteers.get');
+        Route::get('/get-unseen', [VolunteersController::class, 'getUnseen'])->name('volunteers.getunseen');
+        Route::post('/see', [VolunteersController::class, 'see'])->name('volunteers.see');
+        Route::post('/search', [VolunteersController::class, 'search'])->name('volunteers.search');
+        Route::post('/delete', [VolunteersController::class, 'delete'])->name('volunteers.delete');
+    });
+
+    // images
+    Route::prefix('/images')->group(function () {
+        Route::post('/upload', [ImagesController::class, 'uploadeImg'])->name('lib.image.uploade');
+        Route::get('/get_images', [ImagesController::class, 'getImages'])->name('lib.getImages');
+        Route::post('/search', [ImagesController::class, 'search'])->name('lib.images.search');
     });
 
     //logout
