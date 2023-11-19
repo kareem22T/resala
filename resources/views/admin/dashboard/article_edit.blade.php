@@ -4,6 +4,7 @@
 
 @section('articles_add_active', 'active')
 
+@if ($article) 
 @section('content')
 <h3 class="mb-5">
     اضافة مقالة
@@ -54,7 +55,9 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <div contenteditable="true" id="article-content" class="form-control" style="min-height: 300px"></div>
+                                <div contenteditable="true" id="article-content" class="form-control" style="min-height: 300px">
+                                {!! $article->content !!}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -90,7 +93,7 @@
                 <div class="w-25">
                     <!-- Swiper -->
                     <div class="w-100 mb-3 pb-5">
-                        <button type="submit" class="btn btn-primary w-50 form-control" style="height: fit-content" @click="this.getContentArticle().then(() => {this.add()})"><i class="ti ti-plus"></i> Add</button>
+                        <button type="submit" class="btn btn-primary w-50 form-control" style="height: fit-content" @click="this.getContentArticle().then(() => {this.update()})"><i class="ti ti-edit"></i> تحديث</button>
                     </div>
                 </div>
             </div>
@@ -209,8 +212,9 @@ const { createApp, ref } = Vue;
 createApp({
   data() {
     return {
+      article_id: '{{ $article->id }}',
       thumbnail: null,
-      title: '',
+      title: '{{ $article->title }}',
       content: '',
       images: null,
       showImages: false,
@@ -219,7 +223,7 @@ createApp({
       choosed_img: null,
       current_article_id: null,
       search_tags: null,
-      preview_img: null,
+      preview_img: '{{ $article->thumbnail_path }}',
       search: null,
       page: 1,
       total: 0,
@@ -231,8 +235,9 @@ createApp({
       showCodePopUp: false,
       album_imgs: [],
       forAlbum: false,
-      type: 'post',
-      publish_date: new Date().toISOString().split('T')[0],
+      type: '{{ $article->type }}',
+      publish_date: new Date('{{ $article->created_at }}').toISOString().split('T')[0],
+      url: '{{ $article->url }}'
     }
   },
   methods: {
@@ -249,10 +254,11 @@ createApp({
         this.preview_img = this.choosed_img
         this.showImages = false
     },
-    async add() {
+    async update() {
       $('.loader').fadeIn().css('display', 'flex')
         try {
-            const response = await axios.post(`{{ route('article.put') }}`, {
+            const response = await axios.post(`{{ route('article.update') }}`, {
+                id: this.article_id,
                 title: this.title,
                 content: this.content,
                 type: this.type,
@@ -305,48 +311,6 @@ createApp({
 
             setTimeout(() => {
             $('#errors').fadeOut('slow')
-            }, 3500);
-
-            console.error(error);
-        }
-    },
-    async getTagSearch(search_words) {
-        try {
-            const response = await axios.post(`/Moheb/admin/tags/search`, {
-                search_words: search_words,
-            },
-            );
-            if (response.data.status === true) {
-                if (search_words != '')
-                    this.search_tags = response.data.data.data
-                else 
-                    this.search_tags = []
-            } else {
-                document.getElementById('errors').innerHTML = ''
-                $.each(response.data.errors, function (key, value) {
-                    let error = document.createElement('div')
-                    error.classList = 'error'
-                    error.innerHTML = value
-                    document.getElementById('errors').append(error)
-                });
-                $('#errors').fadeIn('slow')
-                setTimeout(() => {
-                    $('input').css('outline', 'none')
-                    $('#errors').fadeOut('slow')
-                }, 5000);
-            }
-
-        } catch (error) {
-            document.getElementById('errors').innerHTML = ''
-            let err = document.createElement('div')
-            err.classList = 'error'
-            err.innerHTML = 'server error try again later'
-            document.getElementById('errors').append(err)
-            $('#errors').fadeIn('slow')
-            $('.loader').fadeOut()
-            this.Tags_data = false
-            setTimeout(() => {
-                $('#errors').fadeOut('slow')
             }, 3500);
 
             console.error(error);
@@ -680,3 +644,4 @@ createApp({
 }).mount('#add_article')
 </script>
 @endsection
+@endif

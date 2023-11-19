@@ -8,6 +8,7 @@ use App\Http\Controllers\VolunteeringDestinationsController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\VolunteersController;
 use App\Http\Controllers\ImagesController;
+use App\Http\Controllers\ArticlesController;
 
 Route::middleware(['admin_guest'])->group(function () {
     Route::get('/login', [RegisterController::class, 'getLoginIndex']);
@@ -32,7 +33,7 @@ Route::middleware('auth:admin')->group(function () {
         // routes
     });
 
-    // volunteering
+    // branches
     Route::prefix('/branches')->group(function () {
         Route::get('/', [BranchController::class, 'index'])->name('branches.prev');
         Route::post('/', [BranchController::class, 'get'])->name('branchs.get');
@@ -44,6 +45,7 @@ Route::middleware('auth:admin')->group(function () {
         Route::post('/edit', [BranchController::class, 'edit'])->name('branches.update');
     });
 
+    // volunteering destinations
     Route::prefix('/volunteering-destinations')->group(function () {
         Route::get('/', [VolunteeringDestinationsController::class, 'index'])->name('destinations.prev');
         Route::post('/', [VolunteeringDestinationsController::class, 'get'])->name('destinations.get');
@@ -55,6 +57,7 @@ Route::middleware('auth:admin')->group(function () {
         Route::post('/edit', [VolunteeringDestinationsController::class, 'edit'])->name('destination.update');
     });
 
+    // volunteers
     Route::prefix('/volunteers')->group(function () {
         Route::get('/', [VolunteersController::class, 'dashboardIndex'])->name('volunteers.prev');
         Route::post('/', [VolunteersController::class, 'get'])->name('volunteers.get');
@@ -69,6 +72,18 @@ Route::middleware('auth:admin')->group(function () {
         Route::post('/upload', [ImagesController::class, 'uploadeImg'])->name('lib.image.uploade');
         Route::get('/get_images', [ImagesController::class, 'getImages'])->name('lib.getImages');
         Route::post('/search', [ImagesController::class, 'search'])->name('lib.images.search');
+    });
+
+    // articles
+    Route::prefix('articles')->group(function () {
+        Route::get('/', [ArticlesController::class, "index"])->name('article.prev');
+        Route::get('/add', [ArticlesController::class, "addIndex"])->name('articles.add');
+        Route::get('/edit/{id}', [ArticlesController::class, "edit"])->name('article.edit');
+        Route::post('/update', [ArticlesController::class, "update"])->name('article.update');
+        Route::post('/get', [ArticlesController::class, "getArticles"])->name('articles.get');
+        Route::post('/search', [ArticlesController::class, "search"])->name('articles.search');
+        Route::post('/delete', [ArticlesController::class, "delete"])->name('articles.delete');
+        Route::post('/add', [ArticlesController::class, "put"])->name('article.put');
     });
 
     //logout

@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="{{ asset('/assets/css/js_composer.css') }}">
     <link rel="stylesheet" href="{{ asset('/assets/css/header.css') }}">
     <link rel="stylesheet" href="{{ asset('/assets/css/footer.css') }}">
+    <link rel="stylesheet" href="{{ asset('/libs/swiper.css') }}?v={{ time() }}" />
     @yield('styles')
     <title>@yield('title') - رسالة</title>
     <style>
@@ -112,6 +113,8 @@
     integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{{ asset('/assets/js/main.js') }}"></script>
+    <script src="{{ asset('/libs/swiper.js') }}?v={{ time() }}"></script>
+    <script src="{{ asset('/libs/jquery.js') }}"></script>
     @yield('scripts')
 </body>
 </html>

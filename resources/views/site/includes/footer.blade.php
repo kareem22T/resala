@@ -16,7 +16,7 @@
                 <a href="">
                     <li>فاعليات رسالة</li>
                 </a>
-                <a href="">
+                <a href="{{ route('news.show') }}">
                     <li>أخبار رسالة</li>
                 </a>
                 <a href="">
@@ -35,11 +35,8 @@
         </div>
         <div>
             <div class="btns">
-                <button>
-                    <i class="fa-solid fa-sack-dollar"></i> تبرع
-                </button>
-                <button>
-                    <i class="fa-solid fa-child-reaching"></i> تطوع</button>
+                <a href="{{ route('donate.main') }}"><i class="fa-solid fa-sack-dollar"></i> تبرع</a>
+                <a href="{{ route('site.volunteering') }}"><i class="fa-solid fa-child-reaching"></i> تطوع</a>
             </div>
         </div>
     </div>

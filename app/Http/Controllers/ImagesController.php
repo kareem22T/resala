@@ -53,7 +53,7 @@ class ImagesController extends Controller
 
     public function search(Request $request) {
         $images = Image::where('path', 'like', '%' . $request->search_words . '%')->orderby('id', 'desc')
-                                ->paginate(15);
+                                ->paginate(10);
         
         return $this->jsonData(true, true, '', [], $images);
 
@@ -62,7 +62,7 @@ class ImagesController extends Controller
 
     public function getImages() {
         
-        $get_images = Image::orderby('id', 'desc')->paginate(15);
+        $get_images = Image::orderby('id', 'desc')->paginate(10);
 
         if ($get_images)
             return $this->jsondata(true, '', [], $get_images);

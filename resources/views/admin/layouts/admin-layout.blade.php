@@ -7,6 +7,7 @@
   <title>لوحة تحكم رسالة | @yield('title')</title>
   @yield('styles')
   <link rel="stylesheet" href="{{ asset('/dashboard/css/styles.min.css') }}" />
+  <link rel="stylesheet" href="{{ asset('/libs/swiper.css') }}" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800&display=swap"
@@ -193,7 +194,7 @@
               <span class="hide-menu">المقالات</span>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link @yield('articles_preview_active')" href="/Moheb/admin/articles" aria-expanded="false">
+              <a class="sidebar-link @yield('articles_preview_active')" href="{{ route('article.prev') }}" aria-expanded="false">
                 <span>
                   <i class="ti ti-file-text"></i>
                 </span>
@@ -201,7 +202,7 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link @yield('articles_add_active')" href="/Moheb/admin/articles/add" aria-expanded="false">
+              <a class="sidebar-link @yield('articles_add_active')" href="{{ route('articles.add') }}" aria-expanded="false">
                 <span>
                   <i class="ti ti-file-plus"></i>
                 </span>
@@ -293,6 +294,7 @@
   <script src="{{ asset('/dashboard/libs/simplebar/dist/simplebar.js') }}"></script>
   <script src="{{ asset('/libs/vue.js') }}"></script>
   <script src="{{ asset('/libs/jquery.js') }}"></script>
+  <script src="{{ asset('/libs/swiper.js') }}"></script>
   <script src="{{ asset('/libs/axios.js') }}"></script>
 
   @yield('scripts')

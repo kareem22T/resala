@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Volunteering_destination;
 use App\Models\Admin;
+use App\Models\Article;
 use App\Http\Traits\SendEmail;
 use App\Http\Traits\DataFormController;
 use Illuminate\Support\Facades\Validator;
@@ -12,6 +13,11 @@ use Illuminate\Support\Facades\Validator;
 class VolunteeringDestinationsController extends Controller
 {
     use DataFormController;
+
+    public function getActivitiesIndex() {
+        $activities = Volunteering_destination::paginate(10);
+        return view('site.activities')->with(compact(['activities']));
+    }
 
     public function index() {
         return view('admin.dashboard.destinationes_prev');
@@ -22,7 +28,7 @@ class VolunteeringDestinationsController extends Controller
     }
     
     public function editIndex($id) {
-        $destination = Volunteering_destination::find($id);
+        $destination = Volunteering_destination::with('thumbnail')->find($id);
         return view('admin.dashboard.destinationes_edit')->with(compact('destination'));
     }
 
@@ -50,19 +56,33 @@ class VolunteeringDestinationsController extends Controller
     public function add(Request $request) {
         $validator = Validator::make($request->all(), [
             'title' => ['required'],
+            'url' => ['required', 'regex:/^[^\s]+$/'],
             'image_id' => ['required'],
         ], [
             'title.required' => 'العنوان مطلوب',
             'image_id.required' => 'الصورة المصغرة مطلوبة',
+            'url.required' => 'الرابط مطلوب',
+            'url.regex' => 'يجب الا يحتوي الرابط على مسافات',
         ]);
 
         if ($validator->fails()) {
             return $this->jsondata(false, 'فشل الاضافة', [$validator->errors()->first()], []);
         }
 
+        $articleUrl = Article::where('url', $request->url)->get();
+        if ($articleUrl->count() > 0) {
+            return $this->jsondata(false, 'Add failed', ['هذا الرابط موجود بالفعل'], []);
+        }
+
+        $destinationsUrl = Volunteering_destination::where('url', $request->url)->get();
+        if ($destinationsUrl->count() > 0) {
+            return $this->jsondata(false, 'Add failed', ['هذا الرابط موجود بالفعل'], []);
+        }
+
         $destination = Volunteering_destination::create([
             'title' => $request->title,
             'description' => $request->description,
+            'url' => $request->url,
             'image_id' => $request->image_id,
         ]);
 
@@ -75,19 +95,34 @@ class VolunteeringDestinationsController extends Controller
         $validator = Validator::make($request->all(), [
             'id' => ['required'],
             'title' => ['required'],
-            'image_id' => $request->image_id,
+            'image_id' => ['required'],
+            'url' => ['required', 'regex:/^[^\s]+$/'],
         ], [
             'title.required' => 'العنوان مطلوب',
+            'image_id.required' => 'الصورة المصغرة مطلوبة',
+            'url.required' => 'الرابط مطلوب',
+            'url.regex' => 'يجب الا يحتوي الرابط على مسافات',
         ]);
 
         if ($validator->fails()) {
             return $this->jsondata(false, 'فشل التعديل', [$validator->errors()->first()], []);
         }
 
+        $articleUrl = Article::where('url', $request->url)->get();
+        if ($articleUrl->count() > 0) {
+            return $this->jsondata(false, 'Add failed', ['هذا الرابط موجود بالفعل'], []);
+        }
+
+        $destinationsUrl = Volunteering_destination::where('url', $request->url)->where('id', '!', $request->id)->get();
+        if ($destinationsUrl->count() > 0) {
+            return $this->jsondata(false, 'Add failed', ['هذا الرابط موجود بالفعل'], []);
+        }
+
         $destination = Volunteering_destination::find($request->id);
 
         $destination->title = $request->title;
         $destination->description = $request->description;
+        $destination->url = $request->url;
         $destination->image_id = $request->image_id;
 
         $destination->save();
@@ -110,7 +145,7 @@ class VolunteeringDestinationsController extends Controller
         $destination->delete();
 
         if ($destination)
-            return $this->jsonData(true, ' تم حذف الفرع بنجاح', [], []);
+            return $this->jsonData(true, ' تم حذف الجهة بنجاح', [], []);
 
     }
 

@@ -24,7 +24,7 @@
                         <h6 class="fw-semibold mb-0 d-inline-flex align-items-center">العنوان</h6>
                     </th>
                     <th class="border-bottom-0">
-                        <h6 class="fw-semibold mb-0 d-inline-flex align-items-center">الوصف</h6>
+                        <h6 class="fw-semibold mb-0 d-inline-flex align-items-center">الرابط</h6>
                     </th>
                     <th class="border-bottom-0">
                         <h6 class="fw-semibold mb-0 d-inline-flex align-items-center">Controls</h6>
@@ -35,9 +35,10 @@
                 <tr v-for="(destination, index) in destinations_data" :key="index">
                     {{-- <td class="border-bottom-0"><h6 class="fw-semibold mb-0">@{{destination.id}}</h6></td> --}}
                     <td class="border-bottom-0"><h6 class="fw-semibold mb-0">@{{destination.title}}</h6></td>
-                    <td class="border-bottom-0" style="max-width: 300px; white-space: breack-spaces;"><h6 class="fw-semibold mb-0">@{{destination.description}}</h6></td>
+                    <td class="border-bottom-0"><h6 class="fw-semibold mb-0">@{{destination.url}}/</h6></td>
                     <td class="border-bottom-0">
                         <div class="d-flex gap-2">
+                            <a :href="`/${destination.url}`" target="_blanck" class="btn btn-success p-2"><h4 class="ti ti-eye text-light m-0 fw-semibold"></h4></a>
                             <a :href="`/admin/volunteering-destinations/edit/${destination.id}`" class="btn btn-secondary p-2"><h4 class="ti ti-edit text-light m-0 fw-semibold"></h4></a>
                             <button class="btn btn-danger p-2" @click="this.delete_pop_up = true; getValues(destination.id, destination.title)"><h4 class="ti ti-trash text-light m-0 fw-semibold"></h4></button>
                         </div>
@@ -112,7 +113,7 @@ createApp({
                     $('.loader').fadeOut()
                     setTimeout(() => {
                         $('#errors').fadeOut('slow')
-                        title.reload();
+                        window.location.reload();
                     }, 2000);
                 } else {
                     $('.loader').fadeOut()

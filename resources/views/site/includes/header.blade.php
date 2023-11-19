@@ -11,7 +11,7 @@
                 </form>
                 <div class="btns">
                     <a href="" class="menu"><i class="fa-solid fa-bars"></i></a>
-                    <a href="/donate"><i class="fa-solid fa-sack-dollar"></i> تبرع</a>
+                    <a href="{{ route('donate.main') }}"><i class="fa-solid fa-sack-dollar"></i> تبرع</a>
                     <a href="{{ route('site.volunteering') }}"><i class="fa-solid fa-child-reaching"></i> تطوع</a>
                 </div>
             </div>
@@ -22,13 +22,13 @@
                 <a href="{{ route('resala.about') }}" class="@yield('about_active')">
                     <li>عن رسالة</li>
                 </a>
-                <a href="">
+                <a href="{{ route('news.show') }}" class="@yield('news_active')">
                     <li>الأخبار</li>
                 </a>
                 <a href="">
                     <li>الفعاليات</li>
                 </a>
-                <a href="">
+                <a href="" class="@yield('destinations_active')">
                     <li>الانشطة</li>
                 </a>
                 <a href="">
@@ -37,41 +37,48 @@
                 <a href="">
                     <li>يوم التحدي</li>
                 </a>
-                <a href="">
+                <a href="{{ route('videos.show') }}" class="@yield('videos_active')">
                     <li>الفيديوهات</li>
                 </a>
-                <a href="">
+                <a href="{{ route('photos.show') }}" class="@yield('images_active')">
                     <li>صور</li>
                 </a>
-                <a href="">
+                <a href="{{ route('resala.baheya') }}" class="@yield('baheya_active')">
                     <li>بهية</li>
                 </a>
-                <a href="">
+                <a href="{{ route('resala.contact') }}" class="@yield('contact_active')">
                     <li>اتصل بنا</li>
                 </a>
 
                 <li class="more">
                     <i class="fa-solid fa-ellipsis-vertical"></i>
                     <ul>
-                        <a href="">
+                        <a href="{{ route('resala.about') }}" class="@yield('about_active')">
                             <li>عن رسالة</li>
-                        </a><a href="">
+                        </a>
+                        <a href="{{ route('news.show') }}" class="@yield('news_active')">
                             <li>الأخبار</li>
-                        </a><a href="">
+                        </a>
+                        <a href="">
                             <li>الفعاليات</li>
-                        </a><a href="">
+                        </a><a href=""  class="@yield('destinations_active')">
                             <li>الانشطة</li>
                         </a><a href="">
                             <li>الفروع</li>
-                        </a><a href="">
+                        </a>
+                        <a href="">
                             <li>يوم التحدي</li>
-                        </a><a href="">
+                        </a>
+                        <a href="{{ route('videos.show') }}" class="@yield('videos_active')">
                             <li>الفيديوهات</li>
-                        </a><a href="">
+                        </a>
+                        <a href="{{ route('photos.show') }}" class="@yield('images_active')">
                             <li>صور</li>
-                        </a><a href="">
+                        </a>
+                        <a href="{{ route('resala.baheya') }}" class="@yield('baheya_active')">
                             <li>بهية</li>
-                        </a><a href="">
+                        </a>
+                        <a href="{{ route('resala.contact') }}" class="@yield('contact_active')">
                             <li>اتصل بنا</li>
                         </a>
                     </ul>

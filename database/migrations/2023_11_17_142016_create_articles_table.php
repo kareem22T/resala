@@ -18,6 +18,7 @@ return new class extends Migration
             $table->longText('content');
             $table->string('type', 100);
             $table->text('thumbnail_path');
+            $table->text('url');
             $table->timestamps();
         });
     }

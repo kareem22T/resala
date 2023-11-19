@@ -13,10 +13,9 @@ class Article extends Model
         "title",
         "content",
         "type",
-        "thumbnail_path"
+        "thumbnail_path",
+        "url",
+        "created_at",
     ];
 
-    protected $dates = [
-        'post_date', 'post_date_gmt', 'post_modified', 'post_modified_gmt',
-    ];
 }
