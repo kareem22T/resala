@@ -56,11 +56,16 @@ class VolunteeringDestinationsController extends Controller
     public function add(Request $request) {
         $validator = Validator::make($request->all(), [
             'title' => ['required'],
+            'brief' => ['required', 'max:50'],
+            'descrption' => ['required'],
             'url' => ['required', 'regex:/^[^\s]+$/'],
             'image_id' => ['required'],
         ], [
             'title.required' => 'العنوان مطلوب',
             'image_id.required' => 'الصورة المصغرة مطلوبة',
+            'brief.required' => 'الوصف المختصر مطلوب',
+            'brief.max' => 'لا يجب ان يزيد الوصف المختصر عن 50 حرف',
+            'description.required' => 'الوصف مطلوب',
             'url.required' => 'الرابط مطلوب',
             'url.regex' => 'يجب الا يحتوي الرابط على مسافات',
         ]);
@@ -81,6 +86,7 @@ class VolunteeringDestinationsController extends Controller
 
         $destination = Volunteering_destination::create([
             'title' => $request->title,
+            'brief' => $request->brief,
             'description' => $request->description,
             'url' => $request->url,
             'image_id' => $request->image_id,
@@ -94,12 +100,17 @@ class VolunteeringDestinationsController extends Controller
     public function edit(Request $request) {
         $validator = Validator::make($request->all(), [
             'id' => ['required'],
+            'brief' => ['required', 'max:50'],
+            'description' => ['required'],
             'title' => ['required'],
             'image_id' => ['required'],
             'url' => ['required', 'regex:/^[^\s]+$/'],
         ], [
             'title.required' => 'العنوان مطلوب',
             'image_id.required' => 'الصورة المصغرة مطلوبة',
+            'brief.required' => 'الوصف المختصر مطلوب',
+            'brief.max' => 'لا يجب ان يزيد الوصف المختصر عن 50 حرف',
+            'description.required' => 'الوصف مطلوب',
             'url.required' => 'الرابط مطلوب',
             'url.regex' => 'يجب الا يحتوي الرابط على مسافات',
         ]);
@@ -122,6 +133,7 @@ class VolunteeringDestinationsController extends Controller
 
         $destination->title = $request->title;
         $destination->description = $request->description;
+        $destination->brief = $request->brief;
         $destination->url = $request->url;
         $destination->image_id = $request->image_id;
 

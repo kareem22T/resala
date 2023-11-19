@@ -16,12 +16,16 @@
                     <input type="text" name="title" id="title" v-model="title" class="form-control mt-2" placeholder="العنوان">
                 </div>
                 <div class="form-group mb-3">
+                    <label for="brief">الوصف المختصر *</label>
+                    <input type="text" name="brief" id="brief" v-model="brief" class="form-control mt-2" placeholder="الوصف المختصر">
+                </div>
+                <div class="form-group mb-3">
                     <label for="url">رابط الجهة *</label>
                     <input type="text" name="url" id="url" v-model="url" class="form-control mt-2" placeholder="رابط الجهة">
                 </div>
                 <div class="d-flex gap-3">
                     <div class="w-50">
-                        <label for="lang_name" class="form-label">محتوى المقالة *</label>
+                        <label for="lang_name" class="form-label">الوصف التفصيلي *</label>
                         <div class="card">
                             <div class="card-header">
                                 <div class="toolbar d-flex gap-1 justify-content-center" style="flex-wrap: wrap">
@@ -201,6 +205,7 @@ createApp({
             showCodePopUp: false,
             album_imgs: [],
             forAlbum: false,
+            brief: "{{ $destination->brief }}"
         }
     },
     methods: {
@@ -212,7 +217,8 @@ createApp({
                     description: this.description,
                     image_id: this.image_Id,
                     url: this.url,
-                    id: this.destination_id
+                    id: this.destination_id,
+                    brief: this.brief
                 },
                 );
                 if (response.data.status === true) {

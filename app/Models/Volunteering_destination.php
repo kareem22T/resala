@@ -13,6 +13,7 @@ class Volunteering_destination extends Model
         'id',
         'title',
         'description',
+        'brief',
         'url',
         'image_id'
     ];

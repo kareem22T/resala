@@ -18,5 +18,7 @@ class HomeController extends Controller
         $active_link = isset($destination) && $destination ? "destinations_active" : '';
         if ($destination)
             return view('site.destination')->with(compact(['destination', 'active_link']));
+
+        return view('site.article')->with(compact(['article', 'active_link']));
     }
 }

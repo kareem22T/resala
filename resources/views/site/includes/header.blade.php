@@ -28,7 +28,7 @@
                 <a href="">
                     <li>الفعاليات</li>
                 </a>
-                <a href="" class="@yield('destinations_active')">
+                <a href="{{ route('activities.show') }}" class="@yield('destinations_active')">
                     <li>الانشطة</li>
                 </a>
                 <a href="">
@@ -61,7 +61,8 @@
                         </a>
                         <a href="">
                             <li>الفعاليات</li>
-                        </a><a href=""  class="@yield('destinations_active')">
+                        </a>
+                        <a href="{{ route('activities.show') }}"  class="@yield('destinations_active')">
                             <li>الانشطة</li>
                         </a><a href="">
                             <li>الفروع</li>

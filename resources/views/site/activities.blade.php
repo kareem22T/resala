@@ -1,7 +1,7 @@
 @extends('site.layouts.site-layout')
 
-@section('title', isset($title) ? $title : '' )
-@section(isset($active_link) ? $active_link : '', 'active')
+@section('title', 'الانشطة' )
+@section('destinations_active', 'active')
 
 @section('styles')
 <style>
@@ -48,32 +48,44 @@
         background: #ffffff40;
         box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
         text-decoration: none;
-        cursor: pointer;
         transition: all .3s ease-in-out;
         border: 2px solid #27318b;
+        text-align: center
     }
-    .articles_wrapper .article:hover {
-        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    .articles_wrapper .article a:hover {
+        background: #27318b !important;
+        color: #fff
     }
     .articles_wrapper .article .thumbnail {
-        width: 100%;
-        height: auto !important;
-        border-radius: .5rem;
+        width: 170px;
+        height: 170px !important;
+        border-radius: 50%;
         overflow: hidden;
+        border: 4px solid #f0efea;
     }
     .thumbnail img {
         width: 100%;
         height: 100%;
+        object-fit: cover;
     }
     .article h1 {
-        font-size: 18px !important;
+        font-size: 30px !important;
         line-height: 30px !important;
         font-weight: 600;
-        color: #27318b;
+        color: #e31b24;
     }
     .article span {
         font-size: 11px;
         color: rgb(118, 118, 118)
+    }
+    .article a {
+        padding: .5rem 1rem;
+        border: 1px solid #27318b;
+        border-radius: 10px;
+        background: transparent;
+        color: #27318b;
+        text-decoration: none;
+        transition: all .3s ease-in-out
     }
     @media (max-width: 1199.99px) {
         .articles_wrapper {
@@ -105,29 +117,28 @@
 @endsection
 
 @section('content')
-    @if($articles && $articles->count() > 0)
+    @if($activities && $activities->count() > 0)
         <div class="articles_wrapper">
-            @foreach ($articles as $article)
-                @php
-                    $created_at = $article->created_at;
-                    $formattedDate = $created_at->formatLocalized('%A %d %B %Y'); // You can customize the format as needed
-                @endphp
-                <a href="/{{ $article->url }}" target="_blanck" class="article">
+            @foreach ($activities as $activity)
+                <div class="article">
                     <div class="thumbnail">
-                        <img src="{{$article->thumbnail_path}}" alt="{{ $article->title }}">
+                        <img src="/dashboard/images/uploads/{{ $activity->thumbnail->path }}" alt="{{ $activity->title }}">
                     </div>
-                    <h1>{{ $article->title }}</h1>
-                    <span>{{ $formattedDate }}</span>
-                </a>
+                    <h1>{{ $activity->title }}</h1>
+                    <p>
+                        {{ $activity->brief }}
+                    </p>
+                    <a href="/{{ $activity->url }}" target="_blanck" >تفاصيل النشاط <i class="fa-solid fa-arrow-left-long"></i></a>
+                </div>
             @endforeach
         </div>
 
         <div class="pagination_wrapper">
-            {!! $articles->links('pagination::bootstrap-4') !!}
+            {!! $activities->links('pagination::bootstrap-4') !!}
         </div>
     @else
     <h1 style="margin: 5rem 0">
-        لا توجد منشورات
+        لا توجد انشطة
     </h1>
     @endif
 @endsection
