@@ -78,7 +78,7 @@
     <div class="pop-up delete_pop_up card w-50" style="margin: auto; display: none;"  :class="{ 'show': delete_pop_up }" v-if="delete_pop_up">
         <div class="card-body">
             <form @submit.prevent>
-                <h5 class="mb-3 text-center">هل انت متاكد من حذف المقلة رقم @{{ article_name }} ؟</h5>
+                <h5 class="mb-3 text-center">هل انت متاكد من حذف المقالة رقم @{{ article_name }} ؟</h5>
                 <div class="btns d-flex w-100 justify-content-between gap-3">
                     <button class="btn btn-danger w-100" @click="deletearticle(article_id)">حذف</button>
                     <button class="btn btn-light w-100" @click="delete_pop_up = false; getValus(null, null, null)">الغاء</button>

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Traits\DataFormController;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Article;
+use App\Models\Page;
 use App\Models\Volunteering_destination;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,7 +18,6 @@ class ArticlesController extends Controller
     public function index() {
         return view('admin.dashboard.article_prev');
     }
-
     public function getNewsIndex() {
         $articles = Article::where('type', 'post')->orderBy(\DB::raw('ABS(TIMESTAMPDIFF(SECOND, created_at, NOW()))'))->paginate(10);
         $title = 'اخبار رسالة';
@@ -91,6 +91,12 @@ class ArticlesController extends Controller
             return $this->jsondata(false, 'Add failed', ['هذا الرابط موجود بالفعل'], []);
         }
 
+        $pagesUrl = Page::where('url', $request->url)->get();
+        if ($pagesUrl->count() > 0) {
+            return $this->jsondata(false, 'Add failed', ['هذا الرابط موجود بالفعل'], []);
+        }
+
+
         $destinationsUrl = Volunteering_destination::where('url', $request->url)->get();
         if ($destinationsUrl->count() > 0) {
             return $this->jsondata(false, 'Add failed', ['هذا الرابط موجود بالفعل'], []);
@@ -144,6 +150,11 @@ class ArticlesController extends Controller
         if ($articleUrl->count() > 0) {
             return $this->jsondata(false, 'Add failed', ['هذا الرابط موجود بالفعل'], []);
         }
+        
+        $pagesUrl = Page::where('url', $request->url)->get();
+        if ($pagesUrl->count() > 0) {
+            return $this->jsondata(false, 'Add failed', ['هذا الرابط موجود بالفعل'], []);
+        }
 
         $destinationsUrl = Volunteering_destination::where('url', $request->url)->get();
         if ($destinationsUrl->count() > 0) {
@@ -170,7 +181,7 @@ class ArticlesController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return $this->jsondata(false, true, 'Edit failed', [$validator->errors()->first()], []);
+            return $this->jsondata(false, 'delete failed', [$validator->errors()->first()], []);
         }
 
         $Article = Article::find($request->article_id);

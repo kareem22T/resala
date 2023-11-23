@@ -13,22 +13,22 @@
 
         <div>
             <ul>
-                <a href="">
+                {{-- <a href="">
                     <li>فاعليات رسالة</li>
-                </a>
+                </a> --}}
                 <a href="{{ route('news.show') }}">
                     <li>أخبار رسالة</li>
                 </a>
-                <a href="">
+                <a href="{{ route('resala.challange_day') }}">
                     <li>تحدي الخير</li>
                 </a>
-                <a href="">
+                <a href="{{ route('resala.privacy_policy') }}">
                     <li>سياسة الخصوصية</li>
                 </a>
-                <a href="">
+                <a href="{{ route('resala.faq') }}">
                     <li>الاسئلة المتكررة</li>
                 </a>
-                <a href="">
+                <a href="https://resala.org/whs/">
                     <li>انا وابن عمي بنساعد الغريب</li>
                 </a>
             </ul>

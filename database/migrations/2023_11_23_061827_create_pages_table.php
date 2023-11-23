@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('branchs', function (Blueprint $table) {
+        Schema::create('pages', function (Blueprint $table) {
             $table->id();
-            $table->string('location');
-            $table->text('address')->nullable();
-            $table->text('phone')->nullable();
-            $table->text('iframe')->nullable();
+            $table->text('title');
+            $table->text('url');
+            $table->longText('content');
+            $table->timestamps();
         });
     }
 
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('branchs');
+        Schema::dropIfExists('pages');
     }
 };

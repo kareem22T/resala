@@ -9,6 +9,7 @@ use App\Http\Controllers\BranchController;
 use App\Http\Controllers\VolunteersController;
 use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\ArticlesController;
+use App\Http\Controllers\PageController;
 
 Route::middleware(['admin_guest'])->group(function () {
     Route::get('/login', [RegisterController::class, 'getLoginIndex']);
@@ -84,6 +85,18 @@ Route::middleware('auth:admin')->group(function () {
         Route::post('/search', [ArticlesController::class, "search"])->name('articles.search');
         Route::post('/delete', [ArticlesController::class, "delete"])->name('articles.delete');
         Route::post('/add', [ArticlesController::class, "put"])->name('article.put');
+    });
+
+    // pages
+    Route::prefix('pages')->group(function () {
+        Route::get('/', [PageController::class, "index"])->name('pages.prev');
+        Route::get('/add', [PageController::class, "addIndex"])->name('pages.add');
+        Route::get('/edit/{id}', [PageController::class, "edit"])->name('pages.edit');
+        Route::post('/update', [PageController::class, "update"])->name('pages.update');
+        Route::post('/get', [PageController::class, "getPages"])->name('pages.get');
+        Route::post('/search', [PageController::class, "search"])->name('pages.search');
+        Route::post('/delete', [PageController::class, "delete"])->name('pages.delete');
+        Route::post('/add', [PageController::class, "put"])->name('pages.put');
     });
 
     //logout

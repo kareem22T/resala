@@ -56,7 +56,7 @@
             <img src="{{asset('/assets/img/donate-1.jpg')}}" alt="">
             <span>التبرع من خلال VISA</span>
         </a>
-        <a href="">
+        <a href="{{ route('resala.bank_transfer') }}">
             <img src="{{asset('/assets/img/donate-2.jpg')}}" alt="">
             <span>التحويل البنكي</span>
         </a>
@@ -64,7 +64,7 @@
             <img src="{{asset('/assets/img/donate-3.jpg')}}" alt="">
             <span>التبرع من خلال مندوب</span>
         </a>
-        <a href="">
+        <a href="{{ route('resala.other_donation') }}">
             <img src="{{asset('/assets/img/donate-4.jpg')}}" alt="">
             <span>طرق تبرع آخرى</span>
         </a>

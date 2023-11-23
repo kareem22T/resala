@@ -15,8 +15,17 @@
                     <input type="text" name="location" id="location" v-model="location" class="form-control mt-2" placeholder="(القاهرة - مصر الجديدة)">
                 </div>
                 <div class="form-group mb-3">
-                    <label for="address">العنوان</label>
+                    <label for="address">العنوان التفصيلي</label>
                     <input type="text" name="address" id="address" v-model="address"  class="form-control mt-2" placeholder="العنوان التفصيلي">
+                </div>
+                <div class="form-group mb-3">
+                    <label for="phone">هاتف الفرع</label>
+                    <input type="text" name="phone" id="phone" v-model="phone"  class="form-control mt-2" placeholder="هاتف الفرع">
+                </div>
+                <div class="form-group mb-3">
+                    <label for="iframe">Google Map iframe</label>
+                    <textarea dir="ltr" name="iframe" id="iframe" rows="5" v-model="iframe"  class="form-control mt-2" placeholder="Google Map iframe">
+                    </textarea>
                 </div>
                 <button class="btn btn-primary" @click="add()">اضافة</button>
             </form>
@@ -35,7 +44,9 @@ createApp({
     data() {
         return {
             location: null,
-            address: null
+            address: null,
+            iframe: null,
+            phone: null
         }
     },
     methods: {
@@ -44,7 +55,9 @@ createApp({
             try {
                 const response = await axios.post(`{{ route("branches.put") }}`, {
                     location: this.location,
-                    address: this.address
+                    address: this.address,
+                    phone: this.phone,
+                    iframe: this.iframe
                 },
                 );
                 if (response.data.status === true) {

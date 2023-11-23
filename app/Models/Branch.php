@@ -11,7 +11,9 @@ class Branch extends Model
     protected $fillable = [
         'id',
         'location',
-        'address'
+        'address',
+        'phone',
+        'iframe',
     ];
 
     protected $table = 'branchs';

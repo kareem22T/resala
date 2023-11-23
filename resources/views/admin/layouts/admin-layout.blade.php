@@ -211,28 +211,22 @@
             </li>
             <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-              <span class="hide-menu">Tags</span>
+              <span class="hide-menu">الصفحات</span>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link @yield('Tags_preview_active')" href="/Moheb/admin/tags" aria-expanded="false">
+              <a class="sidebar-link @yield('pages_preview_active')" href="{{ route('pages.prev') }}" aria-expanded="false">
                 <span>
-                  <i class="ti ti-tags"></i>
+                  <i class="ti ti-clipboard-text"></i>
                 </span>
-                <span class="hide-menu">Preview</span>
+                <span class="hide-menu">عرض</span>
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link @yield('tags_add_active')" href="/Moheb/admin/tags/add" aria-expanded="false">
+              <a class="sidebar-link @yield('pages_add_active')" href="{{ route('pages.add') }}" aria-expanded="false">
                 <span>
-                  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-flag-plus" width="21" height="21" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                    <path d="M14.433 15.315a4.978 4.978 0 0 1 -2.433 -1.315a5 5 0 0 0 -7 0v-9a5 5 0 0 1 7 0a5 5 0 0 0 7 0v7"></path>
-                    <path d="M5 21v-7"></path>
-                    <path d="M16 19h6"></path>
-                    <path d="M19 16v6"></path>
-                  </svg>
+                  <i class="ti ti-file-plus"></i>
                 </span>
-                <span class="hide-menu">Add</span>
+                <span class="hide-menu">اضافة</span>
               </a>
             </li>
           </ul>

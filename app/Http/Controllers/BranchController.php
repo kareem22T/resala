@@ -13,6 +13,12 @@ class BranchController extends Controller
 {
     use DataFormController;
 
+    public function getBranchesIndex() {
+        $branches = Branch::paginate(20);
+        return view('site.branches')->with(compact(['branches']));
+
+    }
+
     public function index() {
         return view('admin.dashboard.branches_prev');
     }
@@ -50,8 +56,12 @@ class BranchController extends Controller
     public function add(Request $request) {
         $validator = Validator::make($request->all(), [
             'location' => ['required'],
+            'address' => ['required'],
+            'phone' => ['required'],
         ], [
             'location.required' => 'الموقع مطلوب',
+            'address.required' => 'العنوان التفصيلي مطلوب',
+            'phone.required' => 'رقم الفرع مطلوب',
         ]);
 
         if ($validator->fails()) {
@@ -61,6 +71,8 @@ class BranchController extends Controller
         $branch = Branch::create([
             'location' => $request->location,
             'address' => $request->address,
+            'phone' => $request->phone,
+            'iframe' => $request->iframe,
         ]);
 
         if ($branch)
@@ -72,8 +84,12 @@ class BranchController extends Controller
         $validator = Validator::make($request->all(), [
             'id' => ['required'],
             'location' => ['required'],
+            'address' => ['required'],
+            'phone' => ['required'],
         ], [
             'location.required' => 'الموقع مطلوب',
+            'address.required' => 'العنوان التفصيلي مطلوب',
+            'phone.required' => 'رقم الفرع مطلوب',
         ]);
 
         if ($validator->fails()) {
@@ -84,6 +100,8 @@ class BranchController extends Controller
 
         $branch->location = $request->location;
         $branch->address = $request->address;
+        $branch->phone = $request->phone;
+        $branch->iframe = $request->iframe;
 
         $branch->save();
 

@@ -1,110 +1,113 @@
 @extends('admin.layouts.admin-layout')
-@section('title', 'الفروع')
-@section('branches_preview_active', 'active')
+
+@section('title', 'الصفحات')
+
+@section('pages_preview_active', 'active')
 
 @section('content')
 <h3 class="mb-5">
-    فروع الجمعية
+    الصفحات
 </h3>
-<style>
-    tbody tr:nth-child(odd) {
-        background: #f7f7f7;
-    }
-</style>
-<main id="branches_prev">
-    <div class="card w-100">
-        <div class="card-header d-flex justify-content-between gap-3">
-            <input type="text" name="search" id="search" class="form-control w-25" placeholder="بحث" v-model="search" @input="getSearch(this.search)">
-            <a href="{{ route('branches.add') }}" class="btn btn-primary"><i class="ti ti-plus"></i> اضافة فرع</a>
-        </div>
-        <div class="card-body p-4">
-        <div class="table-responsive" v-if="branchs_data && branchs_data.length > 0">
-            <table class="table text-nowrap mb-0 align-middle">
-            <thead class="text-dark fs-4">
-                <tr>
-                    {{-- <th class="border-bottom-0">
-                        <h6 class="fw-semibold mb-0 d-inline-flex align-items-center">Id</h6>
-                    </th> --}}
-                    <th class="border-bottom-0">
-                        <h6 class="fw-semibold mb-0 d-inline-flex align-items-center">الموقع</h6>
-                    </th>
-                    <th class="border-bottom-0">
-                        <h6 class="fw-semibold mb-0 d-inline-flex align-items-center">العنوان</h6>
-                    </th>
-                    <th class="border-bottom-0">
-                        <h6 class="fw-semibold mb-0 d-inline-flex align-items-center">Controls</h6>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="(branch, index) in branchs_data" :key="index">
-                    {{-- <td class="border-bottom-0"><h6 class="fw-semibold mb-0">@{{branch.id}}</h6></td> --}}
-                    <td class="border-bottom-0"><h6 class="fw-semibold mb-0">@{{branch.location}}</h6></td>
-                    <td class="border-bottom-0" style="max-width: 300px; white-space:normal;"><h6 class="fw-semibold mb-0" style="line-height: 28px">@{{branch.address}}</h6></td>
-                    <td class="border-bottom-0">
-                        <div class="d-flex gap-2">
-                            <a :href="`/admin/branches/edit/${branch.id}`" class="btn btn-secondary p-2"><h4 class="ti ti-edit text-light m-0 fw-semibold"></h4></a>
-                            <button class="btn btn-danger p-2" @click="this.delete_pop_up = true; getValues(branch.id, branch.location)"><h4 class="ti ti-trash text-light m-0 fw-semibold"></h4></button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-            </table>
-        </div>
-        <div class="pagination w-100 d-flex gap-2 justify-content-center mt-3" v-if="last_page > 1">
-            <div v-for="page_num in last_page" :key="page_num" >
-                <label :for="`page_num_${page_num}`" class="btn btn-primary" :class="page_num == page ? 'active' : ''">@{{ page_num }}</label>
-                <input type="radio" class="d-none" name="page_num" :id="`page_num_${page_num}`" v-model="page" :value="page_num" @change="search == '' ? getbranchs() : getSearch(this.search)">
-            </div>
-        </div>
-        <h4 class="text-center">
-            @{{ branchs_data && branchs_data.length == 0 ? 'لا توجد فروع مضافة' : '' }}
-        </h4>
-        <h4 class="text-center">
-            @{{ branchs_data === false ? 'Server error try again later' : '' }}
-        </h4>
-        </div>
-        <div class="hide-content" v-if="delete_pop_up"></div>
-        <div class="pop-up delete_pop_up card w-50" style="margin: auto; display: none;"  :class="{ 'show': delete_pop_up }" v-if="delete_pop_up">
-            <div class="card-body">
-                <form @submit.prevent>
-                    <h5 class="mb-3 text-center">هل انت متاكد من حذف الفرع @{{ branch_name }}؟</h5>
-                    <div class="btns d-flex w-100 justify-content-between gap-3">
-                        <button class="btn btn-light w-100" @click="delete_pop_up = false; getValus(null, null, null)">الغاء</button>
-                        <button class="btn btn-danger w-100" @click="deletebranch(branch_id)">حذف</button>
+<div class="card w-100" id="word_prev">
+    <div class="card-header d-flex justify-content-between gap-3">
+        <input type="text" name="search" id="search" class="form-control w-25" placeholder="Search" v-model="search" @input="getSearch(this.search)">
+        <a href="{{route('pages.add')}}" class="btn btn-primary w-fit d-flex gap-2 align-items-center">
+            <i class="ti ti-plus"></i> اضافة صفحة
+        </a>
+    </div>
+    <div class="card-body p-4">
+    <div class="table-responsive" v-if="pages_data && pages_data.length > 0">
+        <table class="table text-nowrap mb-0 align-middle">
+        <thead class="text-dark fs-4">
+            <tr>
+                <th class="border-bottom-0">
+                    <h6 class="fw-semibold mb-0 d-inline-flex align-items-center">Id</h6>
+                    {{-- <a href="" class="ml-2 sort text-dark">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrows-sort" width="1rem" height="1rem" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M3 9l4 -4l4 4m-4 -4v14"></path>
+                            <path d="M21 15l-4 4l-4 -4m4 4v-14"></path>
+                        </svg>
+                    </a> --}}
+                </th>
+                <th class="border-bottom-0">
+                    <h6 class="fw-semibold mb-0 d-inline-flex align-items-center">العنوان</h6>
+                </th>
+                <th class="border-bottom-0">
+                    <h6 class="fw-semibold mb-0 d-inline-flex align-items-center">تاريخ الانشاء</h6>
+                </th>
+                <th class="border-bottom-0">
+                    <h6 class="fw-semibold mb-0 d-inline-flex align-items-center">Controls</h6>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="(page, index) in pages_data" :key="index">
+                <td class="border-bottom-0"><h6 class="fw-semibold mb-0">@{{page.id}}</h6></td>
+                <td class="border-bottom-0"><h6 class="fw-semibold mb-0">@{{page.title}}</h6></td>
+                <td class="border-bottom-0"><h6 class="fw-semibold mb-0">@{{new Date(page.created_at).toISOString().split('T')[0]}}</h6></td>
+                <td class="border-bottom-0">
+                    <div class="d-flex gap-2">
+                        <a :href="`/${page.url}`" target="_blanck" class="btn btn-success p-2"><h4 class="ti ti-eye text-light m-0 fw-semibold"></h4></a>
+                        <a :href="`/admin/pages/edit/${page.id}`" class="btn btn-secondary p-2"><h4 class="ti ti-edit text-light m-0 fw-semibold"></h4></a>
+                        <button class="btn btn-danger p-2" @click="this.delete_pop_up = true; getValues(page.id, page.id)"><h4 class="ti ti-trash text-light m-0 fw-semibold"></h4></button>
                     </div>
-                </form>
-            </div>
+                </td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
+    <div class="pagination w-100 d-flex gap-2 justify-content-center mt-3" v-if="last_page > 1">
+        <div v-for="page_num in last_page" :key="page_num" >
+            <label :for="`page_num_${page_num}`" class="btn btn-primary" :class="page_num == page ? 'active' : ''">@{{ page_num }}</label>
+            <input type="radio" class="d-none" name="page_num" :id="`page_num_${page_num}`" v-model="page" :value="page_num" @change="search == '' ? getpages() : getSearch(this.search)">
         </div>
     </div>
-</main>
+    <h4 class="text-center">
+        @{{ pages_data && pages_data.length == 0 ? 'There is no any page' : '' }}
+    </h4>
+    <h4 class="text-center">
+        @{{ pages_data === false ? 'Server error try again later' : '' }}
+    </h4>
+    </div>
+    <div class="hide-content" v-if="delete_pop_up"></div>
+    <div class="pop-up delete_pop_up card w-50" style="margin: auto; display: none;"  :class="{ 'show': delete_pop_up }" v-if="delete_pop_up">
+        <div class="card-body">
+            <form @submit.prevent>
+                <h5 class="mb-3 text-center">هل انت متاكد من حذف الصفحة رقم @{{ page_name }} ؟</h5>
+                <div class="btns d-flex w-100 justify-content-between gap-3">
+                    <button class="btn btn-danger w-100" @click="deletepage(page_id)">حذف</button>
+                    <button class="btn btn-light w-100" @click="delete_pop_up = false; getValus(null, null, null)">الغاء</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 @endsection
 
 @section('scripts')
-<script src="{{ asset('/libs/axios.js') }}"></script>
-<script src="{{ asset('/libs/vue.js') }}"></script>
-
 <script>
-const { createApp, ref } = Vue;
+const { createApp, ref } = Vue
+
 createApp({
     data() {
         return {
-            branch_id: null,
-            branch_name: null,
+            page_id: null,
+            page_name: null,
             delete_pop_up: false,
-            branchs_data: null,
+            pages_data: null,
             search: null,
             page: 1,
             total: null,
-            last_page: null,
+            last_page: null
         }
     },
     methods: {
-        async deletebranch(branch_id) {
+        async deletepage(page_id) {
             $('.loader').fadeIn().css('display', 'flex')
             try {
-                const response = await axios.post(`{{ route("branchs.delete") }}`, {
-                    branch_id: branch_id,
+                const response = await axios.post(`{{ route('pages.delete') }}`, {
+                    page_id: page_id,
                 },
                 );
                 if (response.data.status === true) {
@@ -151,15 +154,15 @@ createApp({
                 console.error(error);
             }
         },
-        async getbranchs() {
+        async getpages() {
             $('.loader').fadeIn().css('display', 'flex')
             try {
-                const response = await axios.post(`{{ route("branchs.get") }}?page=${this.page}`, {
+                const response = await axios.post(`{{ route('pages.get') }}?page=${this.page}`, {
                 },
                 );
                 if (response.data.status === true) {
                     $('.loader').fadeOut()
-                    this.branchs_data = response.data.data.data
+                    this.pages_data = response.data.data.data
                     this.total = response.data.data.total
                     this.last_page = response.data.data.last_page
                 } else {
@@ -196,12 +199,12 @@ createApp({
         },
         async getSearch(search_words) {
             try {
-                const response = await axios.post(`{{ route("branchs.search") }}?page=${this.page}`, {
+                const response = await axios.post(`{{ route('pages.search') }}?page=${this.page}`, {
                     search_words: search_words,
                 },
                 );
                 if (response.data.status === true) {
-                    this.branchs_data = response.data.data.data
+                    this.pages_data = response.data.data.data
                     this.total = response.data.data.total
                     this.last_page = response.data.data.last_page
                 } else {
@@ -235,15 +238,15 @@ createApp({
                 console.error(error);
             }
         },
-        getValues(branch_id, branch_name) {
-            this.branch_id = branch_id
-            this.branch_name = branch_name
+        getValues(page_id, page_name) {
+            this.page_id = page_id
+            this.page_name = page_name
         }
     },
     created() {
-        this.getbranchs()
+        this.getpages()
         $('.loader').fadeOut()
     },
-}).mount('#branches_prev')
+}).mount('#word_prev')
 </script>
 @endsection

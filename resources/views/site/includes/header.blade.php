@@ -3,11 +3,11 @@
     <div class="container">
 
         <div class="head">
-            <img src="{{ asset('/assets/img/Resala-logo.png') }}" alt="logo" class="logo">
+            <a href="/"><img src="{{ asset('/assets/img/Resala-logo.png') }}" alt="logo" class="logo"></a>
             <div class="controls">
                 <form action="">
-                    <input type="text" class="form-control" name="search" placeholder="البحث في الموقع">
-                    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    <input type="text" class="form-control" name="search" id="search_input" placeholder="البحث في الموقع">
+                    <button type="submit" class="search_btn"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </form>
                 <div class="btns">
                     <a href="" class="menu"><i class="fa-solid fa-bars"></i></a>
@@ -25,16 +25,16 @@
                 <a href="{{ route('news.show') }}" class="@yield('news_active')">
                     <li>الأخبار</li>
                 </a>
-                <a href="">
+                {{-- <a href="">
                     <li>الفعاليات</li>
-                </a>
+                </a> --}}
                 <a href="{{ route('activities.show') }}" class="@yield('destinations_active')">
                     <li>الانشطة</li>
                 </a>
-                <a href="">
+                <a href="{{ route('branches.show') }}" class="@yield('branches_active')">
                     <li>الفروع</li>
                 </a>
-                <a href="">
+                <a href="{{ route('resala.challange_day') }}" class="@yield('challange_day_active')">
                     <li>يوم التحدي</li>
                 </a>
                 <a href="{{ route('videos.show') }}" class="@yield('videos_active')">
@@ -59,15 +59,15 @@
                         <a href="{{ route('news.show') }}" class="@yield('news_active')">
                             <li>الأخبار</li>
                         </a>
-                        <a href="">
+                        {{-- <a href="">
                             <li>الفعاليات</li>
-                        </a>
+                        </a> --}}
                         <a href="{{ route('activities.show') }}"  class="@yield('destinations_active')">
                             <li>الانشطة</li>
-                        </a><a href="">
+                        </a><a  href="{{ route('branches.show') }}" class="@yield('branches_active')">
                             <li>الفروع</li>
                         </a>
-                        <a href="">
+                        <a  href="{{ route('resala.challange_day') }}" class="@yield('challange_day_active')">
                             <li>يوم التحدي</li>
                         </a>
                         <a href="{{ route('videos.show') }}" class="@yield('videos_active')">
@@ -89,11 +89,11 @@
             <ul class="social">
                 <li class="mobile">
                     <ul>
-                        <li><a href=""><i class="fa-brands fa-facebook"></i></a></li>
-                        <li><a href=""><i class="fa-brands fa-twitter"></i></a></li>
-                        <li><a href=""><i class="fa-brands fa-instagram"></i></a></li>
-                        <li><a href=""><i class="fa-brands fa-youtube"></i></a></li>
-                        <li><a href=""><i class="fa-brands fa-tiktok"></i></a></li>
+                        <li><a href="https://www.facebook.com/Resala.org" target="_blanck"><i class="fa-brands fa-facebook"></i></a></li>
+                        <li><a href="https://twitter.com/Resalaeg"  target="_blanck"><i class="fa-brands fa-x-twitter"></i></a></li>
+                        <li><a href="https://www.instagram.com/resala.charity.organization?utm_source=ig_profile_share&igshid=i663pmdktl4z"  target="_blanck"><i class="fa-brands fa-instagram"></i></a></li>
+                        <li><a href="https://www.youtube.com/user/resala" target="_blanck"><i class="fa-brands fa-youtube"></i></a></li>
+                        <li><a href="https://www.tiktok.com/@resala_charity" target="_blanck"><i class="fa-brands fa-tiktok"></i></a></li>
                     </ul>
                 </li>
             </ul>
