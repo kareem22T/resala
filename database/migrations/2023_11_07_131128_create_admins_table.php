@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('admins', function (Blueprint $table) {
             $table->id();
-            $table->text('name')->default('admin');
+            $table->text('name');
             $table->text('email');
             $table->text('password');
             $table->boolean('donations_access');
