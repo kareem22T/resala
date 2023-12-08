@@ -18,6 +18,14 @@ Route::middleware(['admin_guest'])->group(function () {
 
 Route::middleware('auth:admin')->group(function () {
     Route::get('/', [AdminHomeController::class, 'getIndex'])->name('admin.home');
+    Route::post('/add-img-slider', [AdminHomeController::class, 'addImageToSlider'])->name('home.slider.add');
+    Route::post('/add-img-events', [AdminHomeController::class, 'addImageToEvents'])->name('home.events.add');
+    Route::post('/delete-img-slider', [AdminHomeController::class, 'deleteImgFromSlider'])->name('home.slider.delete');
+    Route::post('/delete-img-events', [AdminHomeController::class, 'deleteImgFromEvents'])->name('home.events.delete');
+    Route::post('/chang-img-slider-sort', [AdminHomeController::class, 'changeSlideSort'])->name('home.slider.change.sort');
+    Route::post('/chang-img-events-sort', [AdminHomeController::class, 'changeEventsSort'])->name('home.events.change.sort');
+    Route::post('/get-slider-imgs', [AdminHomeController::class, 'getSliderImages'])->name('admin_home.get.slider');
+    Route::post('/get-events-imgs', [AdminHomeController::class, 'getEventsImages'])->name('admin_home.get.events');
 
     // donations
     Route::prefix('/donate')->group(function () {

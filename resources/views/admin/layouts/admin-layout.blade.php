@@ -134,11 +134,11 @@
               <span class="hide-menu">الرئيسية</span>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link @yield('home_active')" href="/Moheb/admin" aria-expanded="false">
+              <a class="sidebar-link @yield('home_active')" href="{{ route('admin.home') }}" aria-expanded="false">
                 <span>
                   <i class="ti ti-layout-dashboard"></i>
                 </span>
-                <span class="hide-menu">الاختصارات والاحصائات</span>
+                <span class="hide-menu">اقسام الصفحة الرئيسية</span>
               </a>
             </li>
             <li class="nav-small-cap">
