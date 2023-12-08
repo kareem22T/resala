@@ -291,21 +291,13 @@
 @section('content')
   <swiper-container class="mySwiper" pagination="true" pagination-clickable="true" space-between="30"
     centered-slides="true" autoplay-delay="4000" autoplay-disable-on-interaction="false" effect="fade">
-    <swiper-slide>
-        <img src="{{ asset('assets/img/slider-1.gif') }}" alt="">
-    </swiper-slide>
-    <swiper-slide>
-        <img src="{{ asset('assets/img/slider-2.jpg') }}" alt="">
-    </swiper-slide>
-    <swiper-slide>
-        <img src="{{ asset('assets/img/slider-3.jpg') }}" alt="">
-    </swiper-slide>
-    <swiper-slide>
-        <img src="{{ asset('assets/img/slider-4.jpg') }}" alt="">
-    </swiper-slide>
-    <swiper-slide>
-        <img src="{{ asset('assets/img/slider-5.jpg') }}" alt="">
-    </swiper-slide>
+    @if($slider_imgs)
+        @foreach ($slider_imgs as $slide)
+            <swiper-slide>
+                <img src="{{ $slide->slide_path }}" alt="">
+            </swiper-slide>
+        @endforeach
+    @endif
   </swiper-container>
 
   <section class="latest">
@@ -363,19 +355,14 @@
             <p>البوم صور لأهم فاعليات جمعية رسالة</p>
         </div>
     </div>
-    <div class="events_wrapper">
-        <div class="img">
-            <img src="{{ asset('assets/img/events-1.jpg') }}">
-        </div>
-        <div class="img">
-            <img src="{{ asset('assets/img/events-2.jpg') }}">
-        </div>
-        <div class="img">
-            <img src="{{ asset('assets/img/events-3.jpg') }}">
-        </div>
-        <div class="img">
-            <img src="{{ asset('assets/img/events-4.jpg') }}">
-        </div>
+    <div class="events_wrapper" dir="ltr">
+        @if($events_imgs)
+            @foreach ($events_imgs as $img)
+                <div class="img">
+                    <img src="{{ $img->slide_path }}" alt="">
+                </div>
+            @endforeach
+        @endif
     </div>
   </section>
 

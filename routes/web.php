@@ -9,6 +9,8 @@ use App\Http\Controllers\ArticlesController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Http\Request;
 use App\Models\Article;
+use App\Models\Home_slider;
+use App\Models\Home_events;
 use Carbon\Carbon;
 
 /*
@@ -26,11 +28,13 @@ Route::get('/', function (Request $request) {
     $articles = Article::where('title', 'like', '%' . $request->search . '%')->orWhere('content', 'like', '%' . $request->search . '%')->orderBy(\DB::raw('ABS(TIMESTAMPDIFF(SECOND, created_at, NOW()))'))->paginate(10);
     $title = $request->search;
     $active_link = '';
+    $slider_imgs = Home_slider::all();
+    $events_imgs = Home_events::all();
     Carbon::setLocale('ar');
     if ($request->search)
         return view('site.articles')->with(compact(['articles', 'title', 'active_link']));
 
-    return view('welcome');
+    return view('welcome')->with(compact(['slider_imgs', 'events_imgs']));
 });
 Route::get('/about', function () {
     return view('site.about');
