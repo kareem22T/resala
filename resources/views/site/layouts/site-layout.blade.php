@@ -27,7 +27,7 @@
     @yield('styles')
     <title>@yield('title') - رسالة</title>
     <style>
-        .loader {
+        .page-loader {
             width: 100vw;
             height: 100vh;
             position: fixed;
@@ -90,7 +90,7 @@
     </style>
 </head>
 <body>
-    <div class="loader" style="background-color: #fff;">
+    <div class="page-loader" style="background-color: #fff;">
         <div class="custom-loader"></div>
     </div>
     <div id="errors"></div>

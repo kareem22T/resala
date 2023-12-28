@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
             $table->integer('author_id');
+            $table->integer('channel_id');
             $table->text('title');
             $table->longText('content');
             $table->string('type', 100);
             $table->text('thumbnail_path');
-            $table->text('url');
             $table->timestamps();
         });
     }
