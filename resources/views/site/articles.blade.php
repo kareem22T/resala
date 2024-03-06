@@ -42,7 +42,7 @@
         border-radius: 1.5rem;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
         gap: 1rem;
         background: #ffffff40;
@@ -59,11 +59,13 @@
         width: 100%;
         height: auto !important;
         border-radius: .5rem;
+        height: 180px !important;
         overflow: hidden;
     }
     .thumbnail img {
         width: 100%;
         height: 100%;
+        object-fit: cover
     }
     .article h1 {
         font-size: 18px !important;
