@@ -173,7 +173,9 @@
             overflow: hidden;
         }
         .events_wrapper .img img {
-            width: 100%
+            width: 100%;
+            height: 100%;
+            object-fit: cover
         }
         .videos_wrapper {
             display: grid;
@@ -316,7 +318,19 @@
             @foreach ($articles as $article)
                 @php
                     $created_at = $article->created_at;
-                    $formattedDate = $created_at->formatLocalized('%A %d %B %Y'); // You can customize the format as needed
+                    // Assuming $article->created_at is a timestamp or date string
+                    $date = Carbon\Carbon::parse($article->created_at);
+
+                    $months = array(
+                        "يناير", "فبراير", "مارس", "إبريل", "مايو", "يونيو",
+                        "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"
+                    );
+
+                    $days = array(
+                        "الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"
+                    );
+
+                    $formattedDate = $days[$date->dayOfWeek] . ', ' . $date->day . ' ' . $months[$date->month] . ', ' . $date->year;
                 @endphp
                 <article>
                     <div>
@@ -383,7 +397,19 @@
             @foreach ($articles as $article)
                 @php
                     $created_at = $article->created_at;
-                    $formattedDate = $created_at->formatLocalized('%A %d %B %Y'); // You can customize the format as needed
+                    // Assuming $article->created_at is a timestamp or date string
+                    $date = Carbon\Carbon::parse($article->created_at);
+
+                    $months = array(
+                        "يناير", "فبراير", "مارس", "إبريل", "مايو", "يونيو",
+                        "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"
+                    );
+
+                    $days = array(
+                        "الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"
+                    );
+
+                    $formattedDate = $days[$date->dayOfWeek] . ', ' . $date->day . ' ' . $months[$date->month] . ', ' . $date->year;
                 @endphp
                 <a href="/{{$article->url}}"  target="_blanck"  class="video">
                     <img src="{{$article->thumbnail_path}}" alt="{{ $article->title }}">

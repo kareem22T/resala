@@ -27,7 +27,7 @@ class ArticlesController extends Controller
     }
 
     public function getVideosIndex() {
-        $articles = Article::where('type', 'vedio')->orderBy(\DB::raw('ABS(TIMESTAMPDIFF(SECOND, created_at, NOW()))'))->paginate(10);
+        $articles = Article::where('type', 'video')->orderBy(\DB::raw('ABS(TIMESTAMPDIFF(SECOND, created_at, NOW()))'))->paginate(10);
         $title = 'الفيديوهات';
         $active_link = 'videos_active';
         Carbon::setLocale('ar');

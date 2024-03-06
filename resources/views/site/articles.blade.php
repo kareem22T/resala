@@ -110,7 +110,19 @@
             @foreach ($articles as $article)
                 @php
                     $created_at = $article->created_at;
-                    $formattedDate = $created_at->formatLocalized('%A %d %B %Y'); // You can customize the format as needed
+                    // Assuming $article->created_at is a timestamp or date string
+                    $date = Carbon\Carbon::parse($article->created_at);
+
+                    $months = array(
+                        "يناير", "فبراير", "مارس", "إبريل", "مايو", "يونيو",
+                        "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"
+                    );
+
+                    $days = array(
+                        "الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"
+                    );
+
+                    $formattedDate = $days[$date->dayOfWeek] . ', ' . $date->day . ' ' . $months[$date->month] . ', ' . $date->year;
                 @endphp
                 <a href="/{{ $article->url }}" target="_blanck" class="article">
                     <div class="thumbnail">
