@@ -191,6 +191,7 @@
         })
         $(document).on("click", ".img", function() {
             let ele = $(this).find("img")
+            $(".zoomed_image_wrapper").find("img").remove()
             $(".zoomed_image_wrapper").append(ele.clone()).css("display", "flex")
         })
         $(".icon-tabler-square-rounded-x").on("click", function () {
