@@ -4,12 +4,8 @@
 
 @section('styles')
     <style>
-        swiper-slide {
-            padding: 10px
-        }
         swiper-slide img {
             width: 100%;
-            border-radius: 10px;
             box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
             box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
         }
@@ -290,7 +286,7 @@
     </style>
 @endsection
 
-@section('content')
+@section('content_home')
   <swiper-container class="mySwiper" pagination="true" pagination-clickable="true" space-between="30"
     centered-slides="true" autoplay-delay="4000" autoplay-disable-on-interaction="false" effect="fade">
     @if($slider_imgs)
@@ -301,126 +297,127 @@
         @endforeach
     @endif
   </swiper-container>
+<div class="container">
+    <section class="latest">
+      <div class="head">
+          <i class="fa-regular fa-newspaper"></i>
+          <div class="text">
+              <h2>أخر <span>اخبارنا</span></h2>
+              <p>تعرف على كل جديد أخبار الجمعية</p>
+          </div>
+      </div>
+      <div class="articles_wrapper">
+          @php
+              $articles = App\Models\Article::where('type', 'post')->latest()->take(6)->get();
+          @endphp
+          @if ($articles->count() > 0)
+              @foreach ($articles as $article)
+                  @php
+                      $created_at = $article->created_at;
+                      // Assuming $article->created_at is a timestamp or date string
+                      $date = Carbon\Carbon::parse($article->created_at);
 
-  <section class="latest">
-    <div class="head">
-        <i class="fa-regular fa-newspaper"></i>
-        <div class="text">
-            <h2>أخر <span>اخبارنا</span></h2>
-            <p>تعرف على كل جديد أخبار الجمعية</p>
-        </div>
-    </div>
-    <div class="articles_wrapper">
-        @php
-            $articles = App\Models\Article::where('type', 'post')->latest()->take(6)->get();
-        @endphp
-        @if ($articles->count() > 0)
-            @foreach ($articles as $article)
-                @php
-                    $created_at = $article->created_at;
-                    // Assuming $article->created_at is a timestamp or date string
-                    $date = Carbon\Carbon::parse($article->created_at);
+                      $months = array(
+                          "يناير", "فبراير", "مارس", "إبريل", "مايو", "يونيو",
+                          "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"
+                      );
 
-                    $months = array(
-                        "يناير", "فبراير", "مارس", "إبريل", "مايو", "يونيو",
-                        "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"
-                    );
+                      $days = array(
+                          "الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"
+                      );
 
-                    $days = array(
-                        "الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"
-                    );
+                      $formattedDate = $days[$date->dayOfWeek] . ', ' . $date->day . ' ' . $months[$date->month] . ', ' . $date->year;
+                  @endphp
+                  <article>
+                      <div>
+                          <a href="/{{$article->url}}" target="_blanck"  class="img">
+                              <img src="{{$article->thumbnail_path}}" alt="{{ $article->title }}">
+                              <div class="after">
+                                  <i class="fa-solid fa-link"></i>
+                              </div>
+                          </a>
+                          <a href="" class="title">{{ $article->title }}</a>
+                      </div>
+                      <span>{{ $formattedDate }}</span>
+                  </article>
+              @endforeach
+          @endif
+      </div>
+    </section>
 
-                    $formattedDate = $days[$date->dayOfWeek] . ', ' . $date->day . ' ' . $months[$date->month] . ', ' . $date->year;
-                @endphp
-                <article>
-                    <div>
-                        <a href="/{{$article->url}}" target="_blanck"  class="img">
-                            <img src="{{$article->thumbnail_path}}" alt="{{ $article->title }}">
-                            <div class="after">
-                                <i class="fa-solid fa-link"></i>
-                            </div>
-                        </a>
-                        <a href="" class="title">{{ $article->title }}</a>
-                    </div>
-                    <span>{{ $formattedDate }}</span>
-                </article>
-            @endforeach
-        @endif
-    </div>
-  </section>
-
-  <section class="donate">
-    <div>
-        <h2>اتبرع لجمعية رسالة</h2>
-        <a href="{{ route('donate.main') }}"><i class="fa-solid fa-sack-dollar"></i> تبرع الان</a>
-    </div>
-    <div>
-        <h2>تطوع بجمعية رسالة</h2>
-        <a href="{{ route('site.volunteering') }}"><i class="fa-solid fa-child-reaching"></i> طلب التطوع</a>
-    </div>
-  </section>
-
-
-  <section class="events">
-    <div class="head">
-        <i class="fa-regular fa-image"></i>
-        <div class="text">
-            <h2>الفعاليات فى صور</h2>
-            <p>البوم صور لأهم فاعليات جمعية رسالة</p>
-        </div>
-    </div>
-    <div class="events_wrapper" dir="ltr">
-        @if($events_imgs)
-            @foreach ($events_imgs as $img)
-                <div class="img">
-                    <img src="{{ $img->slide_path }}" alt="">
-                </div>
-            @endforeach
-        @endif
-    </div>
-  </section>
+    <section class="donate">
+      <div>
+          <h2>اتبرع لجمعية رسالة</h2>
+          <a href="{{ route('donate.main') }}"><i class="fa-solid fa-sack-dollar"></i> تبرع الان</a>
+      </div>
+      <div>
+          <h2>تطوع بجمعية رسالة</h2>
+          <a href="{{ route('site.volunteering') }}"><i class="fa-solid fa-child-reaching"></i> طلب التطوع</a>
+      </div>
+    </section>
 
 
-  <section class="videos">
-    <div class="head">
-        <i class="fa-brands fa-youtube"></i>
-        <div class="text">
-            <h2>فيديوهات رسالة</h2>
-            <p>أهم فيديوهات رسالة</p>
-        </div>
-    </div>
-    <div class="videos_wrapper">
-        @php
-            $articles = App\Models\Article::where('type', 'video')->latest()->take(6)->get();
-        @endphp
-        @if ($articles->count() > 0)
-            @foreach ($articles as $article)
-                @php
-                    $created_at = $article->created_at;
-                    // Assuming $article->created_at is a timestamp or date string
-                    $date = Carbon\Carbon::parse($article->created_at);
+    <section class="events">
+      <div class="head">
+          <i class="fa-regular fa-image"></i>
+          <div class="text">
+              <h2>الفعاليات فى صور</h2>
+              <p>البوم صور لأهم فاعليات جمعية رسالة</p>
+          </div>
+      </div>
+      <div class="events_wrapper" dir="ltr">
+          @if($events_imgs)
+              @foreach ($events_imgs as $img)
+                  <div class="img">
+                      <img src="{{ $img->slide_path }}" alt="">
+                  </div>
+              @endforeach
+          @endif
+      </div>
+    </section>
 
-                    $months = array(
-                        "يناير", "فبراير", "مارس", "إبريل", "مايو", "يونيو",
-                        "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"
-                    );
 
-                    $days = array(
-                        "الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"
-                    );
+    <section class="videos">
+      <div class="head">
+          <i class="fa-brands fa-youtube"></i>
+          <div class="text">
+              <h2>فيديوهات رسالة</h2>
+              <p>أهم فيديوهات رسالة</p>
+          </div>
+      </div>
+      <div class="videos_wrapper">
+          @php
+              $articles = App\Models\Article::where('type', 'video')->latest()->take(6)->get();
+          @endphp
+          @if ($articles->count() > 0)
+              @foreach ($articles as $article)
+                  @php
+                      $created_at = $article->created_at;
+                      // Assuming $article->created_at is a timestamp or date string
+                      $date = Carbon\Carbon::parse($article->created_at);
 
-                    $formattedDate = $days[$date->dayOfWeek] . ', ' . $date->day . ' ' . $months[$date->month] . ', ' . $date->year;
-                @endphp
-                <a href="/{{$article->url}}"  target="_blanck"  class="video">
-                    <img src="{{$article->thumbnail_path}}" alt="{{ $article->title }}">
-                    <span class="title">{{ $article->title }}</span>
-                    <span class="bg"></span>
-                    <span class="date">{{ $formattedDate }}</span>
-                </a>
-            @endforeach
-        @endif
-    </div>
-  </section>
+                      $months = array(
+                          "يناير", "فبراير", "مارس", "إبريل", "مايو", "يونيو",
+                          "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"
+                      );
+
+                      $days = array(
+                          "الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"
+                      );
+
+                      $formattedDate = $days[$date->dayOfWeek] . ', ' . $date->day . ' ' . $months[$date->month] . ', ' . $date->year;
+                  @endphp
+                  <a href="/{{$article->url}}"  target="_blanck"  class="video">
+                      <img src="{{$article->thumbnail_path}}" alt="{{ $article->title }}">
+                      <span class="title">{{ $article->title }}</span>
+                      <span class="bg"></span>
+                      <span class="date">{{ $formattedDate }}</span>
+                  </a>
+              @endforeach
+          @endif
+      </div>
+    </section>
+</div>
 @endsection
 
 @section('scripts')

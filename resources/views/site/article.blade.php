@@ -105,7 +105,7 @@
         .help-card img {
             width: 100%
         }
-        iframe {
+        aside iframe {
             width: 100% !important
         }
         @media (max-width: 767.99px) {

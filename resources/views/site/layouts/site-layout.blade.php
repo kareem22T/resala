@@ -46,7 +46,7 @@
             height: 4px;
             border-radius: 50%;
             color: #ff3100;
-            box-shadow: 
+            box-shadow:
                 calc(1*var(--d))      calc(0*var(--d))     0 0,
                 calc(0.707*var(--d))  calc(0.707*var(--d)) 0 1px,
                 calc(0*var(--d))      calc(1*var(--d))     0 2px,
@@ -87,17 +87,81 @@
         #errors .success {
             background: #12c99b;
         }
+        .img {
+            position: relative;
+        }
+
+        .img:hover .zoom_wrapper {
+            opacity: 1;
+        }
+        .zoom_wrapper {
+            position: absolute;
+            width: 100%;
+            transition: .3s ease-in all;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.295);
+            display: flex;
+            top: 0;
+            left: 0;
+            z-index: 9;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+        }
+        .zoom_wrapper svg {
+            width: 60px;
+            height: 60px;
+            stroke: white
+        }
+        .zoomed_image_wrapper {
+            position: fixed;
+            width: 100%;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            padding: 1rem;
+            justify-content: center;
+            align-items: center;
+            display: none;
+            z-index: 999999999999;
+        }
+        .zoomed_image_wrapper img {
+            width: 100%;
+            max-width: 600px;
+            max-height: 100%;
+            object-fit: contain
+        }
+        .zoomed_image_wrapper .icon-tabler-square-rounded-x {
+            stroke: white;
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 60px;
+            height: 60px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
     <div class="page-loader" style="background-color: #fff;">
         <div class="custom-loader"></div>
     </div>
+    <div class="zoomed_image_wrapper">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-square-rounded-x" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#5f6264" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M10 10l4 4m0 -4l-4 4" />
+            <path d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z" />
+        </svg>
+        <div class="img_wrapper"></div>
+    </div>
     <div id="errors"></div>
     @include('site.includes.header')
     <div class="container" dir="rtl">
         @yield('content')
     </div>
+    @yield('content_home')
     @include('site.includes.footer')
 
 
@@ -114,5 +178,24 @@
     <script src="{{ asset('/libs/swiper.js') }}?v={{ time() }}"></script>
     <script src="{{ asset('/libs/jquery.js') }}"></script>
     @yield('scripts')
+    <script>
+        $(".img").each(function() {
+            $(this).append('<div class="zoom_wrapper"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-photo-search" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#5f6264" fill="none" stroke-linecap="round" stroke-linejoin="round">\
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>\
+            <path d="M15 8h.01" />\
+            <path d="M11.5 21h-5.5a3 3 0 0 1 -3 -3v-12a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v5.5" />\
+            <path d="M18 18m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />\
+            <path d="M20.2 20.2l1.8 1.8" />\
+            <path d="M3 16l5 -5c.928 -.893 2.072 -.893 3 0l2 2" />\
+            </svg></div>')
+        })
+        $(document).on("click", ".img", function() {
+            let ele = $(this).find("img")
+            $(".zoomed_image_wrapper").append(ele.clone()).css("display", "flex")
+        })
+        $(".icon-tabler-square-rounded-x").on("click", function () {
+            $(".zoomed_image_wrapper").fadeOut()
+        })
+    </script>
 </body>
 </html>
