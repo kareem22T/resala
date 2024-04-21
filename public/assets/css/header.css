@@ -7,7 +7,6 @@
 
 header {
   background-color: #f0efea;
-  border-top: 4px solid #27318b;
 }
 
 header .head {
@@ -107,14 +106,70 @@ header .head .controls .btns a:hover {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
-header .head .controls .btns a:not(:last-child) {
+header .head .controls .btns a {
   background-color: #e31b24;
+}
+
+header .head .controls .btns a:nth-child(3) {
+  background-color: #27318b;
+}
+
+header .head .controls .btns a:nth-child(4) {
+  background-color: #353535;
+}
+
+@media (max-width: 575.98px) {
+    header .head .controls .btns a {
+      width: 50px;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+    }
+    header .head .controls .btns a:nth-child(4) {
+      display: none;
+    }
 }
 
 header .head .controls .btns a i {
   font-size: 25px;
 }
 
+header::after {
+    content: '';
+    width: calc(100vw - ((100vw - 1300px) / 2));
+    background: #27318b;
+    height: 4px;
+    position: absolute;
+    right: 0;
+    z-index: -1;
+    top: 0;
+}
+
+@media (min-width: 576px) {
+    header::after {
+        max-width: calc(100vw - ((100vw - 540px) / 2));
+    }
+}
+@media (min-width: 768px) {
+    header::after {
+        max-width: calc(100vw - ((100vw - 720px) / 2));
+    }
+}
+@media (min-width: 992px) {
+    header::after {
+        max-width: calc(100vw - ((100vw - 960px) / 2));
+    }
+}
+@media (min-width: 1200px) {
+    header::after {
+        max-width: calc(100vw - ((100vw - 1140px) / 2));
+    }
+}
+@media (min-width: 1300px) {
+    header::after {
+        max-width: calc(100vw - ((100vw - 1300px) / 2));
+    }
+}
 header nav {
   justify-content: space-between;
   align-items: center;
@@ -125,6 +180,16 @@ header nav {
   transform: translateY(50%);
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   z-index: 999999;
+}
+
+header nav::after {
+    content: '';
+    width: 50vw;
+    background: #27318b;
+    height: 100%;
+    position: absolute;
+    right: 50%;
+    z-index: -1;
 }
 
 @media (min-width: 576px) {

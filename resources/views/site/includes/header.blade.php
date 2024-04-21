@@ -13,6 +13,7 @@
                     <a href="" class="menu"><i class="fa-solid fa-bars"></i></a>
                     <a href="{{ route('donate.main') }}"><i class="fa-solid fa-sack-dollar"></i> تبرع</a>
                     <a href="{{ route('site.volunteering') }}"><i class="fa-solid fa-child-reaching"></i> تطوع</a>
+                    <a href="tel:١٩٤٥٠"><i class="fa-solid fa-phone"></i> ١٩٤٥٠</a>
                 </div>
             </div>
         </div>
