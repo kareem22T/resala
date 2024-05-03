@@ -17,6 +17,9 @@ Route::middleware(['admin_guest'])->group(function () {
 });
 
 Route::middleware('auth:admin')->group(function () {
+    Route::get('/export-donations-by-representative', [DonationsByRepresentativeController::class, 'export']);
+    Route::get('/export-Volunteer', [VolunteeringDestinationsController::class, 'export']);
+
     Route::get('/', [AdminHomeController::class, 'getIndex'])->name('admin.home');
     Route::post('/add-img-slider', [AdminHomeController::class, 'addImageToSlider'])->name('home.slider.add');
     Route::post('/add-img-events', [AdminHomeController::class, 'addImageToEvents'])->name('home.events.add');

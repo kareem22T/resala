@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Volunteering_destination;
+use App\Models\Volunteer;
 use App\Models\Admin;
 use App\Models\Article;
 use App\Http\Traits\SendEmail;
 use App\Http\Traits\DataFormController;
 use Illuminate\Support\Facades\Validator;
+use App\Exports\VolunteerExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class VolunteeringDestinationsController extends Controller
 {
@@ -26,7 +29,7 @@ class VolunteeringDestinationsController extends Controller
     public function addIndex() {
         return view('admin.dashboard.destinationes_add');
     }
-    
+
     public function editIndex($id) {
         $destination = Volunteering_destination::with('thumbnail')->find($id);
         return view('admin.dashboard.destinationes_edit')->with(compact('destination'));
@@ -38,7 +41,7 @@ class VolunteeringDestinationsController extends Controller
 
         $descriptions = Volunteering_destination::where('description', 'like', '%' . $request->search_words . '%')
                                 ->paginate(15);
-        
+
         return $this->jsonData(true, '', [], !$descriptions->isEmpty() ? $descriptions : $titles);
 
     }
@@ -46,6 +49,10 @@ class VolunteeringDestinationsController extends Controller
     public function get() {
         $destinationes = Volunteering_destination::paginate(15);
         return $this->jsonData(true, '', [], $destinationes);
+    }
+    public function export() {
+
+        return Excel::download(new VolunteerExport, 'Volunteers.xlsx');
     }
 
     public function getAll() {
@@ -57,7 +64,7 @@ class VolunteeringDestinationsController extends Controller
         $validator = Validator::make($request->all(), [
             'title' => ['required'],
             'brief' => ['required', 'max:50'],
-            'descrption' => ['required'],
+            'description' => ['required'],
             'url' => ['required', 'regex:/^[^\s]+$/'],
             'image_id' => ['required'],
         ], [

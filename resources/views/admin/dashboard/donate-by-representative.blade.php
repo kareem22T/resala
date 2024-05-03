@@ -3,9 +3,11 @@
 @section('representative_active', 'active')
 
 @section('content')
-<h3 class="mb-5">
+<h3 class="mb-5 d-flex w-100 justify-content-between">
     التبرعات من خلال المندوبين
+    <a href="/admin/export-donations-by-representative" class=" btn btn-success">اخراج اكسيل</a>
 </h3>
+
 <main  id="donation_prev">
     <div class="card w-100" v-if="unseenedDonations && unseenedDonations.length > 0">
         <div class="card-header d-flex justify-content-between gap-3">

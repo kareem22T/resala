@@ -8,6 +8,8 @@ use App\Models\Admin;
 use App\Http\Traits\SendEmail;
 use App\Http\Traits\DataFormController;
 use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\Donation_by_representativeExport;
 
 class DonationsByRepresentativeController extends Controller
 {
@@ -16,6 +18,10 @@ class DonationsByRepresentativeController extends Controller
 
     public function index() {
         return view('site.donate.donate-by-representative');
+    }
+
+    public function export() {
+        return Excel::download(new Donation_by_representativeExport, 'donations.xlsx');
     }
 
     public function send (Request $request) {
@@ -92,7 +98,7 @@ class DonationsByRepresentativeController extends Controller
         $phones = Donation_by_representative::where('phone', 'like', '%' . $request->search_words . '%')->orderby('id', 'desc')
                                 ->paginate(10);
 
-        
+
         return $this->jsonData(true, '', [], !$names->isEmpty() ? $names : (!$addresses->isEmpty() ? $addresses : $phones));
 
     }

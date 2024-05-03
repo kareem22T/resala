@@ -26,7 +26,7 @@ class BranchController extends Controller
     public function addIndex() {
         return view('admin.dashboard.branches_add');
     }
-    
+
     public function editIndex($id) {
         $branch = Branch::find($id);
         return view('admin.dashboard.branches_edit')->with(compact('branch'));
@@ -38,7 +38,7 @@ class BranchController extends Controller
 
         $addresses = Branch::where('address', 'like', '%' . $request->search_words . '%')
                                 ->paginate(15);
-        
+
         return $this->jsonData(true, '', [], !$locations->isEmpty() ? $locations : $addresses);
 
     }
@@ -85,7 +85,6 @@ class BranchController extends Controller
             'id' => ['required'],
             'location' => ['required'],
             'address' => ['required'],
-            'phone' => ['required'],
         ], [
             'location.required' => 'الموقع مطلوب',
             'address.required' => 'العنوان التفصيلي مطلوب',
@@ -100,8 +99,6 @@ class BranchController extends Controller
 
         $branch->location = $request->location;
         $branch->address = $request->address;
-        $branch->phone = $request->phone;
-        $branch->iframe = $request->iframe;
 
         $branch->save();
 
