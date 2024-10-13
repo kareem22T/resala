@@ -35,7 +35,7 @@ header .head .controls {
 
 header .head .controls input {
   height: min-content;
-  font-size: 20px;
+  font-size: 18px;
   padding: 10px 15px;
   border-radius: 13px;
 }
@@ -228,7 +228,7 @@ header nav ul {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 22px;
+  font-size: 20px;
   color: #fff;
   margin: 0;
   padding: 0;
