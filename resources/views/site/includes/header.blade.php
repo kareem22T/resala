@@ -1,5 +1,5 @@
 
-<header dir="rtl" style=";z-index: 999;position: relative; ">
+<header dir="rtl" style=";z-index: 999;position: relative;margin-bottom: 0">
     <div class="container">
 
         <div class="head">
@@ -102,4 +102,3 @@
 
     </div>
 </header>
-<br>
