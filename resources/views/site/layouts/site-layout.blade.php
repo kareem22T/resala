@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="{{ asset('/assets/css/button.css') }}">
     <link rel="stylesheet" href="{{ asset('/assets/css/button_rtl.css') }}">
     <link rel="stylesheet" href="{{ asset('/assets/css/js_composer.css') }}">
-    <link rel="stylesheet" href="{{ asset('/assets/css/header.css') }}">
+    <link rel="stylesheet" href="{{ asset('/assets/css/header.css') }}?v={{time()}}">
     <link rel="stylesheet" href="{{ asset('/assets/css/footer.css') }}">
     <link rel="stylesheet" href="{{ asset('/libs/swiper.css') }}?v={{ time() }}" />
     @yield('styles')
