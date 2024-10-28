@@ -9,8 +9,10 @@ $second: #e31b24;
 
 header {
     background-color: #f0efea;
-    border-top: 4px solid $main-color;
-
+    margin-bottom: 80px !important;
+    @media (max-width: 767.98px) {
+        margin-bottom: 40px !important;
+    }
     .head {
         display: flex;
         justify-content: space-between;
@@ -23,7 +25,10 @@ header {
         }
 
         .logo {
-            height: clamp(2.8125rem, calc(1.6935rem + 4.8387vw), 5.625rem);
+            height: 70px;
+            @media (max-width: 767.98px) {
+                height: 45px;
+            }
         }
 
         .controls {
@@ -36,7 +41,10 @@ header {
                 font-size: 20px;
                 padding: 10px 15px;
                 border-radius: 13px;
-
+                height: min-content;
+                font-size: 17px;
+                padding: 8px 13px;
+                border-radius: 13px;
                 @media (max-width: 991.98px) {
                     font-size: 14px;
                 }
@@ -68,23 +76,36 @@ header {
 
                 button,
                 a {
-                    text-decoration: none;
                     border: none;
                     color: white;
-                    background-color: $main-color;
-                    padding: clamp(0.625rem, calc(0.4861rem + 0.5556vw), 0.9375rem);
+                    background-color: #27318b;
+                    padding: 11px 16px;
                     display: flex;
                     align-items: center;
-                    font-size: clamp(0.8125rem, calc(0.6384rem + 0.7527vw), 1.25rem);
+                    font-size: 16px;
                     gap: 10px;
                     border-radius: 13px;
                     transition: .2s all ease-out;
+                    text-decoration: none;
 
                     &.menu {
                         display: none;
                     }
-
-                    @media (max-width: 575.98px) {
+                    @media (max-width: 767.98px) {
+                        padding: 7px 13px;
+                        display: flex;
+                        align-items: center;
+                        font-size: 12px;
+                        gap: 10px;
+                        border-radius: 13px;
+                        &:last-child {
+                            display: none;
+                        }
+                        &:nth-child(3) {
+                            background-color: #27318b !important;
+                        }
+                    }
+                    @media (max-width: 767.98px) {
                         &.menu {
                             display: block;
                         }
@@ -92,6 +113,7 @@ header {
                         &:not(:first-child) {
                             i {
                                 display: none;
+                                font-size: 22px;
                             }
                         }
                     }
@@ -154,11 +176,12 @@ header {
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 22px;
+            font-size: 20px;
             color: #fff;
             margin: 0;
             padding: 0;
             white-space: nowrap;
+            gap: 2px;
 
             a {
                 text-decoration: none;
@@ -167,7 +190,7 @@ header {
                 border-radius: 13px;
                 cursor: pointer;
 
-                &:hover {
+                &:hover, &.active {
                     background-color: #fff;
                     color: $main-color
                 }
@@ -175,7 +198,8 @@ header {
 
             li {
                 height: max-content;
-                padding: 14px;
+                padding: 8px 12px;
+                font-size: 18px;
             }
 
             .more {
@@ -379,6 +403,58 @@ header {
 
     }
 }
+header::after {
+    content: '';
+    width: calc(100vw - ((100vw - 1300px) / 2));
+    background: #27318b;
+    height: 4px;
+    position: absolute;
+    right: 0;
+    z-index: -1;
+    top: 0;
+}
+
+@media (min-width: 576px) {
+    header::after {
+        max-width: calc(100vw - ((100vw - 540px) / 2));
+    }
+}
+@media (min-width: 768px) {
+    header::after {
+        max-width: calc(100vw - ((100vw - 720px) / 2));
+    }
+}
+@media (min-width: 992px) {
+    header::after {
+        max-width: calc(100vw - ((100vw - 960px) / 2));
+    }
+}
+@media (min-width: 1200px) {
+    header::after {
+        max-width: calc(100vw - ((100vw - 1140px) / 2));
+    }
+}
+@media (min-width: 1300px) {
+    header::after {
+        max-width: calc(100vw - ((100vw - 1300px) / 2));
+    }
+}
+header nav::after {
+    content: '';
+    width: 50vw;
+    background: #27318b;
+    height: 100%;
+    position: absolute;
+    right: 50%;
+    z-index: -1;
+}
+
+@media (min-width: 576px) {
+  header nav {
+    display: flex !important;
+  }
+}
+
 
 .animate__animated.animate__fadeInRight {
     --animate-duration: .5s;

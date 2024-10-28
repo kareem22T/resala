@@ -1,12 +1,12 @@
 @extends('admin.layouts.admin-layout')
 
-@section('title', 'اضافة مقالة')
+@section('title', 'تعديل حدث')
 
-@section('articles_add_active', 'active')
+@section('events_add_active', 'active')
 
 @section('content')
 <h3 class="mb-5">
-    اضافة مقالة
+    تعديل حدث
 </h3>
 <style>
     .toolbar button {
@@ -14,14 +14,22 @@
         font-weight: bold
     }
 </style>
-<div class="card" id="add_article">
+<div class="card" id="add_event">
     <div class="card-body" >
         <div>
             <div class="w-100 mb-4 pb-5 gap-2" style="display: grid; grid-template-columns: 1fr 1fr;">
                 <div class="w-100">
                     <div>
-                        <label for="term_title" class="form-label">عنوان المقالة *</label>
+                        <label for="term_title" class="form-label">عنوان الحدث *</label>
                         <input type="text" class="form-control" id="term_title" v-model="title">
+                    </div>
+                </div>
+            </div>
+            <div class="w-100 mb-4 pb-5 gap-2" style="display: grid; grid-template-columns: 1fr 1fr;">
+                <div class="w-100">
+                    <div>
+                        <label for="intro" class="form-label">مقدمة *</label>
+                        <input type="text" class="form-control" id="intro" v-model="intro">
                     </div>
                 </div>
             </div>
@@ -29,7 +37,7 @@
             <div class="w-100 mb-4 pb-3">
                 <div class="w-100 p-3">
                     <div>
-                        <label for="lang_name" class="form-label">محتوى المقالة *</label>
+                        <label for="lang_name" class="form-label">محتوى الحدث *</label>
                         <div class="card">
                             <div class="card-header">
                                 <div class="toolbar d-flex gap-1 justify-content-center" style="flex-wrap: wrap">
@@ -41,20 +49,20 @@
                                     <button @click="execCommand('justifyLeft')" class="btn btn-success"><i class="ti ti-align-left"></i></button>
                                     <button @click="execCommand('justifyCenter')" class="btn btn-success"><i class="ti ti-align-center"></i></button>
                                     <button @click="execCommand('justifyRight')" class="btn btn-success"><i class="ti ti-align-right"></i></button>
-                                    <button @click="insertHTML('<h2>Heading</h2>', 'article-content')" class="btn btn-success"><i class="ti ti-h-2"></i></button>
-                                    <button @click="insertHTML('<h3>Heading</h3>', 'article-content')" class="btn btn-success"><i class="ti ti-h-3"></i></button>
-                                    <button @click="insertHTML('<h4>Heading</h4>', 'article-content')" class="btn btn-success"><i class="ti ti-h-4"></i></button>
-                                    <button @click="insertHTML('<h5>Heading</h5>', 'article-content')" class="btn btn-success"><i class="ti ti-h-5"></i></button>
-                                    <button @click="insertHTML('<h6>Heading</h6>', 'article-content')" class="btn btn-success"><i class="ti ti-h-6"></i></button>
-                                    <button @click="insertHTML('<p>Paragraph</p>', 'article-content')" class="btn btn-success">P</button>
+                                    <button @click="insertHTML('<h2>Heading</h2>', 'event-content')" class="btn btn-success"><i class="ti ti-h-2"></i></button>
+                                    <button @click="insertHTML('<h3>Heading</h3>', 'event-content')" class="btn btn-success"><i class="ti ti-h-3"></i></button>
+                                    <button @click="insertHTML('<h4>Heading</h4>', 'event-content')" class="btn btn-success"><i class="ti ti-h-4"></i></button>
+                                    <button @click="insertHTML('<h5>Heading</h5>', 'event-content')" class="btn btn-success"><i class="ti ti-h-5"></i></button>
+                                    <button @click="insertHTML('<h6>Heading</h6>', 'event-content')" class="btn btn-success"><i class="ti ti-h-6"></i></button>
+                                    <button @click="insertHTML('<p>Paragraph</p>', 'event-content')" class="btn btn-success">P</button>
                                     <button class="btn btn-success" @click="setValuesToNull(); this.showSliderPopUp = true;"><div class="ti ti-cards"></div></button>
                                     <button class="btn btn-success" @click="setValuesToNull(); this.showAlbumPopUp = true;"><div class="ti ti-apps"></div></button>
-                                    <button class="btn btn-success" @click="setValuesToNull();this.showImages = true; this.current_article_id = 'article-content'"><i class="ti ti-photo-plus"></i></button>
+                                    <button class="btn btn-success" @click="setValuesToNull();this.showImages = true; this.current_event_id = 'event-content'"><i class="ti ti-photo-plus"></i></button>
                                     <button class="btn btn-success" @click="this.showCodePopUp = true"><i class="ti ti-code"></i></button>
                                 </div>
                             </div>
                             <div class="card-body">
-                                <div contenteditable="true" id="article-content" class="form-control" style="min-height: 300px"></div>
+                                <div contenteditable="true" id="event-content" class="form-control" style="min-height: 300px">{{ $event->content }}</div>
                             </div>
                         </div>
                     </div>
@@ -64,33 +72,25 @@
             <div class="mb-3 w-100">
                 <div class="w-25">
                     <label for="" class="mb-2">الصورة المصغرة</label>
-                    <div @click="this.showImages = true; this.current_article_id = null" class="w-100 h-100 p-3 d-flex justify-content-center align-items-center form-control" style="height: 170px;">
+                    <div @click="this.showImages = true; this.current_event_id = null" class="w-100 h-100 p-3 d-flex justify-content-center align-items-center form-control" style="height: 170px;">
                         <img :src="preview_img ? preview_img : '{{ asset('dashboard/images/add_image.svg') }}'" id="preview" alt="img logo" style="width: 100%; max-width: 100%;object-fit: contain;height: 100%;">
                     </div>
                 </div>
                 <br>
-                <div class="d-flex gap-2 justify-content-between mb-3">
-                    <div class="form-group w-25">
-                        <label for="date" class="mb-2">تاريخ المقالة </label>
-                        <input type="date" name="date" id="date" class="form-control w-100" v-model="publish_date">
+                <div class="d-flex gap-2 justify-content-start mb-3">
+                    <div class ="form-group w-25">
+                        <label for="date_from" class="mb-2">تاريخ البدء </label>
+                        <input type="date" name="date_from" id="date_from" class="form-control w-100" v-model="date_from">
                     </div>
                     <div class="form-group w-25">
-                        <label for="url" class="mb-2">رابط المقالة</label>
-                        <input type="text" name="url" id="url" class="form-control w-100" v-model="url">
-                    </div>
-                    <div class="form-group w-25">
-                        <label for="date" class="mb-2">نوع المقالة </label>
-                        <div class="btns d-flex gap-2 justify-content-between w-100">
-                            <button :class="this.type == 'post' ? 'btn btn-primary' : 'btn btn-outline-primary'" @click="this.type = 'post'">منشور</button>
-                            <button :class="this.type == 'video' ? 'btn btn-primary' : 'btn btn-outline-primary'" @click="this.type = 'video'">فيديو</button>
-                            <button :class="this.type == 'photos' ? 'btn btn-primary' : 'btn btn-outline-primary'" @click="this.type = 'photos'">صور</button>
-                        </div>
+                        <label for="date_to" class="mb-2">تاريخ الانتهاء</label>
+                        <input type="date" name="date_to" id="date_to" class="form-control w-100" v-model="date_to">
                     </div>
                 </div>
                 <div class="w-25">
                     <!-- Swiper -->
                     <div class="w-100 mb-3 pb-5">
-                        <button type="submit" class="btn btn-primary w-50 form-control" style="height: fit-content" @click="this.getContentArticle().then(() => {this.add()})"><i class="ti ti-plus"></i> Add</button>
+                        <button type="submit" class="btn btn-primary w-50 form-control" style="height: fit-content" @click="this.getContentEvent().then(() => {this.add()})"><i class="ti ti-edit"></i> Edit</button>
                     </div>
                 </div>
             </div>
@@ -122,7 +122,7 @@
         <div class="d-flex gap-2">
             <button class="btn btn-light"  @click="this.showSliderPopUp = false">Cancel</button>
             <button class="btn btn-primary" @click="this.showImages = true; this.forSlider = true;">Choose</button>
-            <button class="btn btn-secondary" @click="insertSliderContent('article-content')">insert</button>
+            <button class="btn btn-secondary" @click="insertSliderContent('event-content')">insert</button>
         </div>
     </div>
 
@@ -150,7 +150,7 @@
         <div class="d-flex gap-2">
             <button class="btn btn-light"  @click="this.showAlbumPopUp = false">Cancel</button>
             <button class="btn btn-primary" @click="this.showImages = true; this.forAlbum = true;">Choose</button>
-            <button class="btn btn-secondary" @click="insertAlbumContent('article-content')">insert</button>
+            <button class="btn btn-secondary" @click="insertAlbumContent('event-content')">insert</button>
         </div>
     </div>
 
@@ -183,7 +183,7 @@
             </div>
             <div class="d-flex gap-2">
                 <button class="btn btn-light"  @click="this.showImages = false; this.search = null;this.forSlider = false">Cancel</button>
-                <button class="btn btn-success"  @click="insertImgToArticle();this.forSlider = false">Choose</button>
+                <button class="btn btn-success"  @click="insertImgToEvent();this.forSlider = false">Choose</button>
             </div>
         </div>
     </div>
@@ -195,7 +195,7 @@
         </div>
         <div class="d-flex gap-2">
             <button class="btn btn-light"  @click="this.showCodePopUp = false">Cancel</button>
-            <button class="btn btn-secondary" @click="insertHTML(this.code, 'article-content');this.showCodePopUp = false">insert</button>
+            <button class="btn btn-secondary" @click="insertHTML(this.code, 'event-content');this.showCodePopUp = false">insert</button>
         </div>
     </div>
 </div>
@@ -209,17 +209,19 @@ const { createApp, ref } = Vue;
 createApp({
   data() {
     return {
+    event_id: '{{ $event->id }}',
       thumbnail: null,
-      title: '',
+      title: '{{ $event->title }}',
+      intro: '{{ $event->intro }}',
       content: '',
       images: null,
       showImages: false,
       showUploadPopUp: false,
       image: null,
       choosed_img: null,
-      current_article_id: null,
+      current_event_id: null,
       search_tags: null,
-      preview_img: null,
+      preview_img: '{{ $event->thumbnail_path }}',
       search: null,
       page: 1,
       total: 0,
@@ -229,6 +231,8 @@ createApp({
       showSliderPopUp: false,
       code: '',
       showCodePopUp: false,
+      date_from: new Date('{{ $event->date_from }}').toISOString().split('T')[0],
+      date_to:new Date('{{ $event->date_to }}').toISOString().split('T')[0],
       album_imgs: [],
       forAlbum: false,
       type: 'post',
@@ -252,12 +256,13 @@ createApp({
     async add() {
       $('.loader').fadeIn().css('display', 'flex')
         try {
-            const response = await axios.post(`{{ route('article.put') }}`, {
+            const response = await axios.post(`{{ route('event.update') }}`, {
+                event_id: this.event_id,
                 title: this.title,
                 content: this.content,
-                type: this.type,
-                url: this.url,
-                created_at: this.publish_date,
+                intro: this.intro,
+                date_from: this.date_from,
+                date_to: this.date_to,
                 thumbnail_path: this.preview_img
             },
             {
@@ -276,7 +281,7 @@ createApp({
             $('.loader').fadeOut()
             setTimeout(() => {
                 $('#errors').fadeOut('slow')
-                window.location.href = '{{ route("article.prev") }}'
+                window.location.href = '{{ route("event.prev") }}'
             }, 2000);
             } else {
             $('.loader').fadeOut()
@@ -621,17 +626,17 @@ createApp({
     },
     setValuesToNull () {
         this.chooseImage = null
-        this.current_article_id = null
+        this.current_event_id = null
         this.showImages = null
         this.forAlbum = false
         this.forSlider = false
     },
-    insertImgToArticle () {
-        if (this.current_article_id) {
+    insertImgToEvent () {
+        if (this.current_event_id) {
             if (this.choosed_img) {
-                this.insertHTML('<img src="' + this.choosed_img + '" />', this.current_article_id)
+                this.insertHTML('<img src="' + this.choosed_img + '" />', this.current_event_id)
                 this.chooseImage = null
-                this.current_article_id = null
+                this.current_event_id = null
                 this.showImages = null
             }else {
                 document.getElementById('errors').innerHTML = ''
@@ -649,12 +654,12 @@ createApp({
         } else if (this.forSlider) {
             this.slider_imgs.push(this.choosed_img)
             this.chooseImage = null
-            this.current_article_id = null
+            this.current_event_id = null
             this.showImages = null
         } else if (this.forAlbum) {
             this.album_imgs.push(this.choosed_img)
             this.chooseImage = null
-            this.current_article_id = null
+            this.current_event_id = null
             this.showImages = null
         }
         else {
@@ -662,10 +667,10 @@ createApp({
         }
 
     },
-    async getContentArticle() {
+    async getContentEvent() {
         console.log(this.languages_data);
-        if (document.getElementById('article-content') && document.getElementById('article-content').innerHTML != '')
-            this.content = document.getElementById('article-content').innerHTML;
+        if (document.getElementById('event-content') && document.getElementById('event-content').innerHTML != '')
+            this.content = document.getElementById('event-content').innerHTML;
     },
   },
   created() {
@@ -677,6 +682,6 @@ createApp({
         $(this).siblings().css('border', 'none')
     })
   },
-}).mount('#add_article')
+}).mount('#add_event')
 </script>
 @endsection

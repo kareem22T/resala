@@ -287,7 +287,7 @@
 @endsection
 
 @section('content_home')
-  <swiper-container class="mySwiper" pagination="true" pagination-clickable="true" space-between="30"
+  <swiper-container class="mySwiper" style="  margin-top: -80px;" pagination="true" pagination-clickable="true" space-between="30"
     centered-slides="true" autoplay-delay="4000" autoplay-disable-on-interaction="false" effect="fade">
     @if($slider_imgs)
         @foreach ($slider_imgs as $slide)

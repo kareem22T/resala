@@ -6,6 +6,8 @@ use App\Http\Controllers\VolunteersController;
 use App\Http\Controllers\VolunteeringDestinationsController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\ArticlesController;
+use App\Http\Controllers\BloodDonateController;
+use App\Http\Controllers\EventsController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Http\Request;
 use App\Models\Article;
@@ -86,12 +88,20 @@ Route::prefix("/donation-main")->group(function () {
 });
 
 Route::get('/donate-rep', [DonationsByRepresentativeController::class, 'index'])->name('donate.representative');
+Route::get('/events', [EventsController::class, 'getEventsByMonth'])->name('all.events');
+Route::get('/events-search', [EventsController::class, 'searchEventsIndex'])->name('search.events');
+Route::get('/events-calendar', [EventsController::class, 'eventsCalendar'])->name('events.calendar');
+Route::get('/event/{event}', [EventsController::class, 'eventIndex'])->name('event.index');
 
 Route::prefix("/volunteering")->group(function () {
     Route::get('/', [VolunteersController::class, 'index'])->name('site.volunteering');
     Route::post('/send', [VolunteersController::class, 'send'])->name('volunteering.send');
     Route::get('/destinations/get-all', [VolunteeringDestinationsController::class, 'getAll'])->name('destinations.getAll');
     Route::get('/branches/get-all', [BranchController::class, 'getAll'])->name('branches.getAll');
+});
+Route::prefix("/التبرع-بالدم")->group(function () {
+    Route::get('/', [BloodDonateController::class, 'index'])->name('site.blood_donations');
+    Route::post('/send', [BloodDonateController::class, 'send'])->name('blood_donations.send');
 });
 
 Route::get('/category/news/', [ArticlesController::class, 'getNewsIndex'])->name('news.show');
@@ -101,4 +111,4 @@ Route::get('/branches', [BranchController::class, 'getBranchesIndex'])->name('br
 Route::get('/category/videos/', [ArticlesController::class, 'getVideosIndex'])->name('videos.show');
 Route::get('/category/photos/', [ArticlesController::class, 'getImagesIndex'])->name('photos.show');
 Route::get('/{url}', [HomeController::class, 'urlPerIndex'])
-    ->where('url', '^(?!admin|donation-main|donate-rep|volunteering|about|contact-us|baheya|activities|branches|reply-to-rumors|faq).*$')->name('article.details');
+    ->where('url', '^(?!admin|donation-main|donate-rep|volunteering|about|contact-us|baheya|activities|branches|reply-to-rumors|faq|events).*$')->name('article.details');

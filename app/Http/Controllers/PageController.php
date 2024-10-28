@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Traits\DataFormController;
+use App\Models\Article;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Page;
 use App\Models\Volunteering_destination;
@@ -20,7 +21,7 @@ class PageController extends Controller
 
     public function getPages() {
         $Pages = Page::orderBy(\DB::raw('ABS(TIMESTAMPDIFF(SECOND, created_at, NOW()))'))->paginate(10);
-        
+
         return $this->jsonData(true, '', [], $Pages);
     }
 
@@ -30,7 +31,7 @@ class PageController extends Controller
         $byTypes = Page::orderBy(\DB::raw('ABS(TIMESTAMPDIFF(SECOND, created_at, NOW()))'))->where('url', 'like', '%'.$request->search_words.'%')->paginate(10);
 
         $contents = Page::orderBy(\DB::raw('ABS(TIMESTAMPDIFF(SECOND, created_at, NOW()))'))->where('content', 'like', '%'.$request->search_words.'%')->paginate(10);
-        
+
         return $this->jsonData(true, '', [], !$byTitles->isEmpty() ? $byTitles : (!$byTypes->isEmpty() ? $byTypes : $contents));
 
     }
@@ -57,7 +58,7 @@ class PageController extends Controller
         }
 
         $articleUrl = Article::where('url', $request->url)->get();
-        if ($PageUrl->count() > 0) {
+        if ($articleUrl->count() > 0) {
             return $this->jsondata(false, 'Add failed', ['هذا الرابط موجود بالفعل'], []);
         }
 
@@ -119,7 +120,7 @@ class PageController extends Controller
             return $this->jsondata(false, 'Add failed', ['هذا الرابط موجود بالفعل'], []);
         }
 
-        $Page = Page::find($request->id); 
+        $Page = Page::find($request->id);
         $Page->title = $request->title;
         $Page->content = $request->content;
         $Page->url = $request->url;

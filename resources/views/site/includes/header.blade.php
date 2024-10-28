@@ -26,14 +26,17 @@
                 <a href="{{ route('news.show') }}" class="@yield('news_active')">
                     <li>الأخبار</li>
                 </a>
-                {{-- <a href="">
+                <a href="{{ route('all.events') }}" class="@yield('events_active')">
                     <li>الفعاليات</li>
-                </a> --}}
+                </a>
                 <a href="{{ route('activities.show') }}" class="@yield('destinations_active')">
                     <li>الانشطة</li>
                 </a>
                 <a href="{{ route('branches.show') }}" class="@yield('branches_active')">
                     <li>الفروع</li>
+                </a>
+                <a href="{{ route('site.blood_donations') }}" class="@yield('blood_donations')">
+                    <li>التبرع بالدم</li>
                 </a>
                 <a href="{{ route('resala.challange_day') }}" class="@yield('challange_day_active')">
                     <li>يوم التحدي</li>
@@ -60,14 +63,18 @@
                         <a href="{{ route('news.show') }}" class="@yield('news_active')">
                             <li>الأخبار</li>
                         </a>
-                        {{-- <a href="">
+                        <a href="{{ route('all.events') }}" class="@yield('events_active')">
                             <li>الفعاليات</li>
-                        </a> --}}
+                        </a>
                         <a href="{{ route('activities.show') }}"  class="@yield('destinations_active')">
                             <li>الانشطة</li>
                         </a><a  href="{{ route('branches.show') }}" class="@yield('branches_active')">
                             <li>الفروع</li>
                         </a>
+                        <a href="{{ route('site.blood_donations') }}" class="@yield('blood_donations')">
+                            <li>التبرع بالدم</li>
+                        </a>
+
                         <a  href="{{ route('resala.challange_day') }}" class="@yield('challange_day_active')">
                             <li>يوم التحدي</li>
                         </a>

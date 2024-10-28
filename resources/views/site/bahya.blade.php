@@ -56,21 +56,12 @@
         }
     }
 
-</style>    
+</style>
 @endsection
 
 @section('content')
-    <section class="baheya">
-        <div class="text">
-            <h1>مستشفى بهية</h1>
-            <p>
-                بدأت قصة بهية عندما أصيبت السيدة بهية وهبي حرم المهندس/ حسين أحمد عثمان بالسرطان، وهي سيدة مصرية من عائلة عريقة. و في أثناء تلقيها العلاج لاحظت اسرتها مدى معاناة السيدات من الأسر الفقيرة فى تحمل نفقات العلاج الباهظة. فقاموا بتحويل منزلها إلى مركز متخصص فى علاج سرطان الثدي دون مقابل أو تفرقة. مبنى مركز بهية مكون من 6 أدوار باجمالي مساحة 10,000 متر مربع مزودة بأحدث الأجهزة التي تبلغ قيمتها 150 مليون جنيهًاً
-                <br>
-                لزيارة الموقع الرسمي لمستشفى بهية : <a href="http://www.baheya.org/">http://www.baheya.org/</a>
-            </p>
-        </div>
-        <div class="img">
-            <img src="{{ asset('/assets/img/bahyia.jpg') }}" alt="bayia logo">
-        </div>
-    </section>
+@php
+    $page = App\Models\Page::where('url', 'baheya')->first();
+@endphp
+{!! $page->content !!}
 @endsection

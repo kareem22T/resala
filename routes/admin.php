@@ -9,6 +9,8 @@ use App\Http\Controllers\BranchController;
 use App\Http\Controllers\VolunteersController;
 use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\ArticlesController;
+use App\Http\Controllers\BloodDonateController;
+use App\Http\Controllers\EventsController;
 use App\Http\Controllers\PageController;
 
 Route::middleware(['admin_guest'])->group(function () {
@@ -19,6 +21,7 @@ Route::middleware(['admin_guest'])->group(function () {
 Route::middleware('auth:admin')->group(function () {
     Route::get('/export-donations-by-representative', [DonationsByRepresentativeController::class, 'export']);
     Route::get('/export-Volunteer', [VolunteeringDestinationsController::class, 'export']);
+    Route::get('/export-blood-donations', [BloodDonateController::class, 'export']);
 
     Route::get('/', [AdminHomeController::class, 'getIndex'])->name('admin.home');
     Route::post('/add-img-slider', [AdminHomeController::class, 'addImageToSlider'])->name('home.slider.add');
@@ -79,6 +82,16 @@ Route::middleware('auth:admin')->group(function () {
         Route::post('/delete', [VolunteersController::class, 'delete'])->name('volunteers.delete');
     });
 
+    // site.blood_donations
+    Route::prefix('/blood-donations')->group(function () {
+        Route::get('/', [BloodDonateController::class, 'dashboardIndex'])->name('blood_donations.prev');
+        Route::post('/', [BloodDonateController::class, 'get'])->name('blood_donations.get');
+        Route::get('/get-unseen', [BloodDonateController::class, 'getUnseen'])->name('blood_donations.getunseen');
+        Route::post('/see', [BloodDonateController::class, 'see'])->name('blood_donations.see');
+        Route::post('/search', [BloodDonateController::class, 'search'])->name('blood_donations.search');
+        Route::post('/delete', [BloodDonateController::class, 'delete'])->name('blood_donations.delete');
+    });
+
     // images
     Route::prefix('/images')->group(function () {
         Route::post('/upload', [ImagesController::class, 'uploadeImg'])->name('lib.image.uploade');
@@ -96,6 +109,18 @@ Route::middleware('auth:admin')->group(function () {
         Route::post('/search', [ArticlesController::class, "search"])->name('articles.search');
         Route::post('/delete', [ArticlesController::class, "delete"])->name('articles.delete');
         Route::post('/add', [ArticlesController::class, "put"])->name('article.put');
+    });
+
+    // events
+    Route::prefix('events')->group(function () {
+        Route::get('/', [EventsController::class, "index"])->name('event.prev');
+        Route::get('/add', [EventsController::class, "addIndex"])->name('events.add');
+        Route::get('/edit/{id}', [EventsController::class, "edit"])->name('event.edit');
+        Route::post('/update', [EventsController::class, "update"])->name('event.update');
+        Route::post('/get', [EventsController::class, "getEvents"])->name('events.get');
+        Route::post('/search', [EventsController::class, "search"])->name('events.search');
+        Route::post('/delete', [EventsController::class, "delete"])->name('events.delete');
+        Route::post('/add', [EventsController::class, "put"])->name('event.put');
     });
 
     // pages

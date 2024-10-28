@@ -85,7 +85,7 @@
       height: 4px;
       border-radius: 50%;
       color: #365FA0;
-      box-shadow: 
+      box-shadow:
         calc(1*var(--d))      calc(0*var(--d))     0 0,
         calc(0.707*var(--d))  calc(0.707*var(--d)) 0 1px,
         calc(0*var(--d))      calc(1*var(--d))     0 2px,
@@ -119,7 +119,7 @@
       <!-- Sidebar scroll-->
       <div>
         <div class="brand-logo d-flex align-items-center justify-content-between">
-          <a href="/Moheb/admin" class="text-nowrap logo-img">
+          <a href="/admin" class="text-nowrap logo-img">
             <h4>لوحة تحكم رسالة</h4>
           </a>
           <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
@@ -189,6 +189,14 @@
                 <span class="hide-menu">طلبات التطوع</span>
               </a>
             </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link @yield('blood_donations_active')" href="{{ route('blood_donations.prev') }}" aria-expanded="false">
+                <span>
+                  <i class="ti ti-vaccine"></i>
+                </span>
+                <span class="hide-menu">التبرع بالدم</span>
+              </a>
+            </li>
             <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
               <span class="hide-menu">المقالات</span>
@@ -203,6 +211,26 @@
             </li>
             <li class="sidebar-item">
               <a class="sidebar-link @yield('articles_add_active')" href="{{ route('articles.add') }}" aria-expanded="false">
+                <span>
+                  <i class="ti ti-file-plus"></i>
+                </span>
+                <span class="hide-menu">اضافة</span>
+              </a>
+            </li>
+            <li class="nav-small-cap">
+              <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+              <span class="hide-menu">الفاعليات</span>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link @yield('events_preview_active')" href="{{ route('event.prev') }}" aria-expanded="false">
+                <span>
+                  <i class="ti ti-file-text"></i>
+                </span>
+                <span class="hide-menu">عرض</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link @yield('events_add_active')" href="{{ route('events.add') }}" aria-expanded="false">
                 <span>
                   <i class="ti ti-file-plus"></i>
                 </span>
