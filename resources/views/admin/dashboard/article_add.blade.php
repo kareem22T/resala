@@ -500,7 +500,7 @@ createApp({
         document.execCommand(command, false, null);
     },
     insertHTML(html, element, key) {
-        const element = document.getElementById(elementId);
+        const element = document.getElementById(element);
         element.focus();
 
         // Create a range and selection to place the caret at the end
@@ -523,7 +523,7 @@ createApp({
 
             // Get the content from the 'slider' element
             var sliderContent = document.getElementById('slider').innerHTML;
-            const element = document.getElementById(elementId);
+            const element = document.getElementById(element);
         element.focus();
 
         // Create a range and selection to place the caret at the end
@@ -559,7 +559,7 @@ createApp({
 
             // Get the content from the 'slider' element
             var sliderContent = document.getElementById('album').innerHTML;
-            const element = document.getElementById(elementId);
+            const element = document.getElementById(element);
         element.focus();
 
         // Create a range and selection to place the caret at the end
