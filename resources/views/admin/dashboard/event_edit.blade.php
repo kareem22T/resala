@@ -505,8 +505,21 @@ createApp({
         document.execCommand(command, false, null);
     },
     insertHTML(html, element, key) {
-        document.getElementById(element).focus();
+        const element = document.getElementById(elementId);
+        element.focus();
+
+        // Create a range and selection to place the caret at the end
+        const range = document.createRange();
+        range.selectNodeContents(element);
+        range.collapse(false); // Collapse to the end
+
+        const selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+
+
         document.execCommand('insertHTML', false, html);
+        document.execCommand('insertHTML', false, "<br>");
         document.execCommand('insertHTML', false, "<br>");
     },
     insertSliderContent(element) {
@@ -516,7 +529,18 @@ createApp({
 
             // Get the content from the 'slider' element
             var sliderContent = document.getElementById('slider').innerHTML;
-            document.getElementById(element).focus();
+            const element = document.getElementById(elementId);
+        element.focus();
+
+        // Create a range and selection to place the caret at the end
+        const range = document.createRange();
+        range.selectNodeContents(element);
+        range.collapse(false); // Collapse to the end
+
+        const selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+
             document.execCommand('insertHTML', false, sliderContent);
             this.showSliderPopUp = false;
             this.slider_imgs = []
@@ -541,7 +565,18 @@ createApp({
 
             // Get the content from the 'slider' element
             var sliderContent = document.getElementById('album').innerHTML;
-            document.getElementById(element).focus();
+            const element = document.getElementById(elementId);
+        element.focus();
+
+        // Create a range and selection to place the caret at the end
+        const range = document.createRange();
+        range.selectNodeContents(element);
+        range.collapse(false); // Collapse to the end
+
+        const selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+
             document.execCommand('insertHTML', false, sliderContent);
             this.showAlbumPopUp = false;
             this.album_imgs = []
