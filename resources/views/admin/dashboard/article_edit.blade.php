@@ -469,7 +469,7 @@ createApp({
 
         // Create a range and selection to place the caret at the end
         const range = document.createRange();
-        range.selectNodeContents(element);
+        range.selectNodeContents(document.getElementById(element));
         range.collapse(false); // Collapse to the end
 
         const selection = window.getSelection();
@@ -491,7 +491,7 @@ createApp({
 
         // Create a range and selection to place the caret at the end
         const range = document.createRange();
-        range.selectNodeContents(element);
+        range.selectNodeContents(document.getElementById(element));
         range.collapse(false); // Collapse to the end
 
         const selection = window.getSelection();
@@ -526,7 +526,7 @@ createApp({
 
         // Create a range and selection to place the caret at the end
         const range = document.createRange();
-        range.selectNodeContents(element);
+        range.selectNodeContents(document.getElementById(element));
         range.collapse(false); // Collapse to the end
 
         const selection = window.getSelection();
