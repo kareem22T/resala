@@ -226,6 +226,7 @@ createApp({
       page: 1,
       total: 0,
       last_page: 0,
+      showAlbumPopUp: false,
       forSlider: false,
       slider_imgs: [],
       showSliderPopUp: false,

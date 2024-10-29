@@ -223,6 +223,7 @@ createApp({
       preview_img: null,
       search: null,
       page: 1,
+      showAlbumPopUp: false,
       total: 0,
       last_page: 0,
       forSlider: false,

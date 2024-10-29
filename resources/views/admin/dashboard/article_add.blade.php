@@ -148,8 +148,8 @@
             <br>
         </div>
         <div class="d-flex gap-2">
-            <button class="btn btn-light"  @click="this.showAlbumPopUp = false">Cancel</button>
-            <button class="btn btn-primary" @click="this.showImages = true; this.forAlbum = true;">Choose</button>
+            <button class="btn btn-light"  @click="showAlbumPopUp = false">Cancel</button>
+            <button class="btn btn-primary" @click="this.showImages= true; this.forAlbum = true;">Choose</button>
             <button class="btn btn-secondary" @click="insertAlbumContent('article-content')">insert</button>
         </div>
     </div>
@@ -215,6 +215,7 @@ createApp({
       images: null,
       showImages: false,
       showUploadPopUp: false,
+      showAlbumPopUp: false,
       image: null,
       choosed_img: null,
       current_article_id: null,

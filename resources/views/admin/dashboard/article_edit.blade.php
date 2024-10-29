@@ -221,6 +221,8 @@ createApp({
       showUploadPopUp: false,
       image: null,
       choosed_img: null,
+      showAlbumPopUp: false,
+
       current_article_id: null,
       search_tags: null,
       preview_img: '{{ $article->thumbnail_path }}',
