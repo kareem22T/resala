@@ -73,7 +73,7 @@ header .head .controls form button {
 header .head .controls .btns {
   display: flex;
   height: min-content;
-  gap: clamp(0.625rem, 0.4861rem + 0.5556vw, 0.9375rem);
+  gap: 0;
 }
 header .head .controls .btns button,
 header .head .controls .btns a {
@@ -89,6 +89,10 @@ header .head .controls .btns a {
   transition: 0.2s all ease-out;
   text-decoration: none;
 }
+header .head .controls .btns button:first-child,
+header .head .controls .btns a:first-child {
+  margin-left: 14px;
+}
 header .head .controls .btns button.menu,
 header .head .controls .btns a.menu {
   display: none;
@@ -102,6 +106,7 @@ header .head .controls .btns a.menu {
     font-size: 12px;
     gap: 10px;
     border-radius: 13px;
+    min-width: 50px;
   }
   header .head .controls .btns button:last-child,
   header .head .controls .btns a:last-child {

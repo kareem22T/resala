@@ -72,7 +72,7 @@ header {
             .btns {
                 display: flex;
                 height: min-content;
-                gap: clamp(0.625rem, calc(0.4861rem + 0.5556vw), 0.9375rem);
+                gap: 0;
 
                 button,
                 a {
@@ -87,7 +87,9 @@ header {
                     border-radius: 13px;
                     transition: .2s all ease-out;
                     text-decoration: none;
-
+                    &:first-child {
+                        margin-left: 14px;
+                    }
                     &.menu {
                         display: none;
                     }
@@ -98,6 +100,7 @@ header {
                         font-size: 12px;
                         gap: 10px;
                         border-radius: 13px;
+                        min-width: 50px;
                         &:last-child {
                             display: none;
                         }
