@@ -11,9 +11,9 @@
                 </form>
                 <div class="btns">
                     <a href="" class="menu"><i class="fa-solid fa-bars"></i></a>
-                    <a href="{{ route('donate.main') }}"><i class="fa-solid fa-sack-dollar"></i> تبرع</a>
-                    <a href="{{ route('site.volunteering') }}"><i class="fa-solid fa-child-reaching"></i> تطوع</a>
-                    <a href="tel:١٩٤٥٠"><i class="fa-solid fa-phone"></i> ١٩٤٥٠</a>
+                    <a href="{{ route('donate.main') }}" style="border-radius: 0 14px 14px 0;"><i class="fa-solid fa-sack-dollar"></i> تبرع</a>
+                    <a href="{{ route('site.volunteering') }}" style="background: #27318b;border-radius: 14px 0 0 14px;"><i class="fa-solid fa-child-reaching"></i> تطوع</a>
+                    <a href="tel:١٩٤٥٠" style="padding: 0;background: 0;color: #353535;font-size: 30px;box-shadow:  none !important;transform: none !important;margin-right: 10px;"><i class="fa-solid fa-phone" style="font-size: 30px;color: #ffffff;background-color: #353535;padding: 10px 12px;margin-right: 5px;border-radius: 10px;"></i> ١٩٤٥٠</a>
                 </div>
             </div>
         </div>
@@ -97,7 +97,7 @@
             <ul class="social">
                 <li class="mobile">
                     <ul>
-                        <li><a href="https://www.facebook.com/Resala.org" target="_blanck"><i class="fa-brands fa-facebook"></i></a></li>
+                        <li><a href="https://www.facebook.com/Resala.org" target="_blanck"><i class="fa-brands fa-facebook-f"></i></a></li>
                         <li><a href="https://twitter.com/Resalaeg"  target="_blanck"><i class="fa-brands fa-x-twitter"></i></a></li>
                         <li><a href="https://www.instagram.com/resala.charity.organization?utm_source=ig_profile_share&igshid=i663pmdktl4z"  target="_blanck"><i class="fa-brands fa-instagram"></i></a></li>
                         <li><a href="https://www.youtube.com/user/resala" target="_blanck"><i class="fa-brands fa-youtube"></i></a></li>

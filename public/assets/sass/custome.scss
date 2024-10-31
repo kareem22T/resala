@@ -1,5 +1,5 @@
-//  
-// variables 
+//
+// variables
 $main-color: #27318b;
 // --------------
 * {
@@ -9,7 +9,7 @@ $main-color: #27318b;
 }
 body {
     background-image: url('./../img/bg.png');
-    
+
 }
 html {
     scroll-behavior: smooth;
@@ -22,8 +22,8 @@ html {
 }
 
 .container {
-    width: 1300px;
-    padding: 0 25px;
+    width: 1133px;
+    padding: 0 15px;
     margin: auto;
 
     @media (max-width: 1300px) {
@@ -140,7 +140,7 @@ html {
                 }
                 .number {
                     input {
-                        
+
                         width: clamp(4.375rem, calc(3.1317rem + 5.3763vw), 7.5rem);
                         color: black;
                         font-weight: 700;
@@ -199,7 +199,7 @@ html {
                         &:last-child {text-align: left;}
                         border: none;
                     }
-                    th, tr, 
+                    th, tr,
                     td {
                         padding: 10px clamp(1.25rem, calc(0.7527rem + 2.1505vw), 2.5rem);
                         border: none !important;

@@ -12,15 +12,15 @@ html {
   scroll-behavior: smooth;
 }
 
-.container .cart form .total .banks .form-check, .container .cart form .total .banks span, .danger-msg, .thanks tbody tr ul li span {
+.thanks tbody tr ul li span, .danger-msg, .container .cart form .total .banks span, .container .cart form .total .banks .form-check {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .container {
-  width: 1300px;
-  padding: 0 25px;
+  width: 1133px;
+  padding: 0 15px;
   margin: auto;
 }
 @media (max-width: 1300px) {
@@ -40,7 +40,7 @@ html {
 .container h1 {
   color: #27318b;
   margin: 0;
-  font-size: clamp(1.6875rem, calc(1.1156rem + 2.4731vw), 3.125rem);
+  font-size: clamp(1.6875rem, 1.1156rem + 2.4731vw, 3.125rem);
   text-align: center;
   margin-bottom: 9px;
 }
@@ -51,7 +51,7 @@ html {
 }
 .container .cart form .switch-btns a {
   text-decoration: none;
-  padding: clamp(0.625rem, calc(0.4375rem + 1vw), 1.25rem);
+  padding: clamp(0.625rem, 0.4375rem + 1vw, 1.25rem);
   width: 100%;
   background-color: #f5f8ff;
   color: #6b6e75;
@@ -63,17 +63,17 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: clamp(0.3125rem, calc(0.2188rem + 0.5vw), 0.625rem);
-  font-size: clamp(1rem, calc(0.9444rem + 0.2222vw), 1.125rem);
-  line-height: clamp(1.25rem, calc(1.0625rem + 1vw), 1.875rem);
-  transition: all .3s ease-out;
+  gap: clamp(0.3125rem, 0.2188rem + 0.5vw, 0.625rem);
+  font-size: clamp(1rem, 0.9444rem + 0.2222vw, 1.125rem);
+  line-height: clamp(1.25rem, 1.0625rem + 1vw, 1.875rem);
+  transition: all 0.3s ease-out;
 }
 .container .cart form .switch-btns a:hover, .container .cart form .switch-btns a.active {
   border-bottom: 3px solid #27318b;
   color: #27318b;
 }
 .container .cart form .donates, .container .cart form .total {
-  transition: opacity .4s ease-out;
+  transition: opacity 0.4s ease-out;
   grid-column: span 1;
   border: none !important;
 }
@@ -81,20 +81,20 @@ html {
   text-align: right;
 }
 .container .cart form .donates tr, .container .cart form .donates td, .container .cart form .donates th, .container .cart form .total tr, .container .cart form .total td, .container .cart form .total th {
-  background-color: #ffffff00 !important;
+  background-color: rgba(255, 255, 255, 0) !important;
   border: none;
   text-align: right;
-  padding: 5px clamp(0rem, calc(-0.373rem + 1.6129vw), 0.9375rem);
+  padding: 5px clamp(0rem, -0.373rem + 1.6129vw, 0.9375rem);
 }
 .container .cart form .donates tr i, .container .cart form .total tr i {
-  font-size: clamp(0.875rem, calc(0.7258rem + 0.6452vw), 1.25rem);
+  font-size: clamp(0.875rem, 0.7258rem + 0.6452vw, 1.25rem);
   color: #c62727;
   border-radius: 10px;
-  transition: all .3s ease-out;
+  transition: all 0.3s ease-out;
 }
 .container .cart form .donates tr .img, .container .cart form .total tr .img {
-  width: clamp(3.75rem, calc(3.004rem + 3.2258vw), 5.625rem);
-  height: clamp(3.75rem, calc(3.004rem + 3.2258vw), 5.625rem);
+  width: clamp(3.75rem, 3.004rem + 3.2258vw, 5.625rem);
+  height: clamp(3.75rem, 3.004rem + 3.2258vw, 5.625rem);
   overflow: hidden;
   border: 2px solid transparent;
   outline: 1px solid rgba(204, 204, 204, 0.597);
@@ -108,31 +108,31 @@ html {
   object-fit: cover;
 }
 .container .cart form .donates th, .container .cart form .total th {
-  font-size: clamp(0.9rem, calc(0.6613rem + 1.0323vw), 1.5rem);
+  font-size: clamp(0.9rem, 0.6613rem + 1.0323vw, 1.5rem);
 }
 .container .cart form .donates td, .container .cart form .total td {
-  font-size: clamp(0.8rem, calc(0.6011rem + 0.8602vw), 1.3rem);
-  border-bottom: 1px solid #e0e0e0;
-  border-top: 1px solid #e0e0e0;
+  font-size: clamp(0.8rem, 0.6011rem + 0.8602vw, 1.3rem);
+  border-bottom: 1px solid rgb(224, 224, 224);
+  border-top: 1px solid rgb(224, 224, 224);
 }
-.container .cart form .donates input:not([type="radio"]), .container .cart form .total input:not([type="radio"]) {
+.container .cart form .donates input:not([type=radio]), .container .cart form .total input:not([type=radio]) {
   background-color: transparent;
   border: none;
-  max-width: clamp(5.625rem, calc(4.3817rem + 5.3763vw), 8.75rem);
+  max-width: clamp(5.625rem, 4.3817rem + 5.3763vw, 8.75rem);
   padding: 0;
   border-radius: 0%;
   border-radius: 13px;
   font-weight: 600;
 }
-.container .cart form .donates input:not([type="radio"])[type=number], .container .cart form .total input:not([type="radio"])[type=number] {
-  border: 1px solid #e0e0e0;
+.container .cart form .donates input:not([type=radio])[type=number], .container .cart form .total input:not([type=radio])[type=number] {
+  border: 1px solid rgb(224, 224, 224);
   text-align: center;
   font-weight: bold;
   color: #27318b;
   transform: translateX(calc(-50% + 30px));
 }
 .container .cart form .donates .number input, .container .cart form .total .number input {
-  width: clamp(4.375rem, calc(3.1317rem + 5.3763vw), 7.5rem);
+  width: clamp(4.375rem, 3.1317rem + 5.3763vw, 7.5rem);
   color: black;
   font-weight: 700;
   text-align: center;
@@ -149,9 +149,9 @@ html {
   border: 2px solid #27318b;
   border-radius: 15px;
   color: #27318b;
-  font-size: clamp(1.0625rem, calc(0.8138rem + 1.0753vw), 1.6875rem);
+  font-size: clamp(1.0625rem, 0.8138rem + 1.0753vw, 1.6875rem);
   margin: 10px 0;
-  transition: all .3s ease-out;
+  transition: all 0.3s ease-out;
 }
 .container .cart form .donates tfoot a:hover {
   background-color: #27318b;
@@ -164,17 +164,17 @@ html {
 }
 .container .cart form .total th, .container .cart form .total tr, .container .cart form .total td {
   background-color: transparent;
-  padding: 0 clamp(1.25rem, calc(0.7527rem + 2.1505vw), 2.5rem);
+  padding: 0 clamp(1.25rem, 0.7527rem + 2.1505vw, 2.5rem);
 }
 .container .cart form .total tr {
   border: none !important;
 }
 .container .cart form .total th {
   text-align: center;
-  font-size: clamp(1rem, calc(0.7513rem + 1.0753vw), 1.625rem);
+  font-size: clamp(1rem, 0.7513rem + 1.0753vw, 1.625rem);
 }
 .container .cart form .total thead, .container .cart form .total tbody {
-  background-color: #00000011;
+  background-color: rgba(0, 0, 0, 0.0666666667);
 }
 .container .cart form .total thead td, .container .cart form .total tbody td {
   font-weight: 600;
@@ -183,7 +183,7 @@ html {
   text-align: left;
 }
 .container .cart form .total tfoot {
-  background-color: #00000011;
+  background-color: rgba(0, 0, 0, 0.0666666667);
   font-weight: bold;
   white-space: nowrap;
 }
@@ -195,9 +195,9 @@ html {
 }
 .container .cart form .total tfoot th, .container .cart form .total tfoot tr,
 .container .cart form .total tfoot td {
-  padding: 10px clamp(1.25rem, calc(0.7527rem + 2.1505vw), 2.5rem);
+  padding: 10px clamp(1.25rem, 0.7527rem + 2.1505vw, 2.5rem);
   border: none !important;
-  font-size: clamp(1rem, calc(0.7513rem + 1.0753vw), 1.625rem);
+  font-size: clamp(1rem, 0.7513rem + 1.0753vw, 1.625rem);
 }
 .container .cart form .total tfoot th input, .container .cart form .total tfoot tr input,
 .container .cart form .total tfoot td input {
@@ -217,7 +217,7 @@ html {
 }
 .container .cart form .total .banks {
   display: flex;
-  gap: clamp(0.3125rem, calc(0.0638rem + 1.0753vw), 0.9375rem);
+  gap: clamp(0.3125rem, 0.0638rem + 1.0753vw, 0.9375rem);
   margin: 15px 0;
   justify-content: center;
   align-items: center;
@@ -236,7 +236,7 @@ html {
 .container .cart form .total .banks span {
   position: relative;
   gap: 10px;
-  height: clamp(2.5rem, calc(2.2513rem + 1.0753vw), 3.125rem);
+  height: clamp(2.5rem, 2.2513rem + 1.0753vw, 3.125rem);
   padding: 10px;
   background-color: #e0dfdf;
   border-radius: 10px;
@@ -250,7 +250,7 @@ html {
   margin-top: 0;
 }
 .container .cart form .total .banks span img {
-  height: clamp(1.5625rem, calc(1.2847rem + 1.1111vw), 2.1875rem);
+  height: clamp(1.5625rem, 1.2847rem + 1.1111vw, 2.1875rem);
   object-fit: contain;
   margin-left: 10px;
 }
@@ -262,10 +262,10 @@ html {
 }
 
 .success-msg i, .danger-msg i {
-  font-size: clamp(3.125rem, calc(2.1304rem + 4.3011vw), 5.625rem);
+  font-size: clamp(3.125rem, 2.1304rem + 4.3011vw, 5.625rem);
 }
 .success-msg h1, .danger-msg h1 {
-  font-size: clamp(1.125rem, calc(0.5282rem + 2.5806vw), 2.625rem);
+  font-size: clamp(1.125rem, 0.5282rem + 2.5806vw, 2.625rem);
   margin: 10px;
 }
 
@@ -348,7 +348,6 @@ html {
   .number > div {
     flex-wrap: wrap;
   }
-
   .number input {
     transform: none !important;
   }
