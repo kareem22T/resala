@@ -37,7 +37,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <link rel="stylesheet" href="{{ asset('/assets/css/custome.css') }}">
     <link rel="stylesheet" href="{{ asset('/assets/css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('/assets/css/service_box.css') }}">
     <link rel="stylesheet" href="{{ asset('/assets/css/service_box_rtl.css') }}">
@@ -176,6 +175,7 @@
             cursor: pointer;
         }
     </style>
+    <link rel="stylesheet" href="{{ asset('/assets/css/custome.css') }}?v={{ time() }}">
 </head>
 
 <body>
@@ -216,15 +216,18 @@
     @yield('scripts')
     <script>
         $(".img").each(function() {
-            $(this).append('<div class="zoom_wrapper"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-photo-search" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#5f6264" fill="none" stroke-linecap="round" stroke-linejoin="round">\
+            // Check if the element does not have an <a> tag as a parent
+            if (!$(this).closest("a").length) {
+                $(this).append('<div class="zoom_wrapper"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-photo-search" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#5f6264" fill="none" stroke-linecap="round" stroke-linejoin="round">\
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"/>\
                 <path d="M15 8h.01" />\
                 <path d="M11.5 21h-5.5a3 3 0 0 1 -3 -3v-12a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v5.5" />\
                 <path d="M18 18m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />\
                 <path d="M20.2 20.2l1.8 1.8" />\
                 <path d="M3 16l5 -5c.928 -.893 2.072 -.893 3 0l2 2" />\
-                </svg></div>')
-        })
+                </svg></div>');
+            }
+        });
         $(document).on("click", ".img", function() {
             let ele = $(this).find("img")
             $(".zoomed_image_wrapper").find("img").remove()

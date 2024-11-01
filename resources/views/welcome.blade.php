@@ -50,7 +50,7 @@
         .articles_wrapper {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
-            gap: 2rem
+            gap: 20px
         }
 
         article {
@@ -69,7 +69,7 @@
             width: 100%;
             display: block;
             overflow: hidden;
-            height: clamp(13.75rem, calc(-13.75rem + 40vw), 18.75rem);
+            height: 260px;
             border-radius: .5rem;
             border: 1px solid #d0d0d0;
             transition: all .3s ease-in;
@@ -281,9 +281,6 @@
         }
 
         @media (max-width: 1099px) {
-            .articles_wrapper {
-                grid-template-columns: 1fr 1fr
-            }
 
             article .img {
                 height: clamp(13.75rem, calc(1.5625rem + 25vw), 18.75rem);
@@ -294,27 +291,19 @@
             }
         }
 
-        @media (max-width: 992.98px) {
-            .events_wrapper {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .videos_wrapper {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
 
         @media (max-width: 767.98px) {
             .events_wrapper {
-                margin-top: 1.2rem
+                margin-top: 1.2rem;
+                grid-template-columns: 1fr 1fr;
             }
 
             .videos_wrapper {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr 1fr;
             }
 
             .articles_wrapper {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr 1fr;
                 padding: 1rem 1.5rem;
             }
 
@@ -331,12 +320,18 @@
             }
 
             section .head {
-                margin: 1rem auto 0;
+                margin: 1rem auto 1rem;
             }
         }
 
         @media (max-width: 575.98px) {
+            .articles_wrapper {
+                grid-template-columns: 1fr;
+            }
             .events_wrapper {
+                grid-template-columns: 1fr;
+            }
+            .videos_wrapper {
                 grid-template-columns: 1fr;
             }
         }
