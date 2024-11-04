@@ -49,14 +49,13 @@
             text-decoration: none;
             color: #27318b
         }
-        @media (max-width: 992.98px) {
-            .cards_wrapper {
-                flex-direction: column;
-            }
-        }
         @media (max-width: 767.98px) {
             .cards_wrapper {
                 margin: 3rem 0 2rem;
+                flex-direction: column;
+            }
+            .cards_wrapper > div {
+                padding: 3rem 0
             }
         }
     </style>

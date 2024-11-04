@@ -454,7 +454,7 @@
             </div>
             <div class="videos_wrapper">
                 @php
-                    $articles = App\Models\Article::where('type', 'video')->latest()->take(6)->get();
+                    $articles = App\Models\Article::where('type', 'video')->latest()->take(3)->get();
                 @endphp
                 @if ($articles->count() > 0)
                     @foreach ($articles as $article)

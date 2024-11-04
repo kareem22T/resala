@@ -38,17 +38,11 @@
                 <a href="{{ route('site.blood_donations') }}" class="@yield('blood_donations')">
                     <li>التبرع بالدم</li>
                 </a>
-                <a href="{{ route('resala.challange_day') }}" class="@yield('challange_day_active')">
-                    <li>يوم التحدي</li>
-                </a>
                 <a href="{{ route('videos.show') }}" class="@yield('videos_active')">
                     <li>الفيديوهات</li>
                 </a>
                 <a href="{{ route('photos.show') }}" class="@yield('images_active')">
                     <li>صور</li>
-                </a>
-                <a href="{{ route('resala.baheya') }}" class="@yield('baheya_active')">
-                    <li>بهية</li>
                 </a>
                 <a href="{{ route('resala.contact') }}" class="@yield('contact_active')">
                     <li>اتصل بنا</li>
@@ -75,17 +69,11 @@
                             <li>التبرع بالدم</li>
                         </a>
 
-                        <a  href="{{ route('resala.challange_day') }}" class="@yield('challange_day_active')">
-                            <li>يوم التحدي</li>
-                        </a>
                         <a href="{{ route('videos.show') }}" class="@yield('videos_active')">
                             <li>الفيديوهات</li>
                         </a>
                         <a href="{{ route('photos.show') }}" class="@yield('images_active')">
                             <li>صور</li>
-                        </a>
-                        <a href="{{ route('resala.baheya') }}" class="@yield('baheya_active')">
-                            <li>بهية</li>
                         </a>
                         <a href="{{ route('resala.contact') }}" class="@yield('contact_active')">
                             <li>اتصل بنا</li>
