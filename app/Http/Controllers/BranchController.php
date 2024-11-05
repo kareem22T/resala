@@ -14,9 +14,8 @@ class BranchController extends Controller
     use DataFormController;
 
     public function getBranchesIndex() {
-        $branches = Branch::paginate(20);
+        $branches = Branch::all(); // Fetch all branches
         return view('site.branches')->with(compact(['branches']));
-
     }
 
     public function index() {
