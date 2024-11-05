@@ -87,7 +87,7 @@
 
 @section('content')
 <div id="app">
-    <input type="text" v-model="searchQuery" placeholder="بحث عن فرع" class="form-control" style="max-width: 300px; margin: 1rem 0;">
+    <input type="text" v-model="searchQuery" placeholder="بحث عن فرع" class="form-control mb-3" style="max-width: 300px; margin: 1rem auto;">
 
     <div class="branches_wrapper" v-if="filteredBranches.length > 0">
         <div class="card" v-for="branch in paginatedBranches" :key="branch.id">
@@ -112,7 +112,12 @@
     <!-- Pagination controls -->
     <div class="pagination" v-if="filteredBranches.length > itemsPerPage">
         <button :disabled="currentPage === 1" @click="currentPage--" class="page-link">السابق</button>
-        <span class="page-link">@{{ currentPage }}</span>
+
+        <button v-for="page in pageNumbers" :key="page" @click="changePage(page)"
+                :class="{'page-link': true, 'active': page === currentPage}">
+            @{{ page }}
+        </button>
+
         <button :disabled="currentPage === totalPages" @click="currentPage++" class="page-link">التالي</button>
     </div>
 </div>
@@ -128,6 +133,7 @@
             searchQuery: '',
             currentPage: 1,
             itemsPerPage: 10,
+            maxVisiblePages: 4, // Maximum number of visible page numbers
         },
         computed: {
             filteredBranches() {
@@ -144,6 +150,21 @@
             },
             totalPages() {
                 return Math.ceil(this.filteredBranches.length / this.itemsPerPage);
+            },
+            pageNumbers() {
+                const pages = [];
+                const startPage = Math.max(1, this.currentPage - Math.floor(this.maxVisiblePages / 2));
+                const endPage = Math.min(this.totalPages, startPage + this.maxVisiblePages - 1);
+
+                for (let i = startPage; i <= endPage; i++) {
+                    pages.push(i);
+                }
+                return pages;
+            }
+        },
+        methods: {
+            changePage(page) {
+                this.currentPage = page;
             }
         },
         watch: {
