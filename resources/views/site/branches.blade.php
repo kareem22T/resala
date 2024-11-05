@@ -82,12 +82,18 @@
             grid-template-columns: 1fr
         }
     }
+
+    .page-link.active {
+    background: #e7212c !important;
+    border-color: #e7212c !important;
+    color: #fff !important;
+    }
 </style>
 @endsection
 
 @section('content')
 <div id="app">
-    <input type="text" v-model="searchQuery" placeholder="بحث عن فرع" class="form-control mb-3" style="max-width: 300px; margin: 1rem auto;">
+    <input type="text" v-model="searchQuery" placeholder="بحث عن فرع" class="form-control" style="max-width: 300px; margin: 1rem 0;">
 
     <div class="branches_wrapper" v-if="filteredBranches.length > 0">
         <div class="card" v-for="branch in paginatedBranches" :key="branch.id">
@@ -111,14 +117,14 @@
 
     <!-- Pagination controls -->
     <div class="pagination" v-if="filteredBranches.length > itemsPerPage">
-        <button :disabled="currentPage === 1" @click="currentPage--" class="page-link">السابق</button>
+        <button :disabled="currentPage === 1" @click="currentPage--" class="page-link" style="display: block;width: auto;height: auto;">السابق</button>
 
         <button v-for="page in pageNumbers" :key="page" @click="changePage(page)"
                 :class="{'page-link': true, 'active': page === currentPage}">
             @{{ page }}
         </button>
 
-        <button :disabled="currentPage === totalPages" @click="currentPage++" class="page-link">التالي</button>
+        <button :disabled="currentPage === totalPages" @click="currentPage++" class="page-link" style="display: block;width: auto;height: auto;">التالي</button>
     </div>
 </div>
 @endsection
