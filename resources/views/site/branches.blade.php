@@ -121,7 +121,7 @@
         </div>
 
         <!-- Pagination controls -->
-        <div class="pagination" v-if="filteredBranches.length > itemsPerPage">
+        <div class="pagination" dir="rtl" style="direction: rtl !important" v-if="filteredBranches.length > itemsPerPage">
             <button :disabled="currentPage === totalPages" @click="currentPage++" class="page-link"
                 style="display: block;width: auto;height: auto;">التالي</button>
 
