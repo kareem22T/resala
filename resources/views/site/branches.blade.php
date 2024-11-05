@@ -122,16 +122,16 @@
 
         <!-- Pagination controls -->
         <div class="pagination" dir="rtl" style="direction: rtl !important" v-if="filteredBranches.length > itemsPerPage">
-            <button :disabled="currentPage === 1" @click="currentPage--" class="page-link"
-                style="display: block;width: auto;height: auto;">السابق</button>
+            <button :disabled="currentPage === totalPages" @click="currentPage++" class="page-link"
+                style="display: block;width: auto;height: auto;">التالي</button>
 
             <button v-for="page in pageNumbers" :key="page" @click="changePage(page)"
-            :class="{ 'page-link': true, 'active': page === currentPage }">
-            @{{ page }}
-        </button>
-        <button :disabled="currentPage === totalPages" @click="currentPage++" class="page-link"
-            style="display: block;width: auto;height: auto;">التالي</button>
+                :class="{ 'page-link': true, 'active': page === currentPage }">
+                @{{ page }}
+            </button>
 
+            <button :disabled="currentPage === 1" @click="currentPage--" class="page-link"
+                style="display: block;width: auto;height: auto;">السابق</button>
         </div>
     </div>
 @endsection
