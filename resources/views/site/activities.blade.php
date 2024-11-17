@@ -124,7 +124,7 @@
                     <div class="thumbnail">
                         <img src="/dashboard/images/uploads/{{ $activity->thumbnail->path }}" alt="{{ $activity->title }}">
                     </div>
-                    <h1>{{ $activity->title }}</h1>
+                    <h1 style="font-size: 1.5rem !important">{{ $activity->title }}</h1>
                     <p>
                         {{ $activity->brief }}
                     </p>

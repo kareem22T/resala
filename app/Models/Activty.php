@@ -5,9 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Volunteering_destination extends Model
+class Activty extends Model
 {
     use HasFactory;
+    public $table = 'activties';
 
     protected $fillable = [
         'id',
@@ -18,12 +19,7 @@ class Volunteering_destination extends Model
         'image_id'
     ];
 
-
-    public function volunteers()
-    {
-        return $this->hasMany(Volunteer::class);
-    }
-
+    public $timestamps = false;
     public function thumbnail()
     {
         return $this->belongsTo(Image::class, 'image_id');

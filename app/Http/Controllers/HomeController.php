@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activty;
 use Illuminate\Http\Request;
 use App\Models\Article;
 use App\Models\Page;
@@ -15,7 +16,7 @@ class HomeController extends Controller
         if ($article)
             return view('site.article')->with(compact(['article', 'active_link']));
 
-        $destination  = Volunteering_destination::with('thumbnail')->where('url', $url)->first();
+        $destination  = Activty::with('thumbnail')->where('url', $url)->first();
         $active_link = isset($destination) && $destination ? "destinations_active" : '';
         if ($destination)
             return view('site.destination')->with(compact(['destination', 'active_link']));

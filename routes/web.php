@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActivitiesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DonationsByRepresentativeController;
 use App\Http\Controllers\VolunteersController;
@@ -106,7 +107,7 @@ Route::prefix("/التبرع-بالدم")->group(function () {
 
 Route::get('/category/news/', [ArticlesController::class, 'getNewsIndex'])->name('news.show');
 Route::get('/search/{search}', [ArticlesController::class, 'searchSite'])->name('resala.search');
-Route::get('/activities', [VolunteeringDestinationsController::class, 'getActivitiesIndex'])->name('activities.show');
+Route::get('/activities', [ActivitiesController::class, 'getActivitiesIndex'])->name('activities.show');
 Route::get('/branches', [BranchController::class, 'getBranchesIndex'])->name('branches.show');
 Route::get('/category/videos/', [ArticlesController::class, 'getVideosIndex'])->name('videos.show');
 Route::get('/category/photos/', [ArticlesController::class, 'getImagesIndex'])->name('photos.show');

@@ -182,6 +182,14 @@
               </a>
             </li>
             <li class="sidebar-item">
+              <a class="sidebar-link @yield('activites_preview_active')" href="{{ route('activites.prev') }}" aria-expanded="false">
+                <span>
+                  <i class="ti ti-walk"></i>
+                </span>
+                <span class="hide-menu">الانشطة</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
               <a class="sidebar-link @yield('volunteers_active')" href="{{ route('volunteers.prev') }}" aria-expanded="false">
                 <span>
                   <i class="ti ti-heart-handshake"></i>

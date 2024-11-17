@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActivitiesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\RegisterController;
 use App\Http\Controllers\Admin\AdminHomeController;
@@ -70,6 +71,17 @@ Route::middleware('auth:admin')->group(function () {
         Route::post('/add', [VolunteeringDestinationsController::class, 'add'])->name('destinations.put');
         Route::get('/edit/{id}', [VolunteeringDestinationsController::class, 'editIndex'])->name('destinations.edit');
         Route::post('/edit', [VolunteeringDestinationsController::class, 'edit'])->name('destination.update');
+    });
+    // activites
+    Route::prefix('/activites')->group(function () {
+        Route::get('/', [ActivitiesController::class, 'index'])->name('activites.prev');
+        Route::post('/', [ActivitiesController::class, 'get'])->name('activites.get');
+        Route::post('/search', [ActivitiesController::class, 'search'])->name('activites.search');
+        Route::post('/delete', [ActivitiesController::class, 'delete'])->name('activites.delete');
+        Route::get('/add', [ActivitiesController::class, 'addIndex'])->name('activites.add');
+        Route::post('/add', [ActivitiesController::class, 'add'])->name('activites.put');
+        Route::get('/edit/{id}', [ActivitiesController::class, 'editIndex'])->name('activites.edit');
+        Route::post('/edit', [ActivitiesController::class, 'edit'])->name('activites.update');
     });
 
     // volunteers
