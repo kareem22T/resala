@@ -18,7 +18,7 @@ class Volunteering_destination extends Model
         'image_id'
     ];
 
-    protected $timestamps = false;
+    public $timestamps = false;
 
 
     public function volunteers()
