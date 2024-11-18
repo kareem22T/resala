@@ -39,7 +39,7 @@
                     <td class="border-bottom-0">
                         <div class="d-flex gap-2">
                             <a :href="`/${destination.url}`" target="_blanck" class="btn btn-success p-2"><h4 class="ti ti-eye text-light m-0 fw-semibold"></h4></a>
-                            <a :href="`/admin/volunteering-destinations/edit/${destination.id}`" class="btn btn-secondary p-2"><h4 class="ti ti-edit text-light m-0 fw-semibold"></h4></a>
+                            <a :href="`/admin/activites/edit/${destination.id}`" class="btn btn-secondary p-2"><h4 class="ti ti-edit text-light m-0 fw-semibold"></h4></a>
                             <button class="btn btn-danger p-2" @click="this.delete_pop_up = true; getValues(destination.id, destination.title)"><h4 class="ti ti-trash text-light m-0 fw-semibold"></h4></button>
                         </div>
                     </td>
