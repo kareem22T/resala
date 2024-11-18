@@ -51,7 +51,7 @@
         }
         input[type="radio"]:checked +label {
             background: rgb(44,54,142);
-            background: linear-gradient(0deg, rgba(44,54,142,1) 0%, rgba(82,90,162,1) 100%); 
+            background: linear-gradient(0deg, rgba(44,54,142,1) 0%, rgba(82,90,162,1) 100%);
             color: #fff;
             border: none
         }
@@ -114,6 +114,8 @@
                 <td>
                     <img src="{{ asset('/assets/img/other-5.png') }}" alt="التبرع من خلال تطبيقات الهواتف"><br>
                     <img src="{{ asset('/assets/img/other-6.png') }}" alt="التبرع من خلال تطبيقات الهواتف">
+                    <img src="{{ asset('/assets/img/orange_cash.png') }}" style="margin-right: -10px;margin-left: 0;" alt="التبرع من خلال تطبيقات الهواتف">
+                    <img src="{{ asset('/assets/img/etsalat_cash.png') }}" style="margin-right: 0;" alt="التبرع من خلال تطبيقات الهواتف">
                 </td>
             </tr>
             <tr>

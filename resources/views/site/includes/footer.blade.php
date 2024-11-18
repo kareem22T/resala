@@ -19,8 +19,8 @@
                 <a href="{{ route('news.show') }}">
                     <li>أخبار رسالة</li>
                 </a>
-                <a href="{{ route('resala.challange_day') }}">
-                    <li>تحدي الخير</li>
+                <a href="{{ route('site.blood_donations') }}">
+                    <li>بنك الدم</li>
                 </a>
                 <a href="{{ route('resala.privacy_policy') }}">
                     <li>سياسة الخصوصية</li>

@@ -45,7 +45,7 @@
         }
         input[type="radio"]:checked +label {
             background: rgb(44,54,142);
-            background: linear-gradient(0deg, rgba(44,54,142,1) 0%, rgba(82,90,162,1) 100%); 
+            background: linear-gradient(0deg, rgba(44,54,142,1) 0%, rgba(82,90,162,1) 100%);
             color: #fff;
             border: none
         }
@@ -108,9 +108,9 @@
     <table dir="RTL" v-if="type == 1">
         <tbody>
             <tr>
-                <td dir="RTL" style="text-align: center;"><strong><span style="color: #003366;">اسم البنك</span></strong>
+                <td dir="RTL" style="text-align: center;"><strong><span style="color: #e31b23;">اسم البنك</span></strong>
                 </td>
-                <td dir="RTL" style="text-align: center;"><strong><span style="color: #003366;">البنك الأهلى
+                <td dir="RTL" style="text-align: center;"><strong><span style="color: #e31b23;">البنك الأهلى
                             المصرى</span></strong></td>
             </tr>
             <tr>
@@ -126,9 +126,9 @@
                 <td dir="LTR" style="text-align: center;"><strong>EG660003016230603209454000120</strong></td>
             </tr>
             <tr>
-                <td dir="RTL" style="text-align: center;"><strong><span style="color: #003366;">اسم البنك</span></strong>
+                <td dir="RTL" style="text-align: center;"><strong><span style="color: #e31b23;">اسم البنك</span></strong>
                 </td>
-                <td dir="RTL" style="text-align: center;"><strong><span style="color: #003366;">بنك مصر</span></strong></td>
+                <td dir="RTL" style="text-align: center;"><strong><span style="color: #e31b23;">بنك مصر</span></strong></td>
             </tr>
             <tr>
                 <td dir="RTL" style="text-align: center;"><strong>اسم فرع البنك</strong></td>
@@ -143,9 +143,9 @@
                 <td dir="LTR" style="text-align: center;"><strong>EG420002039203920001000019450</strong></td>
             </tr>
             <tr>
-                <td dir="RTL" style="text-align: center;"><strong><span style="color: #003366;">اسم البنك</span></strong>
+                <td dir="RTL" style="text-align: center;"><strong><span style="color: #e31b23;">اسم البنك</span></strong>
                 </td>
-                <td dir="RTL" style="text-align: center;"><strong><span style="color: #003366;">البنك التجارى
+                <td dir="RTL" style="text-align: center;"><strong><span style="color: #e31b23;">البنك التجارى
                             الدولى</span></strong></td>
             </tr>
             <tr>
@@ -162,7 +162,7 @@
             </tr>
             <tr style="background: #dfdfdf;">
                 <td dir="RTL" style="text-align: center;" colspan="2"><span
-                        style="color: #003366; font-size: 18px;"><strong>للتبرع بالدولار الأمريكي</strong></span></td>
+                        style="color: #e31b23; font-size: 18px;"><strong>للتبرع بالدولار الأمريكي</strong></span></td>
             </tr>
             <tr>
                 <td style="text-align: center;"><strong>اسم البنك</strong></td>
@@ -199,12 +199,12 @@
             </tr>
         </tbody>
     </table>
-        
+
     <table v-if="type == 2">
         <tbody>
             <tr>
-                <td style="text-align: center;"><span style="color: #003366;"><strong>اسم البنك</strong></span></td>
-                <td style="text-align: center;"><span style="color: #003366;"><strong>&nbsp;بنك مصر (Banque
+                <td style="text-align: center;"><span style="color: #e31b23;"><strong>اسم البنك</strong></span></td>
+                <td style="text-align: center;"><span style="color: #e31b23;"><strong>&nbsp;بنك مصر (Banque
                             Misr)</strong></span></td>
             </tr>
             <tr>
@@ -224,8 +224,8 @@
                 <td style="text-align: center;"><strong>EG900002039203920001000011214</strong></td>
             </tr>
             <tr>
-                <td style="text-align: center;"><span style="color: #003366;"><strong>اسم البنك</strong></span></td>
-                <td style="text-align: center;"><span style="color: #003366;"><strong>البنك التجاري الدولي
+                <td style="text-align: center;"><span style="color: #e31b23;"><strong>اسم البنك</strong></span></td>
+                <td style="text-align: center;"><span style="color: #e31b23;"><strong>البنك التجاري الدولي
                             (CIB)</strong></span></td>
             </tr>
             <tr>
@@ -234,8 +234,8 @@
             </tr>
             <tr>
                 <td style="text-align: center;"></td>
-                <td style="text-align: center;"><span style="color: #003366;"><strong>للتبرع
-                            بالدولار&nbsp;</strong></span><span style="color: #003366;"><b>الأمريكي</b></span></td>
+                <td style="text-align: center;"><span style="color: #e31b23;"><strong>للتبرع
+                            بالدولار&nbsp;</strong></span><span style="color: #e31b23;"><b>الأمريكي</b></span></td>
             </tr>
             <tr>
                 <td style="text-align: center;"><strong>رقم الحساب</strong></td>
@@ -251,7 +251,7 @@
             </tr>
             <tr>
                 <td style="text-align: center;"></td>
-                <td style="text-align: center;"><span style="color: #003366;"><strong>للتبرع بالجنيه المصري</strong></span>
+                <td style="text-align: center;"><span style="color: #e31b23;"><strong>للتبرع بالجنيه المصري</strong></span>
                 </td>
             </tr>
             <tr>
