@@ -65,7 +65,7 @@
         }
         input[type="radio"]:checked +label {
             background: rgb(44,54,142);
-            background: linear-gradient(0deg, rgba(44,54,142,1) 0%, rgba(82,90,162,1) 100%); 
+            background: linear-gradient(0deg, rgba(44,54,142,1) 0%, rgba(82,90,162,1) 100%);
             color: #fff;
             border: none
         }
@@ -107,20 +107,20 @@
     <section id="volunteers">
         <h1>طلب التطوع في جمعية رسالة </h1>
         <p>قم بتعبئة بيناتك فى الحقول التالية وسوف يتم الاتصال بك في اقرب وقت</p>
-        <a href="/donate"><i class='bx bx-donate-heart'></i> اضغط هنا للتبرع</a>
+        <a href="/donation-main"><i class='bx bx-donate-heart'></i> اضغط هنا للتبرع</a>
         <form @submit.prevent>
             <div class="form-group">
                 <label for="name">الاسم *</label>
                 <input type="text" class="form-control" placeholder="الاسم" v-model="name" id="name">
-            </div>       
+            </div>
             <div class="form-group">
                 <label for="email">البريد الالكتروني *</label>
                 <input type="email" class="form-control" placeholder="البريد الالكتروني" v-model="email" id="email">
-            </div>            
+            </div>
             <div class="form-group">
                 <label for="phone">رقم الهاتف *</label>
                 <input type="text" class="form-control" placeholder="رقم الهاتف" v-model="phone" id="phone">
-            </div>            
+            </div>
             <div class="form-group">
                 <label for="branch">الفرع *</label>
                 <select name="branch" id="branch" v-model="branch_id" class="form-control" v-if="branches && branches.length > 0">
@@ -137,20 +137,20 @@
                             <span>@{{ destination.title }}</span>
                         </label>
                     </div>
-                </div>          
-            </div>      
+                </div>
+            </div>
             <div class="form-group">
                 <label for="city">المحافظة *</label>
                 <input type="text" class="form-control" placeholder="المحافظة" v-model="city" id="city">
-            </div>            
+            </div>
             <div class="form-group">
                 <label for="dob">تاريخ الميلاد *</label>
                 <input type="date" class="form-control" placeholder="تاريخ الميلاد" v-model="dob" id="dob">
-            </div>            
+            </div>
             <div class="form-group">
                 <label for="name">العنوان *</label>
                 <textarea name="" id="" cols="30" rows="10" class="form-control" placeholder="العنوان" v-model="address"></textarea>
-            </div>            
+            </div>
             <button @click="send()">ارسال</button>
         </form>
     </section>

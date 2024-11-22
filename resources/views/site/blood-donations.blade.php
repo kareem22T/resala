@@ -108,7 +108,7 @@
     <section id="volunteers">
         <h1>طلب التبرع بالدم في جمعية رسالة </h1>
         <p>قم بتعبئة بيناتك فى الحقول التالية وسوف يتم الاتصال بك في اقرب وقت</p>
-        <a href="/donate"><i class='bx bx-donate-heart'></i> اضغط هنا للتبرع</a>
+        <a href="/donation-main"><i class='bx bx-donate-heart'></i> اضغط هنا للتبرع</a>
         <form @submit.prevent>
             <div class="form-group">
                 <label for="name">الاسم *</label>
