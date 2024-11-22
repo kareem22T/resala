@@ -170,7 +170,10 @@
             .destination {
                 margin: 3rem 0 2rem;
             }
-        }
+        }    ul {
+        padding-right: 2.2rem !important;
+    }
+
 
     </style>
 @endsection
@@ -182,7 +185,7 @@
             <h1>نشاط {{ $destination->title }}</h1>
             {!! $destination->description !!}
         </div>
-        <div class="img">
+        <div class="img" style="  height: max-content;">
             <img src="/dashboard/images/uploads/{{ $destination->thumbnail->path }}" alt="{{ $destination->title }}">
         </div>
     </section>
