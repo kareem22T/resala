@@ -120,6 +120,11 @@
 @endsection
 
 @section('content')
+    <style>
+            ul {
+        padding-right: 2.2rem !important;
+    }
+    </style>
     @if($activities && $activities->count() > 0)
         <div class="articles_wrapper">
             @foreach ($activities as $activity)
