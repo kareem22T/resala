@@ -13,7 +13,7 @@
                     <a href="" class="menu"><i class="fa-solid fa-bars"></i></a>
                     <a href="{{ route('donate.main') }}" style="border-radius: 0 14px 14px 0;"><i class="fa-solid fa-sack-dollar"></i> تبرع</a>
                     <a href="{{ route('site.volunteering') }}" style="background: #27318b;border-radius: 14px 0 0 14px;"><i class="fa-solid fa-child-reaching"></i> تطوع</a>
-                    <a href="tel:١٩٤٥٠" style="padding: 0;background: 0;color: #353535;font-size: 30px;box-shadow:  none !important;transform: none !important;margin-right: 10px;"><i class="fa-solid fa-phone" style="font-size: 30px;color: #ffffff;background-color: #353535;padding: 10px 12px;margin-right: 5px;border-radius: 10px;"></i><b> ١٩٤٥٠</b></a>
+                    <a href="tel:19450" style="padding: 0;background: 0;color: #353535;font-size: 30px;box-shadow:  none !important;transform: none !important;margin-right: 10px;"><i class="fa-solid fa-phone" style="font-size: 30px;color: #ffffff;background-color: #353535;padding: 10px 12px;margin-right: 5px;border-radius: 10px;"></i><b> 19450</b></a>
                 </div>
             </div>
         </div>

@@ -113,6 +113,9 @@
             height: auto;
         }
     }
+    ul {
+        padding-right: 2.2rem;
+    }
 </style>
 @endsection
 
