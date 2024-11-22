@@ -104,6 +104,12 @@
             <tr>
                 <td>التبرع من خلال الـ ATM</td>
                 <td>
+                    يمكنك التبرع من خلال ماكينات ATM باختيار جمعية رسالة من قائمة التبرع
+                </td>
+            </tr>
+            <tr>
+                <td>التبرع من خلال خدمات التحصيل                </td>
+                <td>
                     <img src="{{ asset('/assets/img/other-2.png') }}" alt="التبرع من خلال الـ ATM"><br>
                     <img src="{{ asset('/assets/img/other-3.png') }}" alt="التبرع من خلال الـ ATM"><br>
                     <img src="{{ asset('/assets/img/other-4.png') }}" alt="التبرع من خلال الـ ATM">
