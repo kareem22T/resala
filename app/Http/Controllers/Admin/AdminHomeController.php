@@ -16,6 +16,10 @@ use App\Http\Controllers\Controller;
 class AdminHomeController extends Controller
 {
     use DataFormController;
+
+    public function welcome() {
+        return view('admin.dashboard.welcome');
+    }
     public function getIndex() {
         $slider_slides = Home_slider::all();
         return view('admin.dashboard.home')->with(compact('slider_slides'));

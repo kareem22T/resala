@@ -13,6 +13,7 @@ use App\Http\Controllers\ArticlesController;
 use App\Http\Controllers\BloodDonateController;
 use App\Http\Controllers\EventsController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\AdminController;
 
 Route::middleware(['admin_guest'])->group(function () {
     Route::get('/login', [RegisterController::class, 'getLoginIndex']);
@@ -24,7 +25,8 @@ Route::middleware('auth:admin')->group(function () {
     Route::get('/export-Volunteer', [VolunteeringDestinationsController::class, 'export']);
     Route::get('/export-blood-donations', [BloodDonateController::class, 'export']);
 
-    Route::get('/', [AdminHomeController::class, 'getIndex'])->name('admin.home');
+    Route::get('/', [AdminHomeController::class, 'welcome'])->name('admin.welcom');
+    Route::get('/dashboard', [AdminHomeController::class, 'getIndex'])->name('admin.home')->middleware('permission:اقسام الصفحة الرئيسية');
     Route::post('/add-img-slider', [AdminHomeController::class, 'addImageToSlider'])->name('home.slider.add');
     Route::post('/add-img-events', [AdminHomeController::class, 'addImageToEvents'])->name('home.events.add');
     Route::post('/delete-img-slider', [AdminHomeController::class, 'deleteImgFromSlider'])->name('home.slider.delete');
@@ -35,7 +37,7 @@ Route::middleware('auth:admin')->group(function () {
     Route::post('/get-events-imgs', [AdminHomeController::class, 'getEventsImages'])->name('admin_home.get.events');
 
     // donations
-    Route::prefix('/donate')->group(function () {
+    Route::prefix('/donate')->middleware('permission:تبرعات من خلال مندوبين')->group(function () {
         Route::get('/by-representative', [DonationsByRepresentativeController::class, 'dashboardIndex'])->name('dashboard.by.representative');
         Route::post('/by-representative', [DonationsByRepresentativeController::class, 'get'])->name('donations.by_representativ.get');
         Route::get('/by-representative/get-unseen', [DonationsByRepresentativeController::class, 'getUnseen'])->name('dashboard.by.representative.getunseen');
@@ -50,7 +52,7 @@ Route::middleware('auth:admin')->group(function () {
     });
 
     // branches
-    Route::prefix('/branches')->group(function () {
+    Route::prefix('/branches')->middleware('permission:الفروع')->group(function () {
         Route::get('/', [BranchController::class, 'index'])->name('branches.prev');
         Route::post('/', [BranchController::class, 'get'])->name('branchs.get');
         Route::post('/search', [BranchController::class, 'search'])->name('branchs.search');
@@ -62,7 +64,7 @@ Route::middleware('auth:admin')->group(function () {
     });
 
     // volunteering destinations
-    Route::prefix('/volunteering-destinations')->group(function () {
+    Route::prefix('/volunteering-destinations')->middleware('permission:جهات التطوع')->group(function () {
         Route::get('/', [VolunteeringDestinationsController::class, 'index'])->name('destinations.prev');
         Route::post('/', [VolunteeringDestinationsController::class, 'get'])->name('destinations.get');
         Route::post('/search', [VolunteeringDestinationsController::class, 'search'])->name('destinations.search');
@@ -73,7 +75,7 @@ Route::middleware('auth:admin')->group(function () {
         Route::post('/edit', [VolunteeringDestinationsController::class, 'edit'])->name('destination.update');
     });
     // activites
-    Route::prefix('/activites')->group(function () {
+    Route::prefix('/activites')->middleware('permission:الانشطة')->group(function () {
         Route::get('/', [ActivitiesController::class, 'index'])->name('activites.prev');
         Route::post('/', [ActivitiesController::class, 'get'])->name('activites.get');
         Route::post('/search', [ActivitiesController::class, 'search'])->name('activites.search');
@@ -85,7 +87,7 @@ Route::middleware('auth:admin')->group(function () {
     });
 
     // volunteers
-    Route::prefix('/volunteers')->group(function () {
+    Route::prefix('/volunteers')->middleware('permission:طلبات التطوع')->group(function () {
         Route::get('/', [VolunteersController::class, 'dashboardIndex'])->name('volunteers.prev');
         Route::post('/', [VolunteersController::class, 'get'])->name('volunteers.get');
         Route::get('/get-unseen', [VolunteersController::class, 'getUnseen'])->name('volunteers.getunseen');
@@ -95,7 +97,7 @@ Route::middleware('auth:admin')->group(function () {
     });
 
     // site.blood_donations
-    Route::prefix('/blood-donations')->group(function () {
+    Route::prefix('/blood-donations')->middleware('permission:التبرع بالدم')->group(function () {
         Route::get('/', [BloodDonateController::class, 'dashboardIndex'])->name('blood_donations.prev');
         Route::post('/', [BloodDonateController::class, 'get'])->name('blood_donations.get');
         Route::get('/get-unseen', [BloodDonateController::class, 'getUnseen'])->name('blood_donations.getunseen');
@@ -112,7 +114,7 @@ Route::middleware('auth:admin')->group(function () {
     });
 
     // articles
-    Route::prefix('articles')->group(function () {
+    Route::prefix('articles')->middleware('permission:المقالات')->group(function () {
         Route::get('/', [ArticlesController::class, "index"])->name('article.prev');
         Route::get('/add', [ArticlesController::class, "addIndex"])->name('articles.add');
         Route::get('/edit/{id}', [ArticlesController::class, "edit"])->name('article.edit');
@@ -124,7 +126,7 @@ Route::middleware('auth:admin')->group(function () {
     });
 
     // events
-    Route::prefix('events')->group(function () {
+    Route::prefix('events')->middleware('permission:الفاعليات')->group(function () {
         Route::get('/', [EventsController::class, "index"])->name('event.prev');
         Route::get('/add', [EventsController::class, "addIndex"])->name('events.add');
         Route::get('/edit/{id}', [EventsController::class, "edit"])->name('event.edit');
@@ -136,7 +138,7 @@ Route::middleware('auth:admin')->group(function () {
     });
 
     // pages
-    Route::prefix('pages')->group(function () {
+    Route::prefix('pages')->middleware('permission:الصفحات')->group(function () {
         Route::get('/', [PageController::class, "index"])->name('pages.prev');
         Route::get('/add', [PageController::class, "addIndex"])->name('pages.add');
         Route::get('/edit/{id}', [PageController::class, "edit"])->name('pages.edit');
@@ -149,4 +151,16 @@ Route::middleware('auth:admin')->group(function () {
 
     //logout
     Route::get('/logout', [RegisterController::class, 'logout'])->name('admin.logout');
+
+    Route::group(['middleware' => ['role:super_admin']], function () {
+        Route::get('/admin/create-role', [AdminController::class, 'createRole'])->name('admin.createRole');
+        Route::post('/admin/store-role', [AdminController::class, 'storeRole'])->name('admin.storeRole');
+
+        Route::get('/admin/create-admin', [AdminController::class, 'createAdmin'])->name('admin.createAdmin');
+        Route::post('/admin/store-admin', [AdminController::class, 'storeAdmin'])->name('admin.storeAdmin');
+        Route::get('/admin/edit/{id}', [AdminController::class, 'editAdmin'])->name('admin.editAdmin');
+        Route::post('/admin/update/{id}', [AdminController::class, 'updateAdmin'])->name('admin.updateAdmin');
+        Route::delete('/admin/delete/{id}', [AdminController::class, 'deleteAdmin'])->name('admin.deleteAdmin');
+    });
+
 });

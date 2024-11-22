@@ -74,7 +74,7 @@
       height: 4px;
       border-radius: 50%;
       color: #365FA0;
-      box-shadow: 
+      box-shadow:
         calc(1*var(--d))      calc(0*var(--d))     0 0,
         calc(0.707*var(--d))  calc(0.707*var(--d)) 0 1px,
         calc(0*var(--d))      calc(1*var(--d))     0 2px,

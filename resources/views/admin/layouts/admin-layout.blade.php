@@ -129,50 +129,64 @@
         <!-- Sidebar navigation-->
         <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
           <ul id="sidebarnav">
+            @can('اقسام الصفحة الرئيسية')
             <li class="nav-small-cap">
-              <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-              <span class="hide-menu">الرئيسية</span>
+                <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                <span class="hide-menu">الرئيسية</span>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link @yield('home_active')" href="{{ route('admin.home') }}" aria-expanded="false">
-                <span>
-                  <i class="ti ti-layout-dashboard"></i>
-                </span>
-                <span class="hide-menu">اقسام الصفحة الرئيسية</span>
-              </a>
+                <a class="sidebar-link @yield('home_active')" href="{{ route('admin.home') }}" aria-expanded="false">
+                    <span>
+                        <i class="ti ti-layout-dashboard"></i>
+                    </span>
+                    <span class="hide-menu">اقسام الصفحة الرئيسية</span>
+                </a>
             </li>
+            @endcan
+
+            @canany(['تبرعات من خلال مندوبين', 'تبرعات عن طريق الفيزا'])
             <li class="nav-small-cap">
-              <i class="ti ti-coins"></i>
-              <span class="hide-menu">التبرعات</span>
+                <i class="ti ti-coins"></i>
+                <span class="hide-menu">التبرعات</span>
             </li>
+            @endcanany
+            @can('تبرعات من خلال مندوبين')
             <li class="sidebar-item">
-              <a class="sidebar-link @yield('representative_active')" href="{{ route('dashboard.by.representative') }}" aria-expanded="false">
-                <span>
-                  <i class="ti ti-home-heart"></i>
-                </span>
-                <span class="hide-menu">تبرعات من خلال مندوبين</span>
-              </a>
+                <a class="sidebar-link @yield('representative_active')" href="{{ route('dashboard.by.representative') }}" aria-expanded="false">
+                    <span>
+                        <i class="ti ti-home-heart"></i>
+                    </span>
+                    <span class="hide-menu">تبرعات من خلال مندوبين</span>
+                </a>
             </li>
+            @endcan
+            @can('تبرعات عن طريق الفيزا')
             <li class="sidebar-item">
-              <a class="sidebar-link @yield('laguages_preview_active')" href="/Moheb/admin/languages" aria-expanded="false">
-                <span>
-                  <i class="ti ti-credit-card"></i>
-                </span>
-                <span class="hide-menu">تبرعات عن طريق الفيزا</span>
-              </a>
+                <a class="sidebar-link @yield('laguages_preview_active')" href="/Moheb/admin/languages" aria-expanded="false">
+                    <span>
+                        <i class="ti ti-credit-card"></i>
+                    </span>
+                    <span class="hide-menu">تبرعات عن طريق الفيزا</span>
+                </a>
             </li>
+            @endcan
+            @canany(['الفروع', 'جهات التطوع', 'الانشطة', 'طلبات التطوع', 'التبرع بالدم'])
             <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
               <span class="hide-menu">التطوع</span>
             </li>
+            @endcanany
+            @can('الفروع')
             <li class="sidebar-item">
-              <a class="sidebar-link @yield('branches_preview_active')" href="{{ route('branches.prev') }}" aria-expanded="false">
-                <span>
-                  <i class="ti ti-map-pins"></i>
-                </span>
-                <span class="hide-menu">الفروع</span>
-              </a>
+                <a class="sidebar-link @yield('branches_preview_active')" href="{{ route('branches.prev') }}" aria-expanded="false">
+                    <span>
+                        <i class="ti ti-map-pins"></i>
+                    </span>
+                    <span class="hide-menu">الفروع</span>
+                </a>
             </li>
+            @endcan
+            @can('جهات التطوع')
             <li class="sidebar-item">
               <a class="sidebar-link @yield('destination_preview_active')" href="{{ route('destinations.prev') }}" aria-expanded="false">
                 <span>
@@ -181,6 +195,8 @@
                 <span class="hide-menu">جهات التطوع</span>
               </a>
             </li>
+            @endcan
+            @can('الانشطة')
             <li class="sidebar-item">
               <a class="sidebar-link @yield('activites_preview_active')" href="{{ route('activites.prev') }}" aria-expanded="false">
                 <span>
@@ -189,6 +205,8 @@
                 <span class="hide-menu">الانشطة</span>
               </a>
             </li>
+            @endcan
+            @can('طلبات التطوع')
             <li class="sidebar-item">
               <a class="sidebar-link @yield('volunteers_active')" href="{{ route('volunteers.prev') }}" aria-expanded="false">
                 <span>
@@ -197,6 +215,8 @@
                 <span class="hide-menu">طلبات التطوع</span>
               </a>
             </li>
+            @endcan
+            @can('التبرع بالدم')
             <li class="sidebar-item">
               <a class="sidebar-link @yield('blood_donations_active')" href="{{ route('blood_donations.prev') }}" aria-expanded="false">
                 <span>
@@ -205,6 +225,8 @@
                 <span class="hide-menu">التبرع بالدم</span>
               </a>
             </li>
+            @endcan
+            @can('المقالات')
             <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
               <span class="hide-menu">المقالات</span>
@@ -225,6 +247,8 @@
                 <span class="hide-menu">اضافة</span>
               </a>
             </li>
+            @endcan
+            @can('الفاعليات')
             <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
               <span class="hide-menu">الفاعليات</span>
@@ -245,6 +269,8 @@
                 <span class="hide-menu">اضافة</span>
               </a>
             </li>
+            @endcan
+            @can('الصفحات')
             <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
               <span class="hide-menu">الصفحات</span>
@@ -265,6 +291,29 @@
                 <span class="hide-menu">اضافة</span>
               </a>
             </li>
+            @endcan
+            @hasrole('super_admin')
+            <li class="nav-small-cap">
+                <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                <span class="hide-menu">المستخدمين</span>
+              </li>
+              <li class="sidebar-item">
+                <a class="sidebar-link @yield('create_role_active')" href="{{ route('admin.createRole') }}" aria-expanded="false">
+                  <span>
+                    <i class="ti ti-shield-check"></i>
+                  </span>
+                  <span class="hide-menu">التصاريح</span>
+                </a>
+              </li>
+              <li class="sidebar-item">
+                <a class="sidebar-link @yield('create_admin_active')" href="{{ route('admin.createAdmin') }}" aria-expanded="false">
+                  <span>
+                    <i class="ti ti-users"></i>
+                  </span>
+                  <span class="hide-menu">المسؤلين</span>
+                </a>
+              </li>
+              @endhasrole
           </ul>
         </nav>
         <!-- End Sidebar navigation -->
@@ -297,13 +346,9 @@
                   aria-expanded="false">
                   <img src="{{ asset('/dashboard/images/profile/user-1.jpg') }}" alt="" width="35" height="35" class="rounded-circle">
                 </a>
-                <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
+                <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2" style="left: 0;right: auto;">
                   <div class="message-body">
-                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
-                      <i class="ti ti-user fs-6"></i>
-                      <p class="mb-0 fs-3">My Profile</p>
-                    </a>
-                    <a href="/Moheb/admin/logout" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
+                    <a href="/admin/logout" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
                   </div>
                 </div>
               </li>
