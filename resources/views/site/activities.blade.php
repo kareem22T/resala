@@ -114,7 +114,7 @@
         }
     }
     ul {
-        padding-right: 2.2rem;
+        padding-right: 2.2rem !important;
     }
 </style>
 @endsection
