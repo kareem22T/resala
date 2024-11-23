@@ -165,8 +165,9 @@
                         style="color: #e31b23; font-size: 18px;"><strong>للتبرع بالدولار الأمريكي</strong></span></td>
             </tr>
             <tr>
-                <td style="text-align: center;"><strong>اسم البنك</strong></td>
-                <td style="text-align: center;"><strong>&nbsp; بنك مصر</strong></td>
+                <td style="text-align: center;"><span style="color: #e31b23;"><strong>اسم البنك</strong></span></td>
+                <td style="text-align: center;"><span style="color: #e31b23;"><strong>&nbsp;بنك مصر (Banque
+                            Misr)</strong></span></td>
             </tr>
             <tr>
                 <td style="text-align: center;"><strong>اسم الفرع</strong></td>

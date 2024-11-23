@@ -103,7 +103,11 @@
             margin: 1rem auto;
         }
         .help-card img {
-            width: 100%
+            width: 100%;
+            max-width: 400px;
+        }
+        img {
+            max-width: 100%;
         }
         aside iframe {
             width: 100% !important
@@ -127,8 +131,13 @@
 @section('content')
 <main>
 <article>
-    <h1>{{ $article->title }}</h1>
-    <div class="content">
+    <h1 style="display: flex;justify-content: space-between;">
+        {{ $article->title }}
+        <div class="thumbnail">
+            <img style="  width: 200px;" src="{{$article->thumbnail_path}}" alt="{{ $article->title }}">
+        </div>
+    </h1>
+    <div class="content" style="margin-top: -24px">
         {!! $article->content !!}
     </div>
     <span class="date">
@@ -159,7 +168,7 @@
     <div class="help-card">
         <img src="{{ asset('/assets/img/help.png') }}" alt="">
         انا وابن عمي بنساعد الغريب
-    </div>    
+    </div>
 </aside>
 </main>
 @endsection
