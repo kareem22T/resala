@@ -85,6 +85,10 @@
                 padding: .7rem 1.25rem;
                 font-size: 1.1rem;
             }
+            tr {
+                display: flex;
+                flex-direction: column;
+            }
         }
 
 </style>
@@ -108,7 +112,8 @@
                 </td>
             </tr>
             <tr>
-                <td>التبرع من خلال خدمات التحصيل                </td>
+                <td>التبرع من خلال خدمات التحصيل
+                </td>
                 <td>
                     <img src="{{ asset('/assets/img/other-2.png') }}" alt="التبرع من خلال الـ ATM"><br>
                     <img src="{{ asset('/assets/img/other-3.png') }}" alt="التبرع من خلال الـ ATM"><br>

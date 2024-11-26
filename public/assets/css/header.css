@@ -24,7 +24,7 @@ header .head .logo {
 }
 @media (max-width: 767.98px) {
   header .head .logo {
-    height: 45px;
+    height: 39px;
   }
 }
 header .head .controls {
@@ -118,7 +118,6 @@ header .head .controls .btns a.menu {
   }
   header .head .controls .btns button:not(:first-child) i,
   header .head .controls .btns a:not(:first-child) i {
-    display: none;
     font-size: 22px;
   }
 }
@@ -137,7 +136,8 @@ header .head .controls .btns a i {
 }
 @media (max-width: 750.98px) {
   header .head {
-    padding-bottom: 16px !important;
+    padding: 15px clamp(0rem, -0.2778rem + 1.1111vw, 0.625rem);
+    padding-bottom: 10px !important;
   }
 }
 header nav {
@@ -374,6 +374,62 @@ header nav::after {
   header nav::after {
     display: none !important;
   }
+  .menu {
+    min-width: min-content !important;
+    border-radius: 7px !important;
+    margin-left: 9px !important;
+  }
+  header .head .controls .btns button i, header .head .controls .btns a i {
+    font-size: 19px;
+  }
+  header .head .controls .btns button, header .head .controls .btns a {
+    padding: 7px 10px;
+    display: flex;
+    align-items: center;
+    font-size: 10px;
+    gap: 5px;
+    border-radius: 13px;
+    min-width: 50px;
+  }
+  header .head .controls .btns button:not(:first-child) i, header .head .controls .btns a:not(:first-child) i {
+    font-size: 15px;
+  }
+  header .head .controls .btns a:nth-child(2) {
+    border-radius: 0 10px 10px 0 !important;
+  }
+  header .head .controls .btns a:nth-child(3) {
+    border-radius: 10px 0 0 10px !important;
+  }
+  header .head .controls .btns a:last-child {
+      padding: 0;
+      background: 0;
+      color: #353535;
+      font-size: 30px;
+      box-shadow: none !important;
+      transform: none !important;
+      margin-right: 5px !important;
+      width: min-content;
+      min-width: min-content;
+      display: flex;
+    }
+    header .head .controls .btns a:last-child i{
+        font-size: 13px !important;
+        color: #ffffff;
+        background-color: #353535 !important;
+        padding: 10px 9px !important;
+        margin-right: 5px !important;
+        border-radius: 7px !important;
+    }
+    header .head .controls .btns a:last-child b{
+        display: none;
+    }
+    header .head .controls .btns button:not(:last-child), header .head .controls .btns a:not(:last-child) {
+        max-height: max-content;
+        min-height: min-content;
+        height: auto;
+        height: 36px;
+        display: flex;
+    }
 }
 
 .animate__animated.animate__fadeInRight {

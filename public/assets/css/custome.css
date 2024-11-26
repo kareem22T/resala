@@ -360,6 +360,19 @@ html {
   align-items: center;
 }
 
+.at_phone_only {
+    display: none;
+}
+
+@media (max-width: 767.98px) {
+    .at_phone_only {
+        display: block;
+    }
+    .mySwiper {
+        margin-top: -40px !important;
+    }
+}
+
 /* .number a {transform: translateX(calc(-50% + 15px));} */
 
 /*# sourceMappingURL=custome.css.map */

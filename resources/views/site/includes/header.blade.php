@@ -47,6 +47,15 @@
                 <a href="{{ route('resala.contact') }}" class="@yield('contact_active')">
                     <li>اتصل بنا</li>
                 </a>
+                <a href="{{ route('donate.main') }}" class="@yield('contact_active') at_phone_only">
+                    <li>تبرع</li>
+                </a>
+                <a href="{{ route('site.volunteering') }}" class="@yield('contact_active') at_phone_only">
+                    <li>تطوع</li>
+                </a>
+                <a href="{{ route('resala.faq') }}" class="at_phone_only">
+                    <li>الاسئلة المتكررة</li>
+                </a>
 
                 <li class="more">
                     <i class="fa-solid fa-ellipsis-vertical"></i>
