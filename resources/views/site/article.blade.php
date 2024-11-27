@@ -123,6 +123,15 @@
             main aside {
                 width: 100%
             }
+            .thumbnail img {
+                width: 100% !important
+            }
+        }
+        .images-album {
+            padding: 32px 0;
+        }
+        .images-album .img_wrapper {
+            height: 220px !important;
         }
     </style>
 @endsection
@@ -131,10 +140,10 @@
 @section('content')
 <main>
 <article>
-    <h1 style="display: flex;justify-content: space-between;">
+    <h1 style="display: flex;justify-content: space-between;flex-direction: column;gap: 16px;padding-bottom: 16px !important">
         {{ $article->title }}
         <div class="thumbnail">
-            <img style="  width: 150px;height: 150px;object-fit: cover;margin-right: 16px;" src="{{$article->thumbnail_path}}" alt="{{ $article->title }}">
+            <img style="  width: 300px;height: 180px;object-fit: cover;" src="{{$article->thumbnail_path}}" alt="{{ $article->title }}">
         </div>
     </h1>
     <div class="content" style="margin-top: -24px">
