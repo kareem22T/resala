@@ -126,7 +126,7 @@
 
                     $formattedDate = $days[$date->dayOfWeek] . ', ' . $date->day . ' ' . $months[$date->month] . ', ' . $date->year;
                 @endphp
-                <a href="/{{ $article->url }}" target="_blanck" class="article">
+                <a href="/{{ $article->url }}" class="article">
                     <div class="thumbnail">
                         <img src="{{$article->thumbnail_path}}" alt="{{ $article->title }}">
                     </div>

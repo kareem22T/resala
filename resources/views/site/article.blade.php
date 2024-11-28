@@ -133,6 +133,14 @@
         .images-album .img_wrapper {
             height: 220px !important;
         }
+        @media (max-width: 7697.98px) {
+            .images-album .img_wrapper {
+                height: 90px !important;
+            }
+            .images-album {
+                gap: 10px !important;
+            }
+        }
     </style>
 @endsection
 
