@@ -40,12 +40,12 @@
             </div>
         </div>
     </div>
-    <ul class="social">
+    <ul class="social" style="padding: 0;color: #000;">
         <li class="mobile">
-            <ul>
+            <ul style="padding: 0;display: flex;justify-content: center;align-items: center;list-style: none;gap: 24px;padding: 24px 0px 6px;">
                 <li><a href="https://www.facebook.com/Resala.org" target="_blanck"><i class="fa-brands fa-facebook-f"></i></a></li>
-                <li><a href="https://twitter.com/Resalaeg"  target="_blanck"><i class="fa-brands fa-x-twitter"></i></a></li>
-                <li><a href="https://www.instagram.com/resala.charity.organization?utm_source=ig_profile_share&igshid=i663pmdktl4z"  target="_blanck"><i class="fa-brands fa-instagram"></i></a></li>
+                <li><a href="https://twitter.com/Resalaeg" target="_blanck"><i class="fa-brands fa-x-twitter"></i></a></li>
+                <li><a href="https://www.instagram.com/resala.charity.organization?utm_source=ig_profile_share&amp;igshid=i663pmdktl4z" target="_blanck"><i class="fa-brands fa-instagram"></i></a></li>
                 <li><a href="https://www.youtube.com/user/resala" target="_blanck"><i class="fa-brands fa-youtube"></i></a></li>
                 <li><a href="https://www.tiktok.com/@resala_charity" target="_blanck"><i class="fa-brands fa-tiktok"></i></a></li>
                 <li><a href="https://www.threads.net/@resala.charity.organization" target="_blanck"><i class="fa-brands fa-threads"></i></a></li>

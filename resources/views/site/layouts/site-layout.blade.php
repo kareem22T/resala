@@ -97,6 +97,18 @@
             z-index: 99999999999999999999;
         }
 
+        footer .social {
+            display: none
+        }
+
+        @media (767.97px) {
+            footer .social {
+                display: flex;
+            }
+            footer a i {
+                color: #000
+            }
+        }
         #errors>* {
             width: 100%;
             color: #fff;
