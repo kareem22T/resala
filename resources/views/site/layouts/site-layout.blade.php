@@ -104,7 +104,8 @@
         @media (max-width: 767.97px) {
             footer .social {
                 display: flex;
-                justify-content: center
+                justify-content: center;
+                list-style: none;
             }
             footer .social i {
                 color: #000
