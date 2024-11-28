@@ -151,7 +151,7 @@
     <h1 style="display: flex;justify-content: space-between;flex-direction: column;gap: 16px;padding-bottom: 16px !important">
         {{ $article->title }}
         <div class="thumbnail">
-            <img style="  width: 300px;height: 180px;object-fit: cover;" src="{{$article->thumbnail_path}}" alt="{{ $article->title }}">
+            <img style="  width: 300px;height: auto;object-fit: cover;" src="{{$article->thumbnail_path}}" alt="{{ $article->title }}">
         </div>
     </h1>
     <div class="content" style="margin-top: -24px">
