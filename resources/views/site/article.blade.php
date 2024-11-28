@@ -133,7 +133,7 @@
         .images-album .img_wrapper {
             height: 220px !important;
         }
-        @media (max-width: 7697.98px) {
+        @media (max-width: 767.98px) {
             .images-album .img_wrapper {
                 height: 90px !important;
             }
