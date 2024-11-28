@@ -101,7 +101,7 @@
             display: none
         }
 
-        @media (767.97px) {
+        @media (max-width: 767.97px) {
             footer .social {
                 display: flex;
             }
