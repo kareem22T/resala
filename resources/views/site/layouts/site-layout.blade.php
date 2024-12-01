@@ -190,18 +190,6 @@
         }
     </style>
     <link rel="stylesheet" href="{{ asset('/assets/css/custome.css') }}?v={{ time() }}">
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HSTYYKVTH8"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-
-        gtag('config', 'G-HSTYYKVTH8');
-    </script>
 </head>
 
 <body>
