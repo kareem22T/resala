@@ -46,7 +46,7 @@ return [
 
         'uploads' => [
             'driver' => 'local',
-            'root' => base_path() . '/dashboard/images/uploads/',
+            'root' => base_path() . '/public/dashboard/images/uploads/',
             'url' => env('APP_URL'). '/public',
             'visibility' => 'public',
             'throw' => false,

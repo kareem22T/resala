@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
 class ImagesController extends Controller
-{    
+{
     use DataFormController;
     use SaveFileTrait;
 
@@ -37,7 +37,7 @@ class ImagesController extends Controller
             return $this->jsondata(false, 'upload failed', [$validator->errors()->first()], []);
         }
 
-        $image = $this->saveFile($request->img, 'dashboard/images/uploads/');
+        $image = $this->saveFile($request->img, 'public/dashboard/images/uploads/');
         if ($image)
             $upload_image = Image::create([
                 'path' => $image
@@ -54,14 +54,14 @@ class ImagesController extends Controller
     public function search(Request $request) {
         $images = Image::where('path', 'like', '%' . $request->search_words . '%')->orderby('id', 'desc')
                                 ->paginate(10);
-        
+
         return $this->jsonData(true, true, '', [], $images);
 
     }
 
 
     public function getImages() {
-        
+
         $get_images = Image::orderby('id', 'desc')->paginate(10);
 
         if ($get_images)
