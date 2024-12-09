@@ -12,7 +12,7 @@ class HomeController extends Controller
 {
     public function urlPerIndex ($url) {
         $article  = Article::where('url', $url)->first();
-        $active_link = isset($article) && $article ? ($article->type == 'post' ? 'news_active' : ($article->type ==  'vedio' ? "videos_active" : 'images_active')) : '';
+        $active_link = isset($article) && $article ? ($article->type == 'post' ? 'news_active' : ($article->type ==  'video' ? "videos_active" : 'images_active')) : '';
         if ($article)
             return view('site.article')->with(compact(['article', 'active_link']));
 

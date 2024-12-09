@@ -110,23 +110,25 @@
     @if($articles && $articles->count() > 0)
         <div class="articles_wrapper">
             @foreach ($articles as $article)
-                @php
-                    $created_at = $article->created_at;
-                    // Assuming $article->created_at is a timestamp or date string
-                    $date = Carbon\Carbon::parse($article->created_at);
+            @php
+            $created_at = $article->created_at;
+            // Assuming $article->created_at is a timestamp or date string
+            $date = Carbon\Carbon::parse($article->created_at);
 
-                    $months = array(
-                        "يناير", "فبراير", "مارس", "إبريل", "مايو", "يونيو",
-                        "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"
-                    );
+            $months = array(
+                1 => "يناير", 2 => "فبراير", 3 => "مارس", 4 => "إبريل", 5 => "مايو",
+                6 => "يونيو", 7 => "يوليو", 8 => "أغسطس", 9 => "سبتمبر",
+                10 => "أكتوبر", 11 => "نوفمبر", 12 => "ديسمبر"
+            );
 
-                    $days = array(
-                        "الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"
-                    );
+            $days = array(
+                "الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"
+            );
 
-                    $formattedDate = $days[$date->dayOfWeek] . ', ' . $date->day . ' ' . $months[$date->month] . ', ' . $date->year;
-                @endphp
-                <a href="/{{ $article->url }}" class="article">
+            $formattedDate = $days[$date->dayOfWeek] . ', ' . $date->day . ' ' . $months[$date->month] . ', ' . $date->year;
+        @endphp
+
+<a href="/{{ $article->url }}" class="article">
                     <div class="thumbnail">
                         <img src="{{$article->thumbnail_path}}" alt="{{ $article->title }}">
                     </div>
