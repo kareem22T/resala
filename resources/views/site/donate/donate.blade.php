@@ -52,7 +52,7 @@
 
 @section('content')
     <section>
-        <a href="">
+        <a href="https://resala.org/donations/">
             <img src="{{asset('/assets/img/donate-1.jpg')}}" alt="">
             <span>التبرع من خلال VISA</span>
         </a>
