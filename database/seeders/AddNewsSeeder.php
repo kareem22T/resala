@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-class ArticlesTableSeeder extends Seeder
+class AddNewsSeeder extends Seeder
 {
     public function run()
     {
