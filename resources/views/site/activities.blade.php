@@ -133,9 +133,6 @@
             @endforeach
         </div>
 
-        <div class="pagination_wrapper">
-            {!! $activities->links('pagination::bootstrap-4') !!}
-        </div>
     @else
     <h1 style="margin: 5rem 0">
         لا توجد انشطة
