@@ -18,7 +18,7 @@ class ActivitiesController extends Controller
     use DataFormController;
 
     public function getActivitiesIndex() {
-        $activities = Activty::paginate(10);
+        $activities = Activty::latest()->paginate(10);
         return view('site.activities')->with(compact(['activities']));
     }
 
