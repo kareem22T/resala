@@ -59,7 +59,7 @@ class ActivitiesController extends Controller
     public function add(Request $request) {
         $validator = Validator::make($request->all(), [
             'title' => ['required'],
-            'brief' => ['required', 'max:50'],
+            'brief' => ['required'],
             'description' => ['required'],
             'url' => ['required', 'regex:/^[^\s]+$/'],
             'image_id' => ['required'],
@@ -103,7 +103,7 @@ class ActivitiesController extends Controller
     public function edit(Request $request) {
         $validator = Validator::make($request->all(), [
             'id' => ['required'],
-            'brief' => ['required', 'max:50'],
+            'brief' => ['required'],
             'description' => ['required'],
             'title' => ['required'],
             'image_id' => ['required'],
