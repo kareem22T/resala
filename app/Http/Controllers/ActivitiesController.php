@@ -18,7 +18,7 @@ class ActivitiesController extends Controller
     use DataFormController;
 
     public function getActivitiesIndex() {
-        $activities = Activty::orderBy('id', 'desc')->paginate(10);
+        $activities = Activty::orderBy('id', 'desc')->get();
         return view('site.activities')->with(compact(['activities']));
     }
 
