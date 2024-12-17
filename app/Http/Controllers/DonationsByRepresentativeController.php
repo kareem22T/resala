@@ -49,18 +49,6 @@ class DonationsByRepresentativeController extends Controller
         ]);
 
         if ($donation) {
-            $admins = Admin::where('donations_access', true)->get();
-            if ($admins->count() > 0)
-            foreach ($admins as $admin) {
-                $this->sendEmail(
-                    $admin->email,
-                    "Donation Request",
-                    "<b>نوع التبرع :</b>" . "تبرع من خلال مندوب" . " (" . ($donation->type == 1 ? "تبرع عيني" : "تبرع مالي") . ")<br>" .
-                    "<b>اسم المتبرع :</b>" . $donation->name . "<br>" .
-                    "<b>رقم هاتف المتبرع :</b>" . $donation->phone . "<br>" .
-                    "<b>عنوان المتبرع :</b>" . $donation->address . "<br>"
-                );
-            }
             return $this->jsonData(true, 'تم ارسال طلبك بنجاح, سوف نتواصل معك في اقرب وقت!', [], []);
         }
     }
