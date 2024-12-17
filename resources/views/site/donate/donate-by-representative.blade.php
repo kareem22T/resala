@@ -39,7 +39,7 @@
         }
         input[type="radio"]:checked +label {
             background: rgb(44,54,142);
-            background: linear-gradient(0deg, rgba(44,54,142,1) 0%, rgba(82,90,162,1) 100%); 
+            background: linear-gradient(0deg, rgba(44,54,142,1) 0%, rgba(82,90,162,1) 100%);
             color: #fff;
             border: none
         }
@@ -74,10 +74,37 @@
                 font-size: 1.1rem;
             }
         }
+        .loader {
+          width: 15px;
+          aspect-ratio: 1;
+          border-radius: 50%;
+          animation: l5 1s infinite linear alternate;
+        }
+        .loader_wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #00000037;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        @keyframes l5 {
+            0%  {box-shadow: 20px 0 #000, -20px 0 #0002;background: #000 }
+            33% {box-shadow: 20px 0 #000, -20px 0 #0002;background: #0002}
+            66% {box-shadow: 20px 0 #0002,-20px 0 #000; background: #0002}
+            100%{box-shadow: 20px 0 #0002,-20px 0 #000; background: #000 }
+        }
     </style>
 @endsection
 
 @section('content')
+    <div class="loader_wrapper">
+        <div class="loader"></div>
+    </div>
     <section id="donate_by_representative">
         <h1>التبرع من خلال مندوب </h1>
         <div class="switch">
@@ -100,23 +127,42 @@
             <div class="form-group">
                 <label for="name">الاسم *</label>
                 <input type="text" class="form-control" placeholder="الاسم" v-model="name">
-            </div>            
+            </div>
             <div class="form-group">
                 <label for="name">رقم الهاتف *</label>
                 <input type="text" class="form-control" placeholder="رقم الهاتف" v-model="phone">
-            </div>            
+            </div>
             <div class="form-group">
                 <label for="name">العنوان *</label>
                 <textarea name="" id="" cols="30" rows="10" class="form-control" placeholder="العنوان" v-model="address"></textarea>
-            </div>            
+            </div>
             <button @click="send()">ارسال</button>
         </form>
     </section>
+    <!-- Modal -->
+    <div class="modal fade" id="thankYouModal" tabindex="-1" aria-labelledby="thankYouModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content text-center">
+                <div class="modal-header" style="justify-content: space-between;width: 100%;display: flex;flex-direction: row;">
+                    <h5 class="modal-title" id="thankYouModalLabel">شكرًا</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="margin: 0;"></button>
+                </div>
+                <div class="modal-body">
+                    شكرًا لتبرعكم الكريم. سيتم التواصل معكم قريبًا لتنسيق موعد زيارة مندوبنا في أقرب وقت ممكن.
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <a href="/" class="btn btn-primary">حسنا</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
 
 @section('scripts')
     <script src="{{ asset('/libs/axios.js') }}"></script>
     <script src="{{ asset('/libs/vue.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
     const { createApp, ref } = Vue;
@@ -132,59 +178,41 @@
     },
     methods: {
         async send() {
-        $('.loader').fadeIn().css('display', 'flex')
-            try {
-                const response = await axios.post(`{{ route("donate.representative.send") }}`, {
-                    type: this.type,
-                    name: this.name,
-                    phone: this.phone,
-                    address: this.address,
-                },
-                );
-                if (response.data.status === true) {
-                    document.getElementById('errors').innerHTML = ''
-                    let error = document.createElement('div')
-                    error.classList = 'success'
-                    error.innerHTML = response.data.message
-                    document.getElementById('errors').append(error)
-                    $('#errors').fadeIn('slow')
-                    $('.loader').fadeOut()
-                    setTimeout(() => {
-                        $('#errors').fadeOut('slow')
-                        window.location.href = '{{ route("donate.main") }}'
-                    }, 3500);
-                } else {
-                    $('.loader').fadeOut()
-                    document.getElementById('errors').innerHTML = ''
-                    $.each(response.data.errors, function (key, value) {
-                        let error = document.createElement('div')
-                        error.classList = 'error'
-                        error.innerHTML = value
-                        document.getElementById('errors').append(error)
-                    });
-                    $('#errors').fadeIn('slow')
-                    setTimeout(() => {
-                        $('input').css('outline', 'none')
-                        $('#errors').fadeOut('slow')
-                    }, 5000);
-                }
+        $('.loader_wrapper').fadeIn().css('display', 'flex');
+        try {
+            const response = await axios.post(`{{ route("donate.representative.send") }}`, {
+                type: this.type,
+                name: this.name,
+                phone: this.phone,
+                address: this.address,
+            });
+            if (response.data.status === true) {
+                $('.loader_wrapper').fadeOut();
 
-            } catch (error) {
-                document.getElementById('errors').innerHTML = ''
-                let err = document.createElement('div')
-                err.classList = 'error'
-                err.innerHTML = 'server error try again later'
-                document.getElementById('errors').append(err)
-                $('#errors').fadeIn('slow')
-                $('.loader').fadeOut()
+                // Show the modal on success
+                const thankYouModal = new bootstrap.Modal(document.getElementById('thankYouModal'));
+                thankYouModal.show();
+                this.type = 1;
+                this.name = '';
+                this.phone = '';
+                this.address = '';
 
-                setTimeout(() => {
-                $('#errors').fadeOut('slow')
-                }, 3500);
-
-                console.error(error);
+            } else {
+                $('.loader_wrapper').fadeOut();
+                document.getElementById('errors').innerHTML = '';
+                $.each(response.data.errors, function (key, value) {
+                    let error = document.createElement('div');
+                    error.classList = 'error';
+                    error.innerHTML = value;
+                    document.getElementById('errors').append(error);
+                });
+                $('#errors').fadeIn('slow');
             }
-        },
+        } catch (error) {
+            $('.loader_wrapper').fadeOut();
+            console.error(error);
+        }
+    },
     },
     }).mount('#donate_by_representative')
     </script>
